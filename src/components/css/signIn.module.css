@@ -2,7 +2,6 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #00a6ff;
   padding: 0 0;
 }
 .background {
@@ -12,11 +11,8 @@
   border-radius: 26px;
   width: 538px;
   height: 512px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -264px;
-  margin-top: -350px;
+  position: flex;
+  margin: 40px auto;
 }
 .btn {
   position: absolute;
