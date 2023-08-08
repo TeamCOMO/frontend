@@ -1,18 +1,18 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React from "react";
+//import { RecoilRoot } from "recoil";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import Landing from "./routes/landing";
-import SignUp from "./routes/signUp";
-import SignIn from "./routes/signIn";
+import SignUp from "./routes/SignUp";
+import SignIn from "./routes/SignIn";
+import Landing from "./routes/Landing";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/Signin" element={<SignIn />} />
+        <Route path="/Signup" element={<SignUp />} />
       </Routes>
     </Router>
   );

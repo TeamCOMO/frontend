@@ -1,4 +1,5 @@
 import SignUpBox from "../components/js/signUpBox";
+
 function SignUp() {
   return (
     <div>

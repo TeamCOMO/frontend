@@ -1,4 +1,4 @@
-import SignInBox from "../components/js/signInBox";
+import SignInBox from "../components/js/SignInBox.js";
 
 function SignIn() {
   return (

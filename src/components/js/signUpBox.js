@@ -1,31 +1,45 @@
-import styles from "../css/signUp.module.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import styles from "../css/SignUp.module.css";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-const { useState, useEffect } = require("react");
+import { API_URL } from "../Constant";
+import { useNavigate, Link } from "react-router-dom";
 
-function SignUpBox() {
+const SignUpBox = () => {
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
   const [infoAgreed, setInfoAgreed] = useState(false);
   const [eventAgreed, setEventAgreed] = useState(false);
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [id, setId] = useState("");
+  const [checkedPassword, setCheckedPassword] = useState("");
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+
+  const handleAllAgreedChange = (e) => {
+    setAllAgreed(e.target.checked);
+    setLecoAgreed(e.target.checked);
+    setInfoAgreed(e.target.checked);
+    setEventAgreed(e.target.checked);
   };
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const handleIdChange = (e) => {
-    setId(e.target.value);
+  const handleCheckedPasswordChange = (e) => {
+    setCheckedPassword(e.target.value);
   };
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   const allCheck = () => {
     if (allAgreed === false) {
       setAllAgreed(true);
@@ -65,29 +79,37 @@ function SignUpBox() {
       setAllAgreed(true);
     else setAllAgreed(false);
   }, [lecoAgreed, infoAgreed, eventAgreed]);
-  const handleSubmit = () => {
-    const userData = {
-      username: id,
-      password: password,
-      checkedPassword: password,
-      nickname: username,
-      email: email,
-    };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
     axios
       .post(
-        `ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
+        `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
         {
-          userData,
+          username: username,
+          password: password,
+          checkedPassword: checkedPassword,
+          nickname: nickname,
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       )
-      .then((res) => {
-        console.log("회원가입 성공", res.data);
+      .then((response) => {
+        console.log(response);
+        alert("회원가입 성공");
+        navigate("/SignInBox");
       })
       .catch((error) => {
-        console.log("회원가입 실패");
+        console.log(error);
+        alert("회원가입에 실패했습니다.");
       });
   };
-  console.log(allAgreed);
+
+  //console.log(allAgreed);
 
   return (
     <div>
@@ -99,36 +121,36 @@ function SignUpBox() {
             </div>
 
             <form className={styles.inputForm}>
-              <div className={styles.inputName}>이름</div>
+              <div className={styles.inputName}>아이디</div>
               <input
                 onChange={handleUsernameChange}
-                name="name"
-                placeholder="이름"
-                className={styles.inputs}
-              />
-              <div className={styles.inputName}>아이디 ID</div>
-              <input
-                onChange={handleIdChange}
-                name="id"
+                name="username"
                 placeholder="아이디"
                 className={styles.inputs}
               />
-              <div className={styles.inputName}>비밀번호 Password</div>
+              <div className={styles.inputName}>비밀번호</div>
               <input
                 onChange={handlePasswordChange}
-                name="pw"
-                type="password"
+                name="Password"
                 placeholder="비밀번호"
                 className={styles.inputs}
               />
-              <div className={styles.inputName}>
-                비밀번호 확인 Password Check
-              </div>
+              <div className={styles.inputName}>비밀번호 확인</div>
               <input
-                name="pw"
-                type="password"
+                onChange={handleCheckedPasswordChange}
+                name="checkedPassword"
+                type="checkedPassword"
                 placeholder="비밀번호 확인"
                 className={styles.inputs}
+              />
+              <div className={styles.inputName}>
+                <span>닉네임</span>{" "}
+              </div>
+              <input
+                onChange={handleNicknameChange}
+                className={styles.inputs}
+                name="nickname"
+                placeholder="닉네임"
               />
               <div className={styles.inputName}>
                 <span>이메일</span>{" "}
@@ -136,7 +158,7 @@ function SignUpBox() {
               <input
                 onChange={handleEmailChange}
                 className={styles.inputs}
-                name="id"
+                name="email"
                 placeholder="이메일"
               />
             </form>
@@ -147,7 +169,7 @@ function SignUpBox() {
                   <input
                     type="checkbox"
                     className={styles.checkbox}
-                    onClick={allCheck}
+                    onChange={handleAllAgreedChange} // 이렇게 onChange 핸들러를 추가해주세요.
                     checked={allAgreed}
                   />
                   <span className={styles.checktext}> 전체 동의하기</span>
@@ -161,7 +183,7 @@ function SignUpBox() {
                   <input
                     type="checkbox"
                     className={styles.checkbox}
-                    onClick={lecoCheck}
+                    onChange={handleAllAgreedChange} // 이렇게 onChange 핸들러를 추가해주세요.
                     checked={lecoAgreed}
                   />
                   <span className={styles.checktext}>
@@ -177,6 +199,7 @@ function SignUpBox() {
                   <input
                     type="checkbox"
                     className={styles.checkbox}
+                    onChange={handleAllAgreedChange}
                     onClick={infoCheck}
                     checked={infoAgreed}
                   />
@@ -194,6 +217,7 @@ function SignUpBox() {
                   <input
                     type="checkbox"
                     className={styles.checkbox}
+                    onChange={handleAllAgreedChange}
                     onClick={eventCheck}
                     checked={eventAgreed}
                   />
@@ -208,12 +232,17 @@ function SignUpBox() {
               </li>
             </ul>
             <div className={styles.btnBox}>
-              <button onClick={handleSubmit} className={styles.btn}>
-                회원가입하기
+              <button
+                style={{ width: "416px" }}
+                type="submit"
+                className="submit"
+                onClick={handleRegister}
+              >
+                회원가입
               </button>
               <br />
               <div className={styles.backSignIn}>
-                <Link to="/signin" className={styles.backText}>
+                <Link to="/SignInBox" className={styles.backText}>
                   로그인 페이지로 돌아가기
                 </Link>
               </div>
@@ -223,6 +252,6 @@ function SignUpBox() {
       </div>
     </div>
   );
-}
+};
 
 export default SignUpBox;

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import styles from "../css/signIn.module.css";
+import styles from "../css/SignIn.module.css";
+
 function SignInBox() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
