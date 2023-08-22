@@ -135,7 +135,7 @@ const SignUpBox = () => {
                 placeholder="비밀번호"
                 className={styles.inputs}
               />
-              <div className={styles.inputName}>비밀번호 확인</div>
+              <div className={styles.inputName}>비밀번호 확인2</div>
               <input
                 onChange={handleCheckedPasswordChange}
                 name="checkedPassword"
