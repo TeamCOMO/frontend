@@ -1,11 +1,20 @@
+
+.wrap {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: url(../img/background.png) no-repeat center;
+  background-size: cover;
+}
 .background {
   margin-top: 100px;
   box-sizing: border-box;
   background-color: #ffffff;
-  border: solid 1px #00a6ff;
+  border: solid 1px #cccccc;
   border-radius: 26px;
-  width: 538px;
-  height: 1600px;
+  width: 30vw;
+  height: 850px;
+  
   position: flex;
   margin: 40px auto;
 }
@@ -15,15 +24,16 @@
 }
 .titleBox {
   display: flex;
-  line-height: 60px;
-  margin: 30px auto;
-  margin-bottom: 0;
+  line-height: 30px;
+text-align: center;
+justify-content: center;
+  
 }
 .title {
   color: #333333;
   font-size: 36px;
   font-weight: 600;
-  margin-left: 20px;
+  
 }
 .regist {
   text-decoration: none;
@@ -51,7 +61,7 @@
   font-size: 14px;
 }
 .inputName {
-  margin-top: 28px;
+  margin-top: 25px;
   color: #333333;
   font-size: 16px;
   font-style: normal;
@@ -103,7 +113,7 @@
   color: #555555;
 }
 .terms_set {
-  margin-top: 44px;
+  margin-top: 30px;
   line-height: 30px;
 }
 .check {
@@ -140,7 +150,11 @@
 .btn {
   width: 454px;
   height: 64px;
-  background-color: #00a6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: #333333;
   color: white;
   cursor: pointer;
   border: 0;
@@ -156,15 +170,16 @@
 .backSignIn {
   font-size: 16px;
   font-weight: 600;
-  margin-top: 20px;
+  
   text-align: center;
 }
 
 .btnBox {
-  position: absolute;
+  position: flex;
   margin: 0 20px;
   width: 454px;
   height: 10px;
+  margin: 0 auto;
 }
 .backText {
   color: #333333;

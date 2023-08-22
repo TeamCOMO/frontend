@@ -3,12 +3,11 @@
   height: 72px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  
 }
 
 .menuBox {
   display: flex;
-  margin-right: 40vw;
   height: 24px;
 }
 .logo {
@@ -23,7 +22,6 @@
   width: 100px;
   margin-top: 0;
   font-size: 16px;
-
   line-height: 24px;
   font-weight: 500;
   color: #666666;
@@ -31,11 +29,13 @@
 }
 
 .loginBox {
-  margin-right: 5vw;
-  display: flex;
-  width: 216px;
+  width: 230px;
   height: 40px;
   justify-content: space-between;
+  right: 50px;
+  position: absolute;
+  
+  
 }
 button {
   width: 100px;
@@ -43,6 +43,7 @@ button {
   border-radius: 5px;
   border: 1px solid #111111;
   cursor: pointer;
+  margin-right: 10px;
 }
 .signup {
   background-color: #111111;

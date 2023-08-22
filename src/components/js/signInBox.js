@@ -44,7 +44,6 @@ function SignInBox() {
 
   return (
     <div className={styles.wrap}>
-      <Nav />
       <div>
         <div className={styles.background}>
           <div>
