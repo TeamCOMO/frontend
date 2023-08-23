@@ -12,9 +12,9 @@ jobs:
       - name: Check Node v
         run: node -v
       - name: Install Dependencies
-        run: npm install rrfs
+        run: npm install
       - name: Build
-        run: npm run build
+        run: CI='' npm run build
       - name: zip create
         run: zip -qq -r ./build.zip .
         shell: bash

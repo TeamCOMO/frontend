@@ -33,47 +33,47 @@ const SignUpBox = () => {
     setEmail(e.target.value);
   };
 
-  const handleAllAgreedChange = (e) => {
-    setAllAgreed(e.target.checked);
-    setLecoAgreed(e.target.checked);
-    setInfoAgreed(e.target.checked);
-    setEventAgreed(e.target.checked);
-  };
+  // const handleAllAgreedChange = (e) => {
+  //   setAllAgreed(e.target.checked);
+  //   setLecoAgreed(e.target.checked);
+  //   setInfoAgreed(e.target.checked);
+  //   setEventAgreed(e.target.checked);
+  // };
 
-  const allCheck = () => {
-    if (allAgreed === false) {
-      setAllAgreed(true);
-      setLecoAgreed(true);
-      setInfoAgreed(true);
-      setEventAgreed(true);
-    } else {
-      setAllAgreed(false);
-      setLecoAgreed(false);
-      setInfoAgreed(false);
-      setEventAgreed(false);
-    }
-  };
-  const lecoCheck = () => {
-    if (lecoAgreed === false) {
-      setLecoAgreed(true);
-    } else {
-      setLecoAgreed(false);
-    }
-  };
-  const infoCheck = () => {
-    if (infoAgreed === false) {
-      setInfoAgreed(true);
-    } else {
-      setInfoAgreed(false);
-    }
-  };
-  const eventCheck = () => {
-    if (eventAgreed === false) {
-      setEventAgreed(true);
-    } else {
-      setEventAgreed(false);
-    }
-  };
+  // const allCheck = () => {
+  //   if (allAgreed === false) {
+  //     setAllAgreed(true);
+  //     setLecoAgreed(true);
+  //     setInfoAgreed(true);
+  //     setEventAgreed(true);
+  //   } else {
+  //     setAllAgreed(false);
+  //     setLecoAgreed(false);
+  //     setInfoAgreed(false);
+  //     setEventAgreed(false);
+  //   }
+  // };
+  // const lecoCheck = () => {
+  //   if (lecoAgreed === false) {
+  //     setLecoAgreed(true);
+  //   } else {
+  //     setLecoAgreed(false);
+  //   }
+  // };
+  // const infoCheck = () => {
+  //   if (infoAgreed === false) {
+  //     setInfoAgreed(true);
+  //   } else {
+  //     setInfoAgreed(false);
+  //   }
+  // };
+  // const eventCheck = () => {
+  //   if (eventAgreed === false) {
+  //     setEventAgreed(true);
+  //   } else {
+  //     setEventAgreed(false);
+  //   }
+  // };
   useEffect(() => {
     if (lecoAgreed === true && infoAgreed === true && eventAgreed === true)
       setAllAgreed(true);

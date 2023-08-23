@@ -1,7 +1,7 @@
 import styles from "../css/signUp.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Nav from "./Nav";
+
 const { useState, useEffect } = require("react");
 
 function SignUpBox2() {
@@ -13,19 +13,19 @@ function SignUpBox2() {
   const [password, setPassword] = useState("");
   const [id, setId] = useState("");
   const [email, setEmail] = useState("");
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
+  // const handleUsernameChange = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-  const handleIdChange = (e) => {
-    setId(e.target.value);
-  };
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // };
+  // const handleIdChange = (e) => {
+  //   setId(e.target.value);
+  // };
   const allCheck = () => {
     if (allAgreed === false) {
       setAllAgreed(true);
