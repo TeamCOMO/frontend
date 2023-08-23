@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "../css/SignUp.module.css";
 import axios from "axios";
-import { API_URL } from "../Constant";
-import { useNavigate, Link } from "react-router-dom";
+
+import Nav from "./Nav";
+const { useState, useEffect } = require("react");
 
 const SignUpBox = () => {
   const [allAgreed, setAllAgreed] = useState(false);
@@ -112,140 +113,69 @@ const SignUpBox = () => {
   //console.log(allAgreed);
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.background}>
-          <div className={styles.setForm}>
-            <div className={styles.titleBox}>
-              <h3 className={styles.title}>COMO 회원가입</h3>
+    <div className={styles.wrap}>
+
+      <div className={styles.background}>
+        <div className={styles.setForm}>
+          <div className={styles.titleBox}>
+            <h3 className={styles.title}>COMO 회원가입 1/2</h3>
+          </div>
+
+          <form className={styles.inputForm}>
+            <div className={styles.inputName}>이름</div>
+            <input
+              onChange={handleUsernameChange}
+              name="name"
+              placeholder="이름"
+              className={styles.inputs}
+            />
+            <div className={styles.inputName}>아이디 ID</div>
+            <input
+              onChange={handleIdChange}
+              name="id"
+              placeholder="아이디"
+              className={styles.inputs}
+            />
+            <div className={styles.inputName}>비밀번호 Password</div>
+            <input
+              onChange={handlePasswordChange}
+              name="pw"
+              type="password"
+              placeholder="비밀번호"
+              className={styles.inputs}
+            />
+            <div className={styles.inputName}>비밀번호 확인 Password Check</div>
+            <input
+              name="pw"
+              type="password"
+              placeholder="비밀번호 확인"
+              className={styles.inputs}
+            />
+            <div className={styles.inputName}>
+              <span>이메일</span>{" "}
             </div>
+            <input
+              onChange={handleEmailChange}
+              className={styles.inputs}
+              name="id"
+              placeholder="이메일"
+            />
+          </form>
 
-            <form className={styles.inputForm}>
-              <div className={styles.inputName}>아이디</div>
-              <input
-                onChange={handleUsernameChange}
-                name="username"
-                placeholder="아이디"
-                className={styles.inputs}
-              />
-              <div className={styles.inputName}>비밀번호</div>
-              <input
-                onChange={handlePasswordChange}
-                name="Password"
-                placeholder="비밀번호"
-                className={styles.inputs}
-              />
-              <div className={styles.inputName}>비밀번호 확인2</div>
-              <input
-                onChange={handleCheckedPasswordChange}
-                name="checkedPassword"
-                type="checkedPassword"
-                placeholder="비밀번호 확인"
-                className={styles.inputs}
-              />
-              <div className={styles.inputName}>
-                <span>닉네임</span>{" "}
-              </div>
-              <input
-                onChange={handleNicknameChange}
-                className={styles.inputs}
-                name="nickname"
-                placeholder="닉네임"
-              />
-              <div className={styles.inputName}>
-                <span>이메일</span>{" "}
-              </div>
-              <input
-                onChange={handleEmailChange}
-                className={styles.inputs}
-                name="email"
-                placeholder="이메일"
-              />
-            </form>
 
-            <ul className={styles.terms_list}>
-              <li className={styles.check}>
-                <div className={styles.terms_set}>
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    onChange={handleAllAgreedChange} // 이렇게 onChange 핸들러를 추가해주세요.
-                    checked={allAgreed}
-                  />
-                  <span className={styles.checktext}> 전체 동의하기</span>
-                  <div className={styles.terms_box_all}>
-                    <p>....</p>
-                  </div>
-                </div>
-              </li>
-              <li className={styles.check}>
-                <div className={styles.terms_set}>
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    onChange={handleAllAgreedChange} // 이렇게 onChange 핸들러를 추가해주세요.
-                    checked={lecoAgreed}
-                  />
-                  <span className={styles.checktext}>
-                    <span className={styles.color}> [필수]</span> vvv 이용약관
-                  </span>
-                </div>
-                <div className={styles.terms_box}>
-                  <p>....</p>
-                </div>
-              </li>
-              <li className={styles.check}>
-                <div className={styles.terms_set}>
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    onChange={handleAllAgreedChange}
-                    onClick={infoCheck}
-                    checked={infoAgreed}
-                  />
-                  <span className={styles.checktext}>
-                    <span className={styles.color}> [필수]</span> 개인정보 수집
-                    및 이용
-                  </span>
-                </div>
-                <div className={styles.terms_box}>
-                  <p>....</p>
-                </div>
-              </li>
-              <li className={styles.check}>
-                <div className={styles.terms_set}>
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    onChange={handleAllAgreedChange}
-                    onClick={eventCheck}
-                    checked={eventAgreed}
-                  />
-                  <span className={styles.checktext}>
-                    <span className={styles.color2}> [선택]</span>
-                    이벤트 • 혜택 정보수신
-                  </span>
-                </div>
-                <div className={styles.terms_box}>
-                  <p>....</p>
-                </div>
-              </li>
-            </ul>
-            <div className={styles.btnBox}>
-              <button
-                style={{ width: "416px" }}
-                type="submit"
-                className="submit"
-                onClick={handleRegister}
-              >
-                회원가입
-              </button>
-              <br />
-              <div className={styles.backSignIn}>
-                <Link to="/SignInBox" className={styles.backText}>
-                  로그인 페이지로 돌아가기
-                </Link>
-              </div>
+         
+          <div className={styles.btnBox}>
+        
+
+          <button  className={styles.btn} onClick={handleSubmit}>다음</button>
+              {/* <Link to ="/signup2" style={{textDecoration:"none", color:"white"}}>
+              <button  className={styles.btn} onClick={handleSubmit}>다음</button></Link> */}
+            
+            <br />
+            <div className={styles.backSignIn}>
+              <Link to="/signin" className={styles.backText}>
+                로그인 페이지로 돌아가기
+              </Link>
             </div>
           </div>
         </div>

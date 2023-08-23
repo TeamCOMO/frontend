@@ -1,0 +1,55 @@
+.wrap {
+  width: 100vw;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  
+}
+
+.menuBox {
+  display: flex;
+  height: 24px;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+.menu {
+  display: flex;
+  width: 100px;
+  margin-top: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #666666;
+  cursor: pointer;
+}
+
+.loginBox {
+  width: 230px;
+  height: 40px;
+  justify-content: space-between;
+  right: 50px;
+  position: absolute;
+  
+  
+}
+button {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #111111;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.signup {
+  background-color: #111111;
+  color: white;
+}
+.login {
+  background-color: white;
+  color: black;
+}
