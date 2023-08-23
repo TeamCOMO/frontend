@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 import styles from "../css/signIn.module.css";
-import Nav from "./Nav";
+import { useNavigate } from "react-router-dom";
 
 function SignInBox() {
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const signInClick = () => {
@@ -15,8 +15,9 @@ function SignInBox() {
     axios
       .post("/user/sign-in", { username: id, password: pw })
       .then((res) => {
-        console.log("로그인 성공:", res);
-        // AccessToken = "";
+        localStorage.setItem("accessToken",res.data)
+        console.log("로그인 성공:", res.data);
+        navigate('/');
       })
       .catch((error) => {
         console.log("잘못된 이메일 또는 비밀번호입니다."); // 로그인 실패 시 처리 (예: 에러 메시지 표시)

@@ -86,10 +86,10 @@ const SignUpBox = () => {
       .post(
         `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
         {
-          username: username,
+          username: nickname,
           password: password,
           checkedPassword: checkedPassword,
-          nickname: nickname,
+          nickname: username,
           email: email,
         },
         {

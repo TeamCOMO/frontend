@@ -53,3 +53,10 @@ button {
   background-color: white;
   color: black;
 }
+
+.logout{
+margin-left: 10px;
+}
+.logout:hover{
+  cursor: pointer;
+}
