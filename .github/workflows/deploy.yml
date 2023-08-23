@@ -12,7 +12,7 @@ jobs:
       - name: Check Node v
         run: node -v
       - name: Install Dependencies
-        run: npm install
+        run: npm install rrfs
       - name: Build
         run: npm run build
       - name: zip create
