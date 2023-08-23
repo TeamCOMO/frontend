@@ -3,26 +3,20 @@ import styles from "../css/signUp.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {useNavigate } from "react-router-dom";
+
 const SignUpBox = () => {
+  const navigate = useNavigate();
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
   const [infoAgreed, setInfoAgreed] = useState(false);
   const [eventAgreed, setEventAgreed] = useState(false);
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [checkedPassword, setCheckedPassword] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleAllAgreedChange = (e) => {
-    setAllAgreed(e.target.checked);
-    setLecoAgreed(e.target.checked);
-    setInfoAgreed(e.target.checked);
-    setEventAgreed(e.target.checked);
-  };
-
+ 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -37,6 +31,13 @@ const SignUpBox = () => {
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const handleAllAgreedChange = (e) => {
+    setAllAgreed(e.target.checked);
+    setLecoAgreed(e.target.checked);
+    setInfoAgreed(e.target.checked);
+    setEventAgreed(e.target.checked);
   };
 
   const allCheck = () => {
@@ -100,7 +101,7 @@ const SignUpBox = () => {
       .then((response) => {
         console.log(response);
         alert("회원가입 성공");
-        navigate("/SignInBox");
+        navigate("/signin");
       })
       .catch((error) => {
         console.log(error);
@@ -144,6 +145,7 @@ const SignUpBox = () => {
             />
             <div className={styles.inputName}>비밀번호 확인 Password Check</div>
             <input
+              onChange={handleCheckedPasswordChange}
               name="pw"
               type="password"
               placeholder="비밀번호 확인"
