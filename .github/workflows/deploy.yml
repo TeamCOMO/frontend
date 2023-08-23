@@ -14,7 +14,7 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: zip create
         run: zip -qq -r ./build.zip .
         shell: bash
