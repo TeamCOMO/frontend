@@ -1,31 +1,46 @@
-import styles from "../css/signUp.module.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import styles from "../css/SignUp.module.css";
 import axios from "axios";
+
 import Nav from "./Nav";
 const { useState, useEffect } = require("react");
 
-function SignUpBox() {
+const SignUpBox = () => {
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
   const [infoAgreed, setInfoAgreed] = useState(false);
   const [eventAgreed, setEventAgreed] = useState(false);
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [id, setId] = useState("");
+  const [checkedPassword, setCheckedPassword] = useState("");
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+
+  const handleAllAgreedChange = (e) => {
+    setAllAgreed(e.target.checked);
+    setLecoAgreed(e.target.checked);
+    setInfoAgreed(e.target.checked);
+    setEventAgreed(e.target.checked);
   };
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const handleIdChange = (e) => {
-    setId(e.target.value);
+  const handleCheckedPasswordChange = (e) => {
+    setCheckedPassword(e.target.value);
   };
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   const allCheck = () => {
     if (allAgreed === false) {
       setAllAgreed(true);
@@ -65,29 +80,37 @@ function SignUpBox() {
       setAllAgreed(true);
     else setAllAgreed(false);
   }, [lecoAgreed, infoAgreed, eventAgreed]);
-  const handleSubmit = () => {
-    const userData = {
-      username: id,
-      password: password,
-      checkedPassword: password,
-      nickname: username,
-      email: email,
-    };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
     axios
       .post(
-        `ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
+        `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
         {
-          userData,
+          username: username,
+          password: password,
+          checkedPassword: checkedPassword,
+          nickname: nickname,
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       )
-      .then((res) => {
-        console.log("회원가입 성공", res.data);
+      .then((response) => {
+        console.log(response);
+        alert("회원가입 성공");
+        navigate("/SignInBox");
       })
       .catch((error) => {
-        console.log("회원가입 실패");
+        console.log(error);
+        alert("회원가입에 실패했습니다.");
       });
   };
-  console.log(allAgreed);
+
+  //console.log(allAgreed);
 
   return (
     <div className={styles.wrap}>
@@ -139,6 +162,7 @@ function SignUpBox() {
             />
           </form>
 
+
          
           <div className={styles.btnBox}>
         
@@ -158,6 +182,6 @@ function SignUpBox() {
       </div>
     </div>
   );
-}
+};
 
 export default SignUpBox;
