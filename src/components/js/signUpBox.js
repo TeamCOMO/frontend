@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "../css/SignUp.module.css";
+import styles from "../css/signUp.module.css";
 import axios from "axios";
-
-import Nav from "./Nav";
-const { useState, useEffect } = require("react");
-
+import { Link } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 const SignUpBox = () => {
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
@@ -34,7 +32,7 @@ const SignUpBox = () => {
   const handleCheckedPasswordChange = (e) => {
     setCheckedPassword(e.target.value);
   };
-  const handleNicknameChange = (e) => {
+  const handleIdChange = (e) => {
     setNickname(e.target.value);
   };
   const handleEmailChange = (e) => {
@@ -81,7 +79,7 @@ const SignUpBox = () => {
     else setAllAgreed(false);
   }, [lecoAgreed, infoAgreed, eventAgreed]);
 
-  const handleRegister = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     axios
       .post(
