@@ -1,4 +1,3 @@
-
 .wrap {
   position: absolute;
   width: 100vw;
@@ -14,7 +13,7 @@
   border-radius: 26px;
   width: 600px;
   height: 850px;
-  
+
   position: flex;
   margin: 40px auto;
 }
@@ -25,15 +24,13 @@
 .titleBox {
   display: flex;
   line-height: 30px;
-text-align: center;
-justify-content: center;
-  
+  text-align: center;
+  justify-content: center;
 }
 .title {
   color: #333333;
   font-size: 36px;
   font-weight: 600;
-  
 }
 .regist {
   text-decoration: none;
@@ -66,6 +63,10 @@ justify-content: center;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
+}
+.duplication {
+  float: right;
+  margin-top: 10px;
 }
 .inputsSmall {
   width: 204px;
@@ -154,12 +155,12 @@ justify-content: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   background-color: #333333;
   color: white;
   cursor: pointer;
   border: 0;
-  margin-top: 50px;
+  margin-top: 30px;
   border-radius: 10px;
   font-size: 20px;
   box-shadow: 0px 10px 40px rgba(174, 174, 174, 0.2);
@@ -171,7 +172,7 @@ justify-content: center;
 .backSignIn {
   font-size: 16px;
   font-weight: 600;
-  
+
   text-align: center;
 }
 

@@ -17,6 +17,24 @@ const SignUpBox = () => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [passwordChecking, setPasswordChecking] = useState(false);
+  const [duplicateCheck, setduplicateCheck] = useState(1);
+  let checkMsg = "";
+  const clickduplicateCheck = (e) => {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/check-duplicate/${nickname}`
+      )
+      .then((res) => {
+        setduplicateCheck(2);
+        console.log(res);
+      })
+      .catch((error) => {
+        setduplicateCheck(3);
+        console.log(error);
+      });
+  };
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -175,7 +193,23 @@ const SignUpBox = () => {
                   name="id"
                   placeholder="아이디"
                   className={styles.inputs}
+                  style={{ width: "270px" }}
                 />
+                <button
+                  onClick={clickduplicateCheck}
+                  className={styles.duplication}
+                >
+                  중복체크
+                </button>
+                {duplicateCheck === 2 ? (
+                  <p style={{ color: "blue" }}>사용 가능한 ID입니다.</p>
+                ) : duplicateCheck === 3 ? (
+                  <p style={{ color: "red" }}>
+                    중복된 ID입니다. 다른 ID를 사용해주세요.
+                  </p>
+                ) : (
+                  ""
+                )}
                 <div className={styles.inputName}>비밀번호 Password</div>
                 <input
                   value={password}

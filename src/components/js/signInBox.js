@@ -22,21 +22,12 @@ function SignInBox() {
       })
       .catch((error) => {
         console.log(error);
-        alert("잘못된 id 또는 비밀번호입니다."); // 로그인 실패 시 처리 (예: 에러 메시지 표시)
+        alert(error.response.data.detail); // 로그인 실패 시 처리 (예: 에러 메시지 표시)
       });
   };
 
   const LoginFn = (e) => {
     e.preventDefault();
-    console.log(id);
-    console.log(pw);
-    if (!id) {
-      return alert("아이디를 입력하세요.");
-    } else if (!pw) {
-      return alert("비밀번호를 입력하세요");
-    } else {
-      //통신하는 부분
-    }
   };
   const onChangeId = (text) => {
     setId(text.target.value);
