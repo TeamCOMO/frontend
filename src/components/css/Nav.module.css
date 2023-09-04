@@ -3,9 +3,18 @@
   height: 72px;
   display: flex;
   align-items: center;
-  
 }
-
+.wrapMain {
+  width: 100vw;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  background-image: none, url(../img/mainBackground.png);
+}
+.link {
+  text-decoration: none;
+  margin-right: 30px;
+}
 .menuBox {
   display: flex;
   height: 24px;
@@ -14,8 +23,10 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 1vw;
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: #888888;
 }
 .menu {
   display: flex;
@@ -34,8 +45,6 @@
   justify-content: space-between;
   right: 50px;
   position: absolute;
-  
-  
 }
 button {
   width: 100px;
@@ -54,9 +63,9 @@ button {
   color: black;
 }
 
-.logout{
-margin-left: 10px;
+.logout {
+  margin-left: 10px;
 }
-.logout:hover{
+.logout:hover {
   cursor: pointer;
 }

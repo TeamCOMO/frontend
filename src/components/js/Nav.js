@@ -1,44 +1,62 @@
+import { useParams } from "react-router-dom/dist";
 import NavStyle from "../css/Nav.module.css";
 import comoLogo from "../img/background.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function Nav() {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+  const param = useParams();
+
   let accessToken = localStorage.accessToken;
-  const handleLogout = ()=>{
-    localStorage.setItem("accessToken","")
-    accessToken ="";
-    navigate('')
-  }
+  const handleLogout = () => {
+    localStorage.setItem("accessToken", "");
+    accessToken = "";
+    navigate("");
+  };
   return (
     <div className={NavStyle.wrap}>
       <Link to="/" className={NavStyle.link}>
-        <img src={comoLogo} className={NavStyle.logo}></img>
+        <div style={{ margin: "0 20px 0 20px" }}>
+          <flex style={{ color: "black" }} className={NavStyle.logo}>
+            C
+          </flex>
+          <flex className={NavStyle.logo}>O</flex>
+          <flex style={{ color: "black" }} className={NavStyle.logo}>
+            M
+          </flex>
+          <flex className={NavStyle.logo}>O</flex>
+        </div>
       </Link>
       <div className={NavStyle.menuBox}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <flex className={NavStyle.menu}>Home</flex>
         </Link>
-        <flex className={NavStyle.menu}>get post</flex>
-        <flex className={NavStyle.menu}>event</flex>
-        <flex className={NavStyle.menu}>My page</flex>
+        <Link to="/post" style={{ textDecoration: "none" }}>
+          <flex className={NavStyle.menu}>Post</flex>
+        </Link>
+        <flex className={NavStyle.menu}>Event</flex>
       </div>
 
-
-      {accessToken === ""?
-      <div className={NavStyle.loginBox}>
-        <Link to="/signin">
-          <button className={NavStyle.login}>Log in</button>
-        </Link>
-        <Link to="/signup">
-          <button className={NavStyle.signup}>Sign up</button>
-        </Link>
-      </div>:
-      <div>
-      <span> 마이페이지 </span>
-      <span className={NavStyle.logout} onClick={handleLogout}> 로그아웃 </span>
-      </div>
-  }
+      {accessToken === "" ? (
+        <div className={NavStyle.loginBox}>
+          <Link to="/signin">
+            <button className={NavStyle.login}>Log in</button>
+          </Link>
+          <Link to="/signup">
+            <button className={NavStyle.signup}>Sign up</button>
+          </Link>
+        </div>
+      ) : (
+        <div className={NavStyle.loginBox}>
+          <Link to="/mypage">
+            <button className={NavStyle.login}>마이페이지</button>
+          </Link>
+          <button className={NavStyle.signup} onClick={handleLogout}>
+            {" "}
+            로그아웃{" "}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

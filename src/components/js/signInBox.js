@@ -15,12 +15,14 @@ function SignInBox() {
     axios
       .post("/user/sign-in", { username: id, password: pw })
       .then((res) => {
-        localStorage.setItem("accessToken",res.data)
+        console.log(res);
+        localStorage.setItem("accessToken", res.data);
         console.log("로그인 성공:", res.data);
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
-        console.log("잘못된 이메일 또는 비밀번호입니다."); // 로그인 실패 시 처리 (예: 에러 메시지 표시)
+        console.log(error);
+        alert("잘못된 id 또는 비밀번호입니다."); // 로그인 실패 시 처리 (예: 에러 메시지 표시)
       });
   };
 
