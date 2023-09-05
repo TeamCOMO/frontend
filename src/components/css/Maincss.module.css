@@ -1,0 +1,30 @@
+.background_image {
+  position: relative;
+  min-width: 100%;
+  min-height: 92vh;
+  background: url(../img/background.png) no-repeat;
+  background-size: cover;
+  position: flex;
+}
+
+.no-background {
+  position: static; /* 또는 다른 적절한 값으로 설정 */
+  /* 다른 스타일 속성들 */
+}
+
+.main_introduce {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_introduce > h1 {
+  color: white;
+  font-size: 50px;
+  position: relative;
+  bottom: 20px;
+  margin: 0;
+}
+
+.main_introduce > span {
+  color: white;
+}
