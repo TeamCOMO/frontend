@@ -8,10 +8,11 @@ function SignInBox() {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const API_URL = process.env.REACT_APP_SERVER_URL;
 
   const signInClick = () => {
-    const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-    axios.defaults.baseURL = SERVER_URL; // const AccessToken = "";
+    axios.defaults.baseURL = API_URL; // const AccessToken = "";
+
     axios
       .post("/user/sign-in", { username: id, password: pw })
       .then((res) => {

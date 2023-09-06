@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const SignUpBox = () => {
+  const API_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
@@ -21,11 +22,9 @@ const SignUpBox = () => {
   let checkMsg = "";
   const clickduplicateCheck = (e) => {
     e.preventDefault();
-
+    const API_URL = process.env.REACT_APP_SERVER_URL;
     axios
-      .get(
-        `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/check-duplicate/${nickname}`
-      )
+      .get(`${API_URL}/user/check-duplicate/${nickname}`)
       .then((res) => {
         setduplicateCheck(2);
         console.log(res);
@@ -142,7 +141,7 @@ const SignUpBox = () => {
     event.preventDefault();
     axios
       .post(
-        `http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com/user/sign-up`,
+        `${API_URL}/user/sign-up`,
         {
           username: nickname,
           password: password,
