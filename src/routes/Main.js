@@ -1,9 +1,15 @@
 import Nav from "../components/js/Nav";
+import styles from "../components/css/Maincss.module.css";
+
 function Main() {
   return (
     <div>
       <Nav />
-      <div style={{fontSize:"100px",marginTop:"50px"}}> 메인페이지입니다~!! 왜안되는거야 테스트용</div>
+      <div className={styles.background_image}></div>
+      <div className="main_introduce">
+        <h1>welcome to COMO</h1>
+        <span>This is some text.</span>
+      </div>
     </div>
   );
 }

@@ -28,13 +28,9 @@ function Nav() {
         </div>
       </Link>
       <div className={NavStyle.menuBox}>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <flex className={NavStyle.menu}>Home</flex>
-        </Link>
         <Link to="/post" style={{ textDecoration: "none" }}>
           <flex className={NavStyle.menu}>Post</flex>
         </Link>
-        <flex className={NavStyle.menu}>Event</flex>
       </div>
 
       {accessToken === "" ? (

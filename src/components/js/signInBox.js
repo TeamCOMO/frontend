@@ -12,6 +12,7 @@ function SignInBox() {
 
   const signInClick = () => {
     axios.defaults.baseURL = API_URL; // const AccessToken = "";
+
     axios
       .post("/user/sign-in", { username: id, password: pw })
       .then((res) => {
