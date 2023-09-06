@@ -8,6 +8,7 @@ function SignInBox() {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+
   const signInClick = () => {
     axios.defaults.baseURL =
       "http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com";

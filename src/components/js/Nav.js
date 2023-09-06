@@ -13,6 +13,9 @@ function Nav() {
     accessToken = "";
     navigate("");
   };
+  {
+    console.log(accessToken, "ACcesstoken");
+  }
   return (
     <div className={NavStyle.wrap}>
       <Link to="/" className={NavStyle.link}>
@@ -37,7 +40,7 @@ function Nav() {
         <flex className={NavStyle.menu}>Event</flex>
       </div>
 
-      {accessToken === "" ? (
+      {accessToken === undefined ? (
         <div className={NavStyle.loginBox}>
           <Link to="/signin">
             <button className={NavStyle.login}>Log in</button>
