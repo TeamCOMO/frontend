@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const SignUpBox = () => {
+  const API_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const [allAgreed, setAllAgreed] = useState(false);
   const [lecoAgreed, setLecoAgreed] = useState(false);
@@ -22,9 +23,11 @@ const SignUpBox = () => {
   const API = process.env.REACT_APP_API_KEY;
   const clickduplicateCheck = (e) => {
     e.preventDefault();
-
+    const API_URL = process.env.REACT_APP_SERVER_URL;
     axios
+
       .get(`${API}/user/check-duplicate/${nickname}`)
+
       .then((res) => {
         setduplicateCheck(2);
         console.log(res);
@@ -141,7 +144,9 @@ const SignUpBox = () => {
     event.preventDefault();
     axios
       .post(
+
         `${API}/user/sign-up`,
+
         {
           username: nickname,
           password: password,
