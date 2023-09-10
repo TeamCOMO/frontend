@@ -8,13 +8,13 @@ function SignInBox() {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  const API_URL = process.env.REACT_APP_SERVER_URL;
+
+  const API = process.env.REACT_APP_API_KEY;
 
   const signInClick = () => {
-    axios.defaults.baseURL = API_URL; // const AccessToken = "";
 
     axios
-      .post("/user/sign-in", { username: id, password: pw })
+      .post(`${API}/user/sign-in`, { username: id, password: pw })
       .then((res) => {
         console.log(res);
         localStorage.setItem("accessToken", res.data);

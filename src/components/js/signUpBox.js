@@ -20,11 +20,14 @@ const SignUpBox = () => {
   const [passwordChecking, setPasswordChecking] = useState(false);
   const [duplicateCheck, setduplicateCheck] = useState(1);
   let checkMsg = "";
+  const API = process.env.REACT_APP_API_KEY;
   const clickduplicateCheck = (e) => {
     e.preventDefault();
     const API_URL = process.env.REACT_APP_SERVER_URL;
     axios
-      .get(`${API_URL}/user/check-duplicate/${nickname}`)
+
+      .get(`${API}/user/check-duplicate/${nickname}`)
+
       .then((res) => {
         setduplicateCheck(2);
         console.log(res);
@@ -141,7 +144,9 @@ const SignUpBox = () => {
     event.preventDefault();
     axios
       .post(
-        `${API_URL}/user/sign-up`,
+
+        `${API}/user/sign-up`,
+
         {
           username: nickname,
           password: password,
