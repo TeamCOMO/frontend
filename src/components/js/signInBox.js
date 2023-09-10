@@ -8,13 +8,11 @@ function SignInBox() {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-
+  const API = process.env.REACT_APP_API_KEY;
+  console.log(process.env.REACT_APP_API_KEY, "API");
   const signInClick = () => {
-    axios.defaults.baseURL =
-      "http://ec2-3-35-3-165.ap-northeast-2.compute.amazonaws.com";
-    // const AccessToken = "";
     axios
-      .post("/user/sign-in", { username: id, password: pw })
+      .post(`${API}/user/sign-in`, { username: id, password: pw })
       .then((res) => {
         console.log(res);
         localStorage.setItem("accessToken", res.data);

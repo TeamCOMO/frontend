@@ -8,13 +8,14 @@ function Nav() {
   const param = useParams();
 
   let accessToken = localStorage.accessToken;
+  console.log(accessToken);
   const handleLogout = () => {
     localStorage.setItem("accessToken", "");
     accessToken = "";
     navigate("");
   };
   {
-    console.log(accessToken, "ACcesstoken");
+    console.log(accessToken, "Accesstoken");
   }
   return (
     <div className={NavStyle.wrap}>
@@ -40,7 +41,7 @@ function Nav() {
         <flex className={NavStyle.menu}>Event</flex>
       </div>
 
-      {accessToken === undefined ? (
+      {accessToken === "" ? (
         <div className={NavStyle.loginBox}>
           <Link to="/signin">
             <button className={NavStyle.login}>Log in</button>
