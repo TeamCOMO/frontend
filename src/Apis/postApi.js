@@ -3,7 +3,7 @@ import axios from "axios";
 const API = process.env.REACT_APP_API_KEY;
 
 export const viewPostApi = (token, page) => {
-  axios.get(`${API}/api/v1/posts/`, null, {
+  return axios.get(`${API}/api/v1/posts/`, null, {
     params: { page },
     headers: {
       Authorization: token,
@@ -13,7 +13,7 @@ export const viewPostApi = (token, page) => {
 };
 
 export const writePostApi = (postInfo, token, tech) => {
-  axios.post(
+  return axios.post(
     `${API}/api/v1/post/create`,
     {
       title: postInfo.title,

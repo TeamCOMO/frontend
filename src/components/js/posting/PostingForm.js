@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./boxStyle.module.css";
-
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { writePostApi } from "../../../Apis/postApi";
 function PostingForm() {
@@ -32,7 +32,6 @@ function PostingForm() {
     setTechs(e.target.value);
   };
   const handlePosting = () => {
-    const API = process.env.REACT_APP_API_KEY;
     const token = localStorage.accessToken;
 
     writePostApi(postInfo, token, tech)
