@@ -28,3 +28,22 @@
 .main_introduce > span {
   color: white;
 }
+
+.explain {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding-top: 100px;
+  padding-left: 100px;
+}
+
+.explain > h1 {
+  font-size: 50px;
+  position: relative;
+  bottom: 20px;
+  margin: 0;
+}
+
+.explain > span {
+  color: white;
+}
