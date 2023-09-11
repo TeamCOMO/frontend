@@ -23,9 +23,7 @@ const SignUpBox = () => {
   const API = process.env.REACT_APP_API_KEY;
   const clickduplicateCheck = (e) => {
     e.preventDefault();
-    const API_URL = process.env.REACT_APP_SERVER_URL;
     axios
-
       .get(`${API}/user/check-duplicate/${nickname}`)
 
       .then((res) => {
@@ -144,7 +142,6 @@ const SignUpBox = () => {
     event.preventDefault();
     axios
       .post(
-
         `${API}/user/sign-up`,
 
         {
