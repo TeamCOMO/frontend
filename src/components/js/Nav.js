@@ -6,17 +6,12 @@ import { useNavigate } from "react-router-dom";
 function Nav() {
   const navigate = useNavigate();
   const param = useParams();
-
   let accessToken = localStorage.accessToken;
-  console.log(accessToken);
   const handleLogout = () => {
     localStorage.setItem("accessToken", "");
     accessToken = "";
     navigate("");
   };
-  {
-    console.log(accessToken, "Accesstoken");
-  }
   return (
     <div className={NavStyle.wrap}>
       <Link to="/" className={NavStyle.link}>

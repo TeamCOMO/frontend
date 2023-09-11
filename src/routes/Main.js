@@ -14,13 +14,15 @@ function Main() {
       />
       <Nav />
       <div className={styles.background_image}>
-        {" "}
+
+
         <h1 class="animate__animated animate__fadeInLeftBig">
           <div className={styles.explain}>
             <h1>welcome to COMO</h1>
             <span>This is some text.</span>
           </div>
         </h1>
+
       </div>
     </div>
   );

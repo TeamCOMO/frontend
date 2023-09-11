@@ -6,6 +6,7 @@ import SignUp from "./routes/signUp";
 import SignIn from "./routes/signIn";
 import Mypage from "./routes/mypage";
 import Post from "./routes/Post";
+import Posting from "./routes/Posting";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/post" element={<Post />} />
+        <Route path="/posting" element={<Posting />} />
       </Routes>
     </Router>
   );
