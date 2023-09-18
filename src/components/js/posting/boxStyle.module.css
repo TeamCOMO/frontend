@@ -1,12 +1,15 @@
-.potingBox {
+.postingBox {
   width: 300px;
   height: 300px;
   float: left;
   border: solid 1px black;
   margin-left: 1vw;
   margin-top: 40px;
+  
 }
-
+.postingBox:hover{
+  cursor: pointer;
+}
 .textarea {
   width: 80%;
 }

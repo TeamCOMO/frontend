@@ -7,7 +7,7 @@ import SignIn from "./routes/signIn";
 import Mypage from "./routes/mypage";
 import Post from "./routes/Post";
 import Posting from "./routes/Posting";
-
+import PostDetail from "./routes/PostDetail"
 function App() {
   return (
     <Router>
@@ -17,6 +17,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/post" element={<Post />} />
+        <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/posting" element={<Posting />} />
       </Routes>
     </Router>
