@@ -30,10 +30,12 @@ export const writePostApi = (postInfo, token, tech) => {
   );
 };
 
-export const getPostApi = (postId,token) =>{
-  return axios.get(
-    `${API}/api/v1/post/${postId}`,{headers:{
-       Authorization: token,
-      "Content-Type": "application/json"}}
-  )
-}
+export const getPostApi = (postId, token) => {
+  return axios.get(`${API}/api/v1/post/${postId}`, {
+    headers: {
+      Authorization: token,
+
+      "Content-Type": "application/json",
+    },
+  });
+};
