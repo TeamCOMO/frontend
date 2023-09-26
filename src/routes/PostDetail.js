@@ -9,7 +9,7 @@ function PostDetail() {
   const postingId = useParams().postId;
   console.log(postInfo);
   useEffect(() => {
-    getPostApi(postingId, token)
+    getPostApi(postingId)
       .then((res) => {
         setPostInfo(res.data);
       })

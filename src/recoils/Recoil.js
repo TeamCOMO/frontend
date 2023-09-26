@@ -29,3 +29,8 @@ export const emailState = atom({
   key: "emailState",
   default: 0,
 });
+
+export const postState = atom({
+  key: "postState",
+  default: [],
+});

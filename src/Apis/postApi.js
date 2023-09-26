@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const API = process.env.REACT_APP_API_KEY;
-
-export const viewPostApi = (token, page) => {
-  return axios.get(`${API}/api/v1/posts/`, null, {
+const token = localStorage.accessToken;
+export const viewPostApi = (page) => {
+  return axios.get(`${API}/api/v1/posts`, {
     params: { page },
     headers: {
       Authorization: token,
@@ -12,7 +12,7 @@ export const viewPostApi = (token, page) => {
   });
 };
 
-export const writePostApi = (postInfo, token, tech) => {
+export const writePostApi = (postInfo, tech) => {
   return axios.post(
     `${API}/api/v1/post/create`,
     {
@@ -30,11 +30,21 @@ export const writePostApi = (postInfo, token, tech) => {
   );
 };
 
-export const getPostApi = (postId, token) => {
+export const getPostApi = (postId) => {
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,
 
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export const categoryClickApi = (category, page) => {
+  return axios.get(`${API}/api/v1/posts`, {
+    params: { category, page },
+    headers: {
+      Authorization: token,
       "Content-Type": "application/json",
     },
   });

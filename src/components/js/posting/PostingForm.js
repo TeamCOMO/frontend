@@ -34,7 +34,7 @@ function PostingForm() {
   const handlePosting = () => {
     const token = localStorage.accessToken;
 
-    writePostApi(postInfo, token, tech)
+    writePostApi(postInfo, tech)
       .then((res) => {
         console.log(res);
         alert("글 추가됨");
