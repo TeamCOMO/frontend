@@ -7,16 +7,20 @@ import Pagination from "react-js-pagination";
 import PostingBox from "../components/js/posting/postingBox";
 import axios from "axios";
 import { viewPostApi } from "../Apis/postApi";
-
+import CategoryBtn from "../components/js/posting/CategoryBtn";
+import { postState } from "../recoils/Recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 function Post() {
   const API = process.env.REACT_APP_API_KEY;
   const token = localStorage.accessToken;
+  const setPostState = useSetRecoilState(postState);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
-  const [posts, setPosts] = useState([]);
   const handlePageChange = (page) => {
     setPage(page);
   };
+
+  console.log(useRecoilValue(postState));
 
   useEffect(() => {
     axios
@@ -30,13 +34,12 @@ function Post() {
       })
       .then((res) => {
         console.log(res.data.posts);
-        setPosts(res.data.posts);
+        setPostState(res.data.posts);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [page]);
-  console.log(posts);
   return (
     <div style={{ overflowX: "hidden" }}>
       <Nav />
@@ -44,7 +47,8 @@ function Post() {
         <PostingBtn param="post" />
         <h3 style={{ margin: "40px 0 0 60px" }}>POSTING</h3>
         <div className={postStyle.postingBoxWrap}>
-          {posts.map((e) => {
+          <CategoryBtn />
+          {useRecoilValue(postState).map((e) => {
             console.log(e);
             return <PostingBox param={e} />;
           })}
