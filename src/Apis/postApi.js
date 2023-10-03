@@ -49,3 +49,21 @@ export const categoryClickApi = (category, page) => {
     },
   });
 };
+
+export const editPostApi = (postInfo) => {
+  return axios.patch(`${API}/api/v1/post/modify`, postInfo, {
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export const deletePostApi = (postId) => {
+  return axios.delete(`${API}/api/v1/post/delete/${postId}`, {
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+  });
+};

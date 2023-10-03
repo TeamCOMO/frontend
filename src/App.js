@@ -7,7 +7,8 @@ import SignIn from "./routes/signIn";
 import Mypage from "./routes/mypage";
 import Post from "./routes/Post";
 import Posting from "./routes/Posting";
-import PostDetail from "./routes/PostDetail"
+import PostDetail from "./routes/PostDetail";
+import EditPost from "./routes/EditPost";
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/post" element={<Post />} />
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/posting" element={<Posting />} />
+        <Route path="/editpost/:postId" element={<EditPost />} />
       </Routes>
     </Router>
   );

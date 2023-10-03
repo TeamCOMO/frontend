@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./boxStyle.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { writePostApi } from "../../../Apis/postApi";
-function PostingForm() {
+import { editPostApi, writePostApi } from "../../../Apis/postApi";
+function PostingForm(param) {
   const navigate = useNavigate();
   const [postInfo, setPostInfo] = useState({
+    postId: "",
     title: "",
     body: "",
     category: "",
@@ -13,27 +14,38 @@ function PostingForm() {
   const [techs, setTechs] = useState("");
   const [tech, setTech] = useState([]);
 
+  useEffect(() => {
+    param.postType == "editPost"
+      ? setPostInfo(param.editPostInfo)
+      : console.log("Not Edit");
+  }, [param]);
+  console.log(param.editPostInfo);
   console.log(postInfo);
   const handlePostInfo = (e) => {
-    console.log(e.target.id, e.target.value);
-
     setPostInfo({
       ...postInfo,
       [e.target.id]: e.target.value,
     });
   };
-  console.log(tech);
+  postInfo.postId = Number(postInfo.postId);
   const onClickTehcs = () => {
     setTech(tech.concat(techs));
-    console.log(tech);
     alert("추가됐습니다.");
   };
   const handleTech = (e) => {
     setTechs(e.target.value);
   };
+  const handleEditPosting = () => {
+    editPostApi(postInfo, tech)
+      .then((res) => {
+        console.log(res);
+        navigate("/post");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handlePosting = () => {
-    const token = localStorage.accessToken;
-
     writePostApi(postInfo, tech)
       .then((res) => {
         console.log(res);
@@ -47,22 +59,32 @@ function PostingForm() {
 
   return (
     <div style={{ justifyContent: "center", display: "flex" }}>
-      <input onChange={handlePostInfo} id="title" placeholder="제목"></input>
+      <input
+        value={postInfo.title}
+        onChange={handlePostInfo}
+        id="title"
+        placeholder="제목"
+      ></input>
       <textarea
+        value={postInfo.body}
         onChange={handlePostInfo}
         id="body"
         placeholder="본문"
         className={style.textarea}
       ></textarea>
       <input
+        value={postInfo.category}
         onChange={handlePostInfo}
         id="category"
         placeholder="카테고리"
       ></input>
       <input onChange={handleTech} id="techs" placeholder="기술스택"></input>
       <button onClick={onClickTehcs}>추가</button>
-
-      <button onClick={handlePosting}> 글쓰기 </button>
+      {param.postType == "editPost" ? (
+        <button onClick={handleEditPosting}>수정하기</button>
+      ) : (
+        <button onClick={handlePosting}> 글쓰기 </button>
+      )}
     </div>
   );
 }

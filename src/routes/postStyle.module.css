@@ -1,9 +1,14 @@
 .totalPostingBox {
   margin-top: 200px;
   width: 90vw;
+
   border: 1px solid;
   border-radius: 10px;
+  margin: 20px auto;
+}
+.postingFormCss {
   margin: 0 auto;
+  justify-content: space-between;
 }
 .postingBtn {
   margin: 40px 60px 0px 0px;
