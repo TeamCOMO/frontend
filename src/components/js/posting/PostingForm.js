@@ -58,7 +58,7 @@ function PostingForm(param) {
   };
 
   return (
-    <div style={{ justifyContent: "center", display: "flex" }}>
+    <div >
       <input
         value={postInfo.title}
         onChange={handlePostInfo}
