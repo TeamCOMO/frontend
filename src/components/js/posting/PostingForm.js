@@ -1,36 +1,46 @@
-import { useEffect, useState } from "react";
-import style from "./boxStyle.module.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { editPostApi, writePostApi } from "../../../Apis/postApi";
+import { useEffect, useState } from 'react';
+import style from './boxStyle.module.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { editPostApi, writePostApi } from '../../../Apis/postApi';
 function PostingForm(param) {
   const navigate = useNavigate();
+  let formData = new FormData();
+
   const [postInfo, setPostInfo] = useState({
-    postId: "",
-    title: "",
-    body: "",
-    category: "",
+    postId: '',
+    title: '',
+    body: '',
+    category: '',
+    image: '',
   });
-  const [techs, setTechs] = useState("");
+  const [techs, setTechs] = useState('');
   const [tech, setTech] = useState([]);
 
   useEffect(() => {
-    param.postType == "editPost"
+    param.postType == 'editPost'
       ? setPostInfo(param.editPostInfo)
-      : console.log("Not Edit");
+      : console.log('Not Edit');
   }, [param]);
-  console.log(param.editPostInfo);
-  console.log(postInfo);
   const handlePostInfo = (e) => {
-    setPostInfo({
-      ...postInfo,
-      [e.target.id]: e.target.value,
-    });
+    if (e.target.id === 'image') {
+      console.log(e, 'check');
+      // 이미지 파일이 변경되었을 때 처리
+      setPostInfo({
+        ...postInfo,
+        image: e.target.files[0], // 파일 객체를 저장
+      });
+    } else
+      setPostInfo({
+        ...postInfo,
+        [e.target.id]: e.target.value,
+      });
+    console.log(postInfo, formData);
   };
   postInfo.postId = Number(postInfo.postId);
   const onClickTehcs = () => {
     setTech(tech.concat(techs));
-    alert("추가됐습니다.");
+    alert('추가됐습니다.');
   };
   const handleTech = (e) => {
     setTechs(e.target.value);
@@ -39,7 +49,7 @@ function PostingForm(param) {
     editPostApi(postInfo, tech)
       .then((res) => {
         console.log(res);
-        navigate("/post");
+        navigate('/post');
       })
       .catch((err) => {
         console.log(err);
@@ -49,8 +59,8 @@ function PostingForm(param) {
     writePostApi(postInfo, tech)
       .then((res) => {
         console.log(res);
-        alert("글 추가됨");
-        navigate("/post");
+        alert('글 추가됨');
+        navigate('/post');
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +68,13 @@ function PostingForm(param) {
   };
 
   return (
-    <div >
+    <div>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handlePostInfo}
+        id="image"
+      ></input>
       <input
         value={postInfo.title}
         onChange={handlePostInfo}
@@ -80,7 +96,7 @@ function PostingForm(param) {
       ></input>
       <input onChange={handleTech} id="techs" placeholder="기술스택"></input>
       <button onClick={onClickTehcs}>추가</button>
-      {param.postType == "editPost" ? (
+      {param.postType == 'editPost' ? (
         <button onClick={handleEditPosting}>수정하기</button>
       ) : (
         <button onClick={handlePosting}> 글쓰기 </button>
