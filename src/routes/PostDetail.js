@@ -1,8 +1,8 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { deletePostApi, getPostApi } from "../Apis/postApi";
-import { useEffect, useState } from "react";
-import postStyle from "./postStyle.module.css";
-import Nav from "../components/js/Nav";
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deletePostApi, getPostApi } from '../Apis/postApi';
+import { useEffect, useState } from 'react';
+import postStyle from './postStyle.module.css';
+import Nav from '../components/js/Nav';
 
 function PostDetail() {
   const [postInfo, setPostInfo] = useState({});
@@ -12,7 +12,7 @@ function PostDetail() {
   const handleDeletePost = () => {
     deletePostApi(postingId)
       .then((res) => {
-        navigate("/post");
+        navigate('/post');
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -32,6 +32,9 @@ function PostDetail() {
     <div>
       <Nav />
       <div className={postStyle.totalPostingBox}>
+        <div>
+          <img style={{ width: '100px' }} src={postInfo.images}></img>
+        </div>
         <div>
           <span>제목 : </span>
           <span>{postInfo.title}</span>

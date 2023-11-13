@@ -32,7 +32,6 @@ export const writePostApi = (postInfo, tech) => {
   return axios.post(`${API}/api/v1/post`, data, {
     headers: {
       'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
-
       Authorization: token,
     },
   });
@@ -42,7 +41,6 @@ export const getPostApi = (postId) => {
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,
-
       'Content-Type': 'application/json',
     },
   });
