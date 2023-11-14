@@ -13,7 +13,6 @@ export const viewPostApi = (page) => {
 };
 
 export const writePostApi = (postInfo, tech) => {
-  console.log(postInfo);
   const dto = {
     title: postInfo.title,
     body: postInfo.body,
@@ -24,8 +23,6 @@ export const writePostApi = (postInfo, tech) => {
 
   const blob = new Blob([JSON.stringify(dto)], { type: 'application/json' });
   data.append('dto', blob);
-
-  // const blob2 = new Blob([postInfo.image], { type: 'image' });
 
   data.append('images', postInfo.image);
 
@@ -57,10 +54,27 @@ export const categoryClickApi = (category, page) => {
 };
 
 export const editPostApi = (postInfo) => {
-  return axios.patch(`${API}/api/v1/post`, postInfo, {
+  const dto = {
+    postId: postInfo.postId,
+    title: postInfo.title,
+    body: postInfo.body,
+    category: postInfo.category,
+    techs: postInfo.tech,
+  };
+  const oldURL = postInfo.images[0];
+  const data = new FormData();
+
+  const blob = new Blob([JSON.stringify(dto)], { type: 'application/json' });
+  data.append('dto', blob);
+
+  // const blob2 = new Blob([postInfo.image], { type: 'image' });
+  console.log(dto, 'dto입니다');
+  data.append('images', postInfo.image);
+
+  return axios.patch(`${API}/api/v1/post`, data, {
     headers: {
+      'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
       Authorization: token,
-      'Content-Type': 'application/json',
     },
   });
 };
@@ -72,4 +86,17 @@ export const deletePostApi = (postId) => {
       'Content-Type': 'application/json',
     },
   });
+};
+
+export const applyApi = (postId) => {
+  return axios.post(
+    `${API}/api/v1/apply/${postId}`,
+    {},
+    {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
 };

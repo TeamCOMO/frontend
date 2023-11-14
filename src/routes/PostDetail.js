@@ -3,6 +3,7 @@ import { deletePostApi, getPostApi } from '../Apis/postApi';
 import { useEffect, useState } from 'react';
 import postStyle from './postStyle.module.css';
 import Nav from '../components/js/Nav';
+import ApplyBtn from '../components/js/Apply/ApplyBtn';
 
 function PostDetail() {
   const [postInfo, setPostInfo] = useState({});
@@ -53,11 +54,11 @@ function PostDetail() {
           <span>기술스택 : </span>
           <span>{postInfo.techs}</span>
         </div>
-
         <Link to={`/editpost/${postingId}`}>
           <button>수정하기</button>
         </Link>
         <button onClick={handleDeletePost}>삭제하기</button>
+        <ApplyBtn postId={postingId}></ApplyBtn>
       </div>
     </div>
   );
