@@ -8,8 +8,8 @@ import Mypage from "./routes/mypage";
 import Post from "./routes/Post";
 import Posting from "./routes/Posting";
 import Heart_p from "./routes/heart_p";
-
 import PostDetail from "./routes/PostDetail";
+import EditPost from "./routes/EditPost";
 function App() {
   return (
     <Router>
@@ -22,6 +22,8 @@ function App() {
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/posting" element={<Posting />} />
         <Route path="/heart_p" element={<Heart_p />} />
+
+        <Route path="/editpost/:postId" element={<EditPost />} />
       </Routes>
     </Router>
   );
