@@ -1,10 +1,13 @@
 .totalPostingBox {
   margin-top: 200px;
   width: 90vw;
-
-  border: 1px solid;
   border-radius: 10px;
   margin: 20px auto;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: url(../components/img/background.png);
 }
 .postingFormCss {
   margin: 0 auto;
