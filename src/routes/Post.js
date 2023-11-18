@@ -43,27 +43,29 @@ function Post() {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Nav />
-      <div className={postStyle.totalPostingBox}>
-        <PostingBtn param="post" />
-        <h3 style={{ margin: '40px 0 0 60px' }}>POSTING</h3>
-        <div className={postStyle.postingBoxWrap}>
-          <CategoryBtn />
-          {useRecoilValue(postState).map((e) => {
-            console.log(e);
-            return <PostingBox param={e} />;
-          })}
-        </div>
-        <div className={postStyle.pagination}>
-          <Pagination
-            activePage={page}
-            prevPageText={'<'}
-            nextPageText={'>'}
-            totalItemsCount={100}
-            pageRangeDisplayed={3}
-            onChange={handlePageChange}
-            itemsCountPerPage={16}
-            hideFirstLastPages
-          />
+      <div className={postStyle.background}>
+        <div className={postStyle.totalPostingBox}>
+          <PostingBtn param="post" />
+          <h3 style={{ margin: '40px 0 0 60px' }}>POSTING</h3>
+          <div className={postStyle.postingBoxWrap}>
+            <CategoryBtn />
+            {useRecoilValue(postState).map((e) => {
+              console.log(e);
+              return <PostingBox param={e} />;
+            })}
+          </div>
+          <div className={postStyle.pagination}>
+            <Pagination
+              activePage={page}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              totalItemsCount={100}
+              pageRangeDisplayed={3}
+              onChange={handlePageChange}
+              itemsCountPerPage={16}
+              hideFirstLastPages
+            />
+          </div>
         </div>
       </div>
     </div>

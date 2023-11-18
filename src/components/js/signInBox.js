@@ -1,22 +1,23 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import styles from "../css/signIn.module.css";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import styles from '../css/signIn.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function SignInBox() {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
   const API = process.env.REACT_APP_API_KEY;
   const signInClick = () => {
+    localStorage.removeItem('accessToken');
     axios
       .post(`${API}/user/sign-in`, { username: id, password: pw })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("accessToken", res.data);
-        console.log("로그인 성공:", res.data);
-        navigate("/");
+        localStorage.setItem('accessToken', res.data);
+        console.log('로그인 성공:', res.data);
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -33,8 +34,8 @@ function SignInBox() {
   const onChangePw = (text) => {
     setPw(text.target.value);
   };
-  console.log("change ID");
-  console.log("change Pw");
+  console.log('change ID');
+  console.log('change Pw');
   return (
     <div className={styles.wrap}>
       <div>
