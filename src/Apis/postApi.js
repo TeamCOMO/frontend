@@ -100,3 +100,13 @@ export const applyApi = (postId) => {
     }
   );
 };
+
+export const editUserInfoApi = (editInfo) => {
+  console.log(editInfo);
+  return axios.patch(`${API}/user`, editInfo, {
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json',
+    },
+  });
+};

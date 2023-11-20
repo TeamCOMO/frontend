@@ -1,13 +1,13 @@
 .postingBox {
-  width: 300px;
-  height: 300px;
+  width: 255px;
+  height: 250px;
+
   float: left;
   border: solid 1px black;
   margin-left: 1vw;
   margin-top: 40px;
-  
 }
-.postingBox:hover{
+.postingBox:hover {
   cursor: pointer;
 }
 .textarea {

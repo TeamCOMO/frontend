@@ -1,4 +1,11 @@
+import UserPatchBtn from '../components/js/mypage/UserPatchBtn';
+
 function mypage() {
-  return <h3>MYPAGE</h3>;
+  return (
+    <div>
+      <h3>MYPAGE</h3>
+      <UserPatchBtn />
+    </div>
+  );
 }
 export default mypage;
