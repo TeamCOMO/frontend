@@ -10,6 +10,8 @@ import Posting from './routes/Posting';
 import PostDetail from './routes/PostDetail';
 import EditPost from './routes/EditPost';
 import MypageWrite from './routes/MypageWrite';
+import Heart_p from "./routes/heart_p";
+
 function App() {
   return (
     <Router>
@@ -21,6 +23,8 @@ function App() {
         <Route path="/post" element={<Post />} />
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/posting" element={<Posting />} />
+        <Route path="/heart_p" element={<Heart_p />} />
+
         <Route path="/editpost/:postId" element={<EditPost />} />
         <Route path="/mypage/write" element={<MypageWrite />}></Route>
       </Routes>
