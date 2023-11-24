@@ -43,10 +43,13 @@ function Post() {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Nav />
-      <div className={postStyle.background}>
-        <div className={postStyle.totalPostingBox}>
+      <div className={postStyle.background} style={{ height: '150vh' }}>
+        <div
+          className={postStyle.totalPostingBox}
+          style={{ paddingTop: '30px' }}
+        >
           <PostingBtn param="post" />
-          <h3 style={{ margin: '40px 0 0 60px' }}>POSTING</h3>
+          <h3 style={{ margin: '0 0 0 60px' }}>POSTING</h3>
           <div className={postStyle.postingBoxWrap}>
             <CategoryBtn />
             {useRecoilValue(postState).map((e) => {

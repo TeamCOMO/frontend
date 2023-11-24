@@ -38,10 +38,6 @@ function PostDetail() {
         <div className={postStyle.totalPostingBox}>
           <PostContatiner>
             <PostDetailContainer>
-              <div>
-                <img style={{ width: '100px' }} src={postInfo.images}></img>
-              </div>
-
               <Title>{postInfo.title}</Title>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div>글 작성한 사람</div>
@@ -58,7 +54,11 @@ function PostDetail() {
                 </div>
               </div>
               <Line />
+              <div style={{ marginTop: '30px' }}>
+                <img style={{ width: '100px' }} src={postInfo.images}></img>
+              </div>
               <Body>{postInfo.body}</Body>
+
               <div>
                 <span>카테고리 : </span>
                 <span>{postInfo.category}</span>
@@ -124,5 +124,5 @@ const Body = styled.div`
   color: #000;
   font-family: Roboto;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 400;
 `;

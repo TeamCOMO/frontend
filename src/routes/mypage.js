@@ -40,13 +40,13 @@ function mypage() {
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 글</MiniBox>
             </Link>
-            <Link>
+            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 댓글 </MiniBox>
             </Link>
-            <Link>
+            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내 모집글 신청 현황</MiniBox>
             </Link>
-            <Link>
+            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
           </div>
