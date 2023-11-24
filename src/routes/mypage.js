@@ -28,6 +28,7 @@ function mypage() {
               </div>
               <div>
                 <img src={github}></img>
+
                 <img style={{ marginLeft: '20px' }} src={velog}></img>
               </div>
               <UserPatchBtn />
