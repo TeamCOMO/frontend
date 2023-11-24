@@ -15,7 +15,7 @@ function UserPatchBtn() {
       .catch((err) => console.log(err));
   };
 
-  return <button onClick={edit}>유저 정보 수정 기능</button>;
+  return <button onClick={edit}>정보 수정</button>;
 }
 
 export default UserPatchBtn;
