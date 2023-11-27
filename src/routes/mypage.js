@@ -8,14 +8,15 @@ import velog from '../components/img/velogImg.svg';
 import { Link } from 'react-router-dom';
 
 function mypage() {
-  const token = localStorage.getItem('accessToken');
-  const base64Payload = token.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
-  const payload = Buffer.from(base64Payload, 'base64');
-  const info = JSON.parse(payload.toString());
+  // const token = localStorage.getItem('accessToken');
+  // const base64Payload = token.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
+  // const payload = Buffer.from(base64Payload, 'base64');
+  // const info = JSON.parse(payload.toString());
 
   return (
     <div>
       <Nav />
+
       <div className={styles.background_image} style={{ paddingTop: '100px' }}>
         <Box>
           <div style={{ marginTop: '40px' }}>
@@ -36,7 +37,7 @@ function mypage() {
 
             <MiniBox>
               <div>아이디 </div>
-              <Info>{info.sub}</Info>
+              {/* <Info>{info.sub}</Info> */}
             </MiniBox>
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 글</MiniBox>

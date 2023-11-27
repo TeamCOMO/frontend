@@ -96,14 +96,21 @@ function UserPatchBtn() {
 export default UserPatchBtn;
 
 const PopupBackground = styled.div`
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 `;
+
 const PopupBox = styled.div`
   width: 500px;
   height: 600px;
   position: absolute;
-  right: 30%;
-  bottom: 25%;
+  right: 36%;
+  bottom: 15%;
   background-color: #fff;
   border-radius: 20px;
 `;
