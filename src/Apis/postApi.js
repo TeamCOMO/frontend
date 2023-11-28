@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = process.env.REACT_APP_API_KEY;
-const token = localStorage.accessToken;
+const token = sessionStorage.accessToken;
 export const viewPostApi = (page) => {
   return axios.get(`${API}/api/v1/post`, {
     params: { page },
@@ -35,6 +35,7 @@ export const writePostApi = (postInfo, tech) => {
 };
 
 export const getPostApi = (postId) => {
+  console.log(token);
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,
@@ -108,5 +109,11 @@ export const editUserInfoApi = (editInfo) => {
       Authorization: token,
       'Content-Type': 'application/json',
     },
+  });
+};
+
+export const getWriteApi = (page) => {
+  return axios.get(`${API}/api/v1/post/myself?${page}`, {
+    headers: { Authorization: token },
   });
 };

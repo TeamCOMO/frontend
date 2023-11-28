@@ -12,7 +12,7 @@ import { postState } from '../recoils/Recoil';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 function Post() {
   const API = process.env.REACT_APP_API_KEY;
-  const token = localStorage.accessToken;
+  const token = sessionStorage.accessToken;
   const setPostState = useSetRecoilState(postState);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState('');
@@ -43,10 +43,13 @@ function Post() {
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Nav />
-      <div className={postStyle.background}>
-        <div className={postStyle.totalPostingBox}>
+      <div className={postStyle.background} style={{ height: '150vh' }}>
+        <div
+          className={postStyle.totalPostingBox}
+          style={{ paddingTop: '30px' }}
+        >
           <PostingBtn param="post" />
-          <h3 style={{ margin: '40px 0 0 60px' }}>POSTING</h3>
+          <h3 style={{ margin: '0 0 0 60px' }}>POSTING</h3>
           <div className={postStyle.postingBoxWrap}>
             <CategoryBtn />
             {useRecoilValue(postState).map((e) => {
