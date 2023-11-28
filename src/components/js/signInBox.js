@@ -3,19 +3,24 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from '../css/signIn.module.css';
 import { useNavigate } from 'react-router-dom';
-
+import { Buffer } from 'buffer';
 function SignInBox() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const API = process.env.REACT_APP_API_KEY;
   const signInClick = () => {
-    localStorage.removeItem('accessToken');
+    sessionStorage.removeItem('accessToken');
     axios
       .post(`${API}/user/sign-in`, { username: id, password: pw })
       .then((res) => {
         console.log(res);
-        localStorage.setItem('accessToken', res.data);
+        sessionStorage.setItem('accessToken', res.data);
+        const base64Payload = res.data.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
+        const payload = Buffer.from(base64Payload, 'base64');
+        const info = JSON.parse(payload.toString());
+
+        sessionStorage.setItem('info', info.sub);
         console.log('로그인 성공:', res.data);
         navigate('/');
       })
