@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = process.env.REACT_APP_API_KEY;
-const token = localStorage.accessToken;
+const token = sessionStorage.accessToken;
 export const viewPostApi = (page) => {
   return axios.get(`${API}/api/v1/post`, {
     params: { page },

@@ -9,7 +9,7 @@ import { WritingDate } from '../components/js/posting/postingBox';
 
 function PostDetail() {
   const [postInfo, setPostInfo] = useState({});
-  const token = localStorage.accessToken;
+  const token = sessionStorage.accessToken;
   const postingId = useParams().postId;
   const navigate = useNavigate();
   const handleDeletePost = () => {

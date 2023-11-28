@@ -26,13 +26,13 @@ function UserPatchBtn() {
     editUserInfoApi(editInfo)
       .then((res) => {
         console.log(res);
-        localStorage.setItem('github_url', editInfo.github_url);
+        sessionStorage.setItem('github_url', editInfo.github_url);
         setPopup(!popup);
         alert('수정이 완료되었습니다!');
       })
       .catch((err) => console.log(err));
   };
-  const nickname = localStorage.getItem('info');
+  const nickname = sessionStorage.getItem('info');
 
   return (
     <div>

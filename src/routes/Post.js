@@ -12,7 +12,7 @@ import { postState } from '../recoils/Recoil';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 function Post() {
   const API = process.env.REACT_APP_API_KEY;
-  const token = localStorage.accessToken;
+  const token = sessionStorage.accessToken;
   const setPostState = useSetRecoilState(postState);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState('');

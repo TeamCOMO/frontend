@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 function Nav() {
   const navigate = useNavigate();
   const param = useParams();
-  let accessToken = localStorage.accessToken;
+  let accessToken = sessionStorage.accessToken;
   const handleLogout = () => {
-    localStorage.setItem('accessToken', '');
+    sessionStorage.setItem('accessToken', '');
     accessToken = '';
     navigate('/signin');
   };

@@ -6,7 +6,7 @@ import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
 function PostingBox(e) {
   const postId = e.param.id;
-  const token = localStorage.accessToken;
+  const token = sessionStorage.accessToken;
 
   console.log(e.param, 'postingBox');
   return (
