@@ -111,3 +111,9 @@ export const editUserInfoApi = (editInfo) => {
     },
   });
 };
+
+export const getWriteApi = (page) => {
+  return axios.get(`${API}/api/v1/post/myself?${page}`, {
+    headers: { Authorization: token },
+  });
+};
