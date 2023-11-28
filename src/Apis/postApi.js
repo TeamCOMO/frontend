@@ -35,6 +35,7 @@ export const writePostApi = (postInfo, tech) => {
 };
 
 export const getPostApi = (postId) => {
+  console.log(token);
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,

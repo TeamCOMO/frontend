@@ -29,7 +29,7 @@ function PostDetail() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [postingId]);
 
   return (
     <div>

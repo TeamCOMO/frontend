@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 function Nav() {
   const navigate = useNavigate();
-  const param = useParams();
+
   let accessToken = sessionStorage.accessToken;
+  console.log(accessToken);
   const handleLogout = () => {
     sessionStorage.setItem('accessToken', '');
     accessToken = '';
@@ -32,7 +33,7 @@ function Nav() {
         </Link>
       </div>
 
-      {accessToken === '' ? (
+      {accessToken === undefined || accessToken === '' ? (
         <div className={NavStyle.loginBox}>
           <Link to="/signin">
             <button className={NavStyle.login}>Log in</button>
