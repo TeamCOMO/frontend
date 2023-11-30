@@ -29,6 +29,9 @@ function PostingBox(e) {
             {e.param.techs.map((e) => {
               return <Tech>{e}</Tech>;
             })}
+            <Tech style={{ marginLeft: '70px', width: '400px' }}>
+              {e.param.nickname}
+            </Tech>
           </div>
           <Line />
           <FlexBox style={{ marginTop: '20px' }}>
@@ -80,6 +83,7 @@ export const WritingDate = styled.div`
   font-weight: 400;
 `;
 const Tech = styled.div`
+  margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
 

@@ -118,3 +118,9 @@ export const getWriteApi = (page) => {
     headers: { Authorization: token },
   });
 };
+
+export const getMypageInfo = () => {
+  return axios.get(`${API}/user/my-page`, {
+    headers: { Authorization: token },
+  });
+};
