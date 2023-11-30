@@ -120,7 +120,25 @@ export const getWriteApi = (page) => {
 };
 
 export const getMypageInfo = () => {
+  token = sessionStorage.accessToken;
+
   return axios.get(`${API}/user/my-page`, {
+    headers: { Authorization: token },
+  });
+};
+
+export const getMypageAppliedPost = (page) => {
+  return axios.get(
+    `${API}/api/v1/post/applied`,
+    {
+      headers: { Authorization: token },
+    },
+    { params: { page } }
+  );
+};
+
+export const getApplyStatus = (postId) => {
+  return axios.get(`${API}/user/applied/${postId}`, {
     headers: { Authorization: token },
   });
 };

@@ -59,10 +59,10 @@ function Mypage() {
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 댓글 </MiniBox>
             </Link>
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/status" style={{ textDecoration: 'none' }}>
               <MiniBox>내 모집글 신청 현황</MiniBox>
             </Link>
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
           </div>
