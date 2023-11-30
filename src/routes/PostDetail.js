@@ -1,23 +1,23 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { deletePostApi, getPostApi } from "../Apis/postApi";
-import { useEffect, useState } from "react";
-import postStyle from "./postStyle.module.css";
-import Nav from "../components/js/Nav";
-import ApplyBtn from "../components/js/Apply/ApplyBtn";
-import styled from "@emotion/styled";
-import { WritingDate } from "../components/js/posting/postingBox";
-import axios from "axios";
-import style from "../routes/PostDetail.module.css";
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deletePostApi, getPostApi } from '../Apis/postApi';
+import { useEffect, useState } from 'react';
+import postStyle from './postStyle.module.css';
+import Nav from '../components/js/Nav';
+import ApplyBtn from '../components/js/Apply/ApplyBtn';
+import styled from '@emotion/styled';
+import { WritingDate } from '../components/js/posting/postingBox';
+import axios from 'axios';
+import style from '../routes/PostDetail.module.css';
 
 function PostDetail() {
   const [postInfo, setPostInfo] = useState({});
-  const [comment, setComment] = useState(""); // 댓글을 저장하는 상태 변수
+  const [comment, setComment] = useState(''); // 댓글을 저장하는 상태 변수
   const [comments, setComments] = useState([]); // 댓글 리스트를 저장하는 상태 변수
   const API = process.env.REACT_APP_API_KEY;
-  const token = localStorage.accessToken;
-  const [body, setBody] = useState(""); // 내용을 저장하는 상태 변수
+  const token = sessionStorage.accessToken;
+  const [body, setBody] = useState(''); // 내용을 저장하는 상태 변수
   const [commentId, setEditingCommentId] = useState(null);
-  const [editingComment, setEditingComment] = useState("");
+  const [editingComment, setEditingComment] = useState('');
   const [editing, setEditing] = useState(false);
   //const [nickname, setickname] = useState("");
   let accessToken = sessionStorage.accessToken;
@@ -32,13 +32,13 @@ function PostDetail() {
   const handleDeletePost = () => {
     deletePostApi(postingId)
       .then((res) => {
-        navigate("/post");
+        navigate('/post');
         console.log(res);
       })
       .catch((err) => console.log(err));
   };
   console.log(postInfo);
-  console.log("실시간 입력 댓글 : " + comment);
+  console.log('실시간 입력 댓글 : ' + comment);
   //console.log("댓글 닉네임 : " + comment.nickname);
 
   useEffect(() => {
@@ -60,9 +60,9 @@ function PostDetail() {
 
   // 댓글 기능 : 댓글 입력 완료 후 사용자의 닉네임과 함께 보이도록 설정
   const handleComment = () => {
-    if (window.confirm("댓글을 입력하시겠습니까?")) {
-      if (comment.trim() === "") {
-        alert("내용을 입력해주세요!");
+    if (window.confirm('댓글을 입력하시겠습니까?')) {
+      if (comment.trim() === '') {
+        alert('내용을 입력해주세요!');
         return;
       }
       axios
@@ -74,24 +74,24 @@ function PostDetail() {
           {
             headers: {
               Authorization: accessToken,
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
           }
         )
         .then((res) => {
-          console.log("댓글 입력 성공!");
+          console.log('댓글 입력 성공!');
           console.log(comment);
           // 서버로부터 응답을 받았을 때의 처리
-          setComment(""); // 댓글 입력 필드를 초기화
+          setComment(''); // 댓글 입력 필드를 초기화
           //setComments((prevComments) => [...prevComments, res.data.data]); // 댓글을 배열에 추가
         })
         .catch((error) => {
           console.error(error);
-          console.log("댓글 입력 실패ㅠㅠ");
+          console.log('댓글 입력 실패ㅠㅠ');
         });
     }
     setComments((prevComments) => [...prevComments, comment]);
-    setComment(""); // 댓글 입력 필드 초기화
+    setComment(''); // 댓글 입력 필드 초기화
   };
 
   // 댓글 불러오기 기능 : 댓글 입력 완료 후 사용자의 닉네임과 함께 보이도록 설정
@@ -99,25 +99,25 @@ function PostDetail() {
     axios
       .get(`${API}/api/v1/post/${postingId}/comments`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: accessToken,
         },
       })
       .then((res) => {
-        console.log("댓글 불러오기 성공!");
+        console.log('댓글 불러오기 성공!');
         setComments(res.data.comments); // 가져온 데이터로 comments 상태를 업데이트합니다.
       })
       .catch((error) => {
         console.error(error);
-        console.log("댓글 불러오기 실패ㅠㅠ");
+        console.log('댓글 불러오기 실패ㅠㅠ');
       });
-    console.log("댓글 불러오기" + comments);
+    console.log('댓글 불러오기' + comments);
   };
 
   // 댓글 수정 기능
   const handleCommentUpdate = () => {
-    console.log("111111111");
-    if (window.confirm("댓글을 수정하시겠습니까?")) {
+    console.log('111111111');
+    if (window.confirm('댓글을 수정하시겠습니까?')) {
       axios
         .patch(
           `${API}/api/v1/comment/${commentId}`,
@@ -126,7 +126,7 @@ function PostDetail() {
           },
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: accessToken,
             },
           }
@@ -141,9 +141,9 @@ function PostDetail() {
           );
 
           setEditingCommentId(null);
-          setEditingComment("");
-          console.log("댓글 수정 완료!");
-          console.log("commentId : " + comment.id);
+          setEditingComment('');
+          console.log('댓글 수정 완료!');
+          console.log('commentId : ' + comment.id);
           //handleComments(comment); //이거 하면 바로 삭제됨
         })
         .catch((error) => {
@@ -154,14 +154,14 @@ function PostDetail() {
 
   //수정 상태를 활성화하는 함수
   const handleEditComment = (singleComment) => {
-    console.log("수정 상태를 활성화 handleEditComment 함수 실행");
+    console.log('수정 상태를 활성화 handleEditComment 함수 실행');
     setEditingCommentId(singleComment.id); // 수정할 댓글의 ID 설정
     setEditingComment(singleComment.body); // 현재 댓글의 내용으로 편집 필드 초기화
   };
 
   //댓글 삭제 기능
   const handleDeleteComment = (commentId) => {
-    if (window.confirm("댓글을 삭제하시겠습니까?")) {
+    if (window.confirm('댓글을 삭제하시겠습니까?')) {
       axios
         .delete(`${API}/api/v1/comment/${commentId}`, {
           headers: {
@@ -170,7 +170,7 @@ function PostDetail() {
         })
         .then((response) => {
           console.log(response.data);
-          console.log("댓글 삭제 완료!");
+          console.log('댓글 삭제 완료!');
           setComments(comments.filter((comment) => comment.id !== commentId));
         })
         .catch((error) => {
@@ -187,15 +187,15 @@ function PostDetail() {
           <PostContatiner>
             <PostDetailContainer>
               <div>
-                <img style={{ width: "100px" }} src={postInfo.images}></img>
+                <img style={{ width: '100px' }} src={postInfo.images}></img>
               </div>
               <Title>{postInfo.title}</Title>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div>글 작성한 사람</div>
-                <WritingDate style={{ marginLeft: "40px" }}>
+                <WritingDate style={{ marginLeft: '40px' }}>
                   작성일 {postInfo.createdDate}
                 </WritingDate>
-                <div style={{ marginLeft: "auto" }}>
+                <div style={{ marginLeft: 'auto' }}>
                   <Link to={`/editpost/${postingId}`}>
                     <button>수정하기</button>
                   </Link>
