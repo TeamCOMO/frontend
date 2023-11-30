@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 function Mypage() {
   const [info, setInfo] = useState({});
-  console.log(info);
+
   useEffect(() => {
     getMypageInfo()
       .then((res) => {
@@ -21,7 +21,7 @@ function Mypage() {
         console.log(err);
       });
   }, []);
-
+  console.log(info);
   return (
     <div>
       <Nav />
@@ -59,9 +59,6 @@ function Mypage() {
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 댓글 </MiniBox>
             </Link>
-            <Link to="/mypage/status" style={{ textDecoration: 'none' }}>
-              <MiniBox>내 모집글 신청 현황</MiniBox>
-            </Link>
             <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
@@ -77,7 +74,7 @@ const Box = styled.div`
   display: flex;
   justify-content: space-around;
   width: 600px;
-  height: 500px;
+  height: 400px;
   background-color: #fff;
   border-radius: 20px;
   margin: 0 auto;
