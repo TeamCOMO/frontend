@@ -49,3 +49,13 @@
 .explain > span {
   color: white;
 }
+
+.my-swiper-slide {
+  height: 300px;
+  background: #ccc;
+}
+
+.swiper-slide {
+  height: 300px;
+  background: #ccc;
+}
