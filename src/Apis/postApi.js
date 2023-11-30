@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = process.env.REACT_APP_API_KEY;
-const token = sessionStorage.accessToken;
+let token = sessionStorage.accessToken;
 export const viewPostApi = (page) => {
   return axios.get(`${API}/api/v1/post`, {
     params: { page },
@@ -28,14 +28,15 @@ export const writePostApi = (postInfo, tech) => {
 
   return axios.post(`${API}/api/v1/post`, data, {
     headers: {
-      'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
       Authorization: token,
+      'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
     },
   });
 };
 
 export const getPostApi = (postId) => {
-  console.log(token);
+  token = sessionStorage.accessToken;
+
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,

@@ -7,7 +7,7 @@
 .background {
   width: 100vw;
   height: 100vh;
-  background: url(../components/img/background.png);
+  background: url(../components/img/mainBackground.png);
 }
 .postingFormCss {
   margin: 0 auto;

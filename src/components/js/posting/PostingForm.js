@@ -12,7 +12,7 @@ function PostingForm(param) {
     postId: '',
     title: '',
     body: '',
-    category: '',
+    category: 'Study',
     image: '',
   });
   const [techs, setTechs] = useState('');
@@ -111,6 +111,7 @@ function PostingForm(param) {
           <hr></hr>
           <div>스택 </div>
           <Input onChange={handleTech} id="techs" placeholder="기술스택">
+            <option disabled={true}>선택</option>
             <option value={'React'}>React</option>
             <option value={'Spring'}>Spring</option>
           </Input>
@@ -120,6 +121,11 @@ function PostingForm(param) {
           >
             추가
           </button>
+          <div>
+            {tech.map((e) => {
+              return e;
+            })}
+          </div>
           <p>선택 후 추가버튼을 눌러주세요.</p>
           <div style={{ marginTop: '60px', marginLeft: '100px' }}>
             {param.postType == 'editPost' ? (

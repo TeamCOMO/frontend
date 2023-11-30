@@ -8,10 +8,10 @@ import velog from '../components/img/velogImg.svg';
 import { Link } from 'react-router-dom';
 
 function mypage() {
-  // const token = sessionStorage.getItem('accessToken');
-  // const base64Payload = token.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
-  // const payload = Buffer.from(base64Payload, 'base64');
-  // const info = JSON.parse(payload.toString());
+  const token = sessionStorage.getItem('accessToken');
+  const base64Payload = token.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
+  const payload = Buffer.from(base64Payload, 'base64');
+  const info = JSON.parse(payload.toString());
 
   return (
     <div>

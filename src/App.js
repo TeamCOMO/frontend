@@ -10,7 +10,7 @@ import Posting from './routes/Posting';
 import PostDetail from './routes/PostDetail';
 import EditPost from './routes/EditPost';
 import MypageWrite from './routes/MypageWrite';
-import Heart_p from "./routes/heart_p";
+import Heart_p from './routes/heart_p';
 
 function App() {
   return (
