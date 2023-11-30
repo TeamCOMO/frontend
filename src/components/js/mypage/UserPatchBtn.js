@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { editUserInfoApi } from '../../../Apis/postApi';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
 function UserPatchBtn(props) {
   const [popup, setPopup] = useState(false);
+  console.log(props);
+  const git = props.info.github_url;
+  const blog = props.info.blog_url;
+  const nickname = props.info.nickname;
 
   const [editInfo, setEditinfo] = useState({
-    github_url: props.info.github_url,
-    blog_url: props.info.blog_url,
-    nickname: props.info.nickname,
+    github_url: git,
+    blog_url: blog,
+    nickname: nickname,
     password: '',
   });
+  useEffect(() => {
+    console.log(editInfo);
+    setEditinfo({
+      github_url: git,
+      blog_url: blog,
+      nickname: nickname,
+      password: '',
+    });
+  }, [props]);
+  console.log(editInfo);
   const handleClose = () => {
     setPopup(!popup);
   };
