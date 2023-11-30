@@ -5,11 +5,9 @@ import styled from '@emotion/styled';
 import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
 function PostingBox(e) {
-  console.log(e);
   const postId = e.param.id;
   const token = sessionStorage.accessToken;
 
-  console.log(e.param, 'postingBox');
   return (
     <Link to={`/post/${postId}`}>
       <Box>
