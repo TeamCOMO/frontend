@@ -32,7 +32,7 @@ function PostDetail() {
   const handleDeletePost = () => {
     deletePostApi(postingId)
       .then((res) => {
-        navigate('/post');
+        navigate(-1);
         console.log(res);
       })
       .catch((err) => console.log(err));

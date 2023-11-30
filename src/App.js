@@ -11,6 +11,8 @@ import PostDetail from './routes/PostDetail';
 import EditPost from './routes/EditPost';
 import MypageWrite from './routes/MypageWrite';
 import Heart_p from './routes/heart_p';
+import MypageApplied from './routes/MypageApplied';
+import MypageApplyStatus from './routes/MypageApplyStatus';
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
 
         <Route path="/editpost/:postId" element={<EditPost />} />
         <Route path="/mypage/write" element={<MypageWrite />}></Route>
+        <Route path="/mypage/applied" element={<MypageApplied />}></Route>
+        <Route
+          path="/mypage/status/:postId"
+          element={<MypageApplyStatus />}
+        ></Route>
       </Routes>
     </Router>
   );

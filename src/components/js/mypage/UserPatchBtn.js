@@ -7,14 +7,13 @@ function UserPatchBtn(props) {
   const [popup, setPopup] = useState(false);
 
   const [editInfo, setEditinfo] = useState({
-    github_url: '',
-    blog_url: '',
-    nickname: '',
+    github_url: props.info.github_url,
+    blog_url: props.info.blog_url,
+    nickname: props.info.nickname,
     password: '',
   });
   const handleClose = () => {
     setPopup(!popup);
-    setEditinfo(null);
   };
   const handleEditInfo = (e) => {
     const value = e.target.value;
@@ -24,6 +23,13 @@ function UserPatchBtn(props) {
   };
 
   const edit = () => {
+    if (editInfo.password == '') {
+      alert('비밀번호를 입력하세요!');
+      return;
+    } else if (editInfo.nickname.length >= 7) {
+      alert('닉네임은 6글자를 넘을 수 없습니다.');
+      return;
+    }
     editUserInfoApi(editInfo)
       .then((res) => {
         console.log(res);
@@ -35,7 +41,6 @@ function UserPatchBtn(props) {
       })
       .catch((err) => console.log(err));
   };
-  const nickname = sessionStorage.getItem('info');
 
   return (
     <div>
@@ -89,6 +94,7 @@ function UserPatchBtn(props) {
                 name="password"
                 onChange={handleEditInfo}
                 type="password"
+                defaultValue=""
               />
               <EditBtn onClick={edit}>수정 완료</EditBtn>
             </div>

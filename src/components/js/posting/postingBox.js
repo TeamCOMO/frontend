@@ -11,6 +11,13 @@ function PostingBox(e) {
   return (
     <Link to={`/post/${postId}`}>
       <Box>
+        {e.status == true ? (
+          <Link to={`/mypage/status/${postId}`}>
+            <div>신청 현황 보기</div>
+          </Link>
+        ) : (
+          ''
+        )}
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param.category === 'Study' ? (
