@@ -5,12 +5,15 @@ import styled from '@emotion/styled';
 import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
 function PostingBox(e) {
+  if (e.param == undefined) return 0;
+  console.log(e);
   const postId = e.param.id;
   const token = sessionStorage.accessToken;
 
   return (
-    <Link to={`/post/${postId}`}>
+    <Link to={`/post/${postId}`} style={{ color: '#C59900' }}>
       <Box>
+        <NickName>{e.param.nickname}</NickName>
         {e.status == true ? (
           <Link to={`/mypage/status/${postId}`}>
             <div>신청 현황 보기</div>
@@ -36,9 +39,6 @@ function PostingBox(e) {
             {e.param.techs.map((e) => {
               return <Tech>{e}</Tech>;
             })}
-            <Tech style={{ marginLeft: '70px', width: '400px' }}>
-              {e.param.nickname}
-            </Tech>
           </div>
           <Line />
           <FlexBox style={{ marginTop: '20px' }}>
@@ -52,6 +52,12 @@ function PostingBox(e) {
 }
 
 export default PostingBox;
+
+const NickName = styled.div`
+  font-size: 20px;
+  top: 0;
+  color: '#FFD339';
+`;
 const FlexBox = styled.div`
   display: flex;
   justify-content: space-between;
