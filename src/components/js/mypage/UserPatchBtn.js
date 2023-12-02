@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { editUserInfoApi } from '../../../Apis/postApi';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
-function UserPatchBtn() {
+function UserPatchBtn(props) {
   const [popup, setPopup] = useState(false);
+  console.log(props);
+  const git = props.info.github_url;
+  const blog = props.info.blog_url;
+  const nickname = props.info.nickname;
 
   const [editInfo, setEditinfo] = useState({
-    github_url: '',
-    blog_url: '',
-    nickname: '',
+    github_url: git,
+    blog_url: blog,
+    nickname: nickname,
     password: '',
   });
+  useEffect(() => {
+    console.log(editInfo);
+    setEditinfo({
+      github_url: git,
+      blog_url: blog,
+      nickname: nickname,
+      password: '',
+    });
+  }, [props]);
+  console.log(editInfo);
   const handleClose = () => {
     setPopup(!popup);
-    setEditinfo(null);
   };
   const handleEditInfo = (e) => {
     const value = e.target.value;
@@ -23,16 +37,24 @@ function UserPatchBtn() {
   };
 
   const edit = () => {
+    if (editInfo.password == '') {
+      alert('비밀번호를 입력하세요!');
+      return;
+    } else if (editInfo.nickname.length >= 7) {
+      alert('닉네임은 6글자를 넘을 수 없습니다.');
+      return;
+    }
     editUserInfoApi(editInfo)
       .then((res) => {
         console.log(res);
         sessionStorage.setItem('github_url', editInfo.github_url);
         setPopup(!popup);
+
         alert('수정이 완료되었습니다!');
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
-  const nickname = sessionStorage.getItem('info');
 
   return (
     <div>
@@ -63,24 +85,30 @@ function UserPatchBtn() {
             </div>
             <div style={{ margin: '0 auto', width: '300px' }}>
               <InputTitle>블로그 URL</InputTitle>
-              <InputBox name="blog_url" onChange={handleEditInfo} />
+              <InputBox
+                name="blog_url"
+                onChange={handleEditInfo}
+                defaultValue={props.info.blog_url}
+              />
+
               <InputTitle>깃허브 URL</InputTitle>
               <InputBox
                 onChange={handleEditInfo}
                 name="github_url"
-                placeholder="https://github.com/example"
+                defaultValue={props.info.github_url}
               />
               <InputTitle>닉네임</InputTitle>
               <InputBox
                 name="nickname"
                 onChange={handleEditInfo}
-                placeholder={nickname}
+                defaultValue={props.info.nickname}
               />
               <InputTitle>비밀번호</InputTitle>
               <InputBox
                 name="password"
                 onChange={handleEditInfo}
                 type="password"
+                defaultValue=""
               />
               <EditBtn onClick={edit}>수정 완료</EditBtn>
             </div>

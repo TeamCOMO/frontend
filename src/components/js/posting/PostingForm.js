@@ -15,7 +15,7 @@ function PostingForm(param) {
     category: 'Study',
     image: '',
   });
-  const [techs, setTechs] = useState('');
+  const [techs, setTechs] = useState('React');
   const [tech, setTech] = useState([]);
 
   useEffect(() => {
@@ -25,8 +25,6 @@ function PostingForm(param) {
   }, [param]);
   const handlePostInfo = (e) => {
     if (e.target.id === 'image') {
-      console.log(e, 'check');
-      // 이미지 파일이 변경되었을 때 처리
       setPostInfo({
         ...postInfo,
         image: e.target.files[0], // 파일 객체를 저장
@@ -40,8 +38,18 @@ function PostingForm(param) {
   };
   postInfo.postId = Number(postInfo.postId);
   const onClickTehcs = () => {
+    if (tech.includes(techs)) {
+      alert('이미 존재하는 스택입니다!');
+      return;
+    }
     setTech(tech.concat(techs));
     alert('추가됐습니다.');
+  };
+  const handleDelete = (delTech) => {
+    const filteredTech = tech.filter((e) => {
+      return !(e == delTech);
+    });
+    setTech(filteredTech);
   };
   const handleTech = (e) => {
     setTechs(e.target.value);
@@ -57,15 +65,19 @@ function PostingForm(param) {
       });
   };
   const handlePosting = () => {
-    writePostApi(postInfo, tech)
-      .then((res) => {
-        console.log(res);
-        alert('글 추가됨');
-        navigate('/post');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (tech == '') alert('스택을 추가해주세요');
+    else if (postInfo.title == '') alert('제목을 입력해주세요');
+    else if (postInfo.body == '') alert('본문을 입력해주세요.');
+    else
+      writePostApi(postInfo, tech)
+        .then((res) => {
+          console.log(res);
+          alert('글 추가됨');
+          navigate('/post');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
 
   return (
@@ -110,23 +122,42 @@ function PostingForm(param) {
           </Input>
           <hr></hr>
           <div>스택 </div>
-          <Input onChange={handleTech} id="techs" placeholder="기술스택">
-            <option disabled={true}>선택</option>
-            <option value={'React'}>React</option>
-            <option value={'Spring'}>Spring</option>
-          </Input>
-          <button
-            style={{ marginLeft: '20px', border: '0' }}
-            onClick={onClickTehcs}
+          <div style={{ display: 'flex' }}>
+            <Input onChange={handleTech} id="techs" placeholder="기술스택">
+              <option value={'React'}>React</option>
+              <option value={'Spring'}>Spring</option>
+            </Input>
+            <button
+              style={{ marginLeft: '20px', border: '0' }}
+              onClick={onClickTehcs}
+            >
+              추가
+            </button>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              background: '#fff',
+              marginTop: '20px',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
           >
-            추가
-          </button>
-          <div>
             {tech.map((e) => {
-              return e;
+              return (
+                <TechBox>
+                  {e}{' '}
+                  <Delete
+                    onClick={() => handleDelete(e)}
+                    style={{ marginLeft: '40px' }}
+                  >
+                    x
+                  </Delete>
+                </TechBox>
+              );
             })}
           </div>
-          <p>선택 후 추가버튼을 눌러주세요.</p>
+
           <div style={{ marginTop: '60px', marginLeft: '100px' }}>
             {param.postType == 'editPost' ? (
               <button onClick={handleEditPosting}>수정하기</button>
@@ -152,4 +183,21 @@ const Title = styled.input`
 const Input = styled.select`
   width: 200px;
   height: 50px;
+`;
+
+const TechBox = styled.div`
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 132px;
+  height: 30px;
+  background-color: aliceblue;
+`;
+const Delete = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;

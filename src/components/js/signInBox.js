@@ -19,7 +19,7 @@ function SignInBox() {
         const base64Payload = res.data.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
         const payload = Buffer.from(base64Payload, 'base64');
         const info = JSON.parse(payload.toString());
-
+        console.log(info);
         sessionStorage.setItem('info', info.sub);
         console.log('로그인 성공:', res.data);
         navigate('/');
