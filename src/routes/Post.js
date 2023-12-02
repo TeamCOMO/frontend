@@ -15,7 +15,9 @@ function Post() {
   const token = sessionStorage.accessToken;
   const setPostState = useSetRecoilState(postState);
   const [page, setPage] = useState(1);
+
   const [category, setCategory] = useState("");
+  const [totalElem, setTotalElem] = useState(0);
   const handlePageChange = (page) => {
     setPage(page);
   };
@@ -33,7 +35,8 @@ function Post() {
         },
       })
       .then((res) => {
-        console.log(res.data.posts);
+        console.log(res);
+        setTotalElem(res.data.totalElements);
         setPostState(res.data.posts);
       })
       .catch((error) => {
@@ -43,7 +46,8 @@ function Post() {
   return (
     <div style={{ overflowX: "hidden" }}>
       <Nav />
-      <div className={postStyle.background} style={{ height: "150vh" }}>
+
+      <div className={postStyle.background} style={{ height: "160vh" }}>
         <div
           className={postStyle.totalPostingBox}
           style={{ paddingTop: "30px" }}
@@ -53,7 +57,6 @@ function Post() {
           <div className={postStyle.postingBoxWrap}>
             <CategoryBtn />
             {useRecoilValue(postState).map((e) => {
-              console.log(e);
               return <PostingBox param={e} />;
             })}
           </div>
@@ -62,10 +65,10 @@ function Post() {
               activePage={page}
               prevPageText={"<"}
               nextPageText={">"}
-              totalItemsCount={100}
+              totalItemsCount={totalElem}
               pageRangeDisplayed={3}
               onChange={handlePageChange}
-              itemsCountPerPage={16}
+              itemsCountPerPage={12}
               hideFirstLastPages
             />
           </div>

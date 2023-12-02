@@ -10,8 +10,10 @@ import axios from "axios";
 
 function PostingBox(e) {
   console.log(e);
+  const postId = e.param?.id;
+
   //const postId = useParams().postId;
-  const postId = e.param.id;
+  // const postId = e.param.id;
   //const token = localStorage.accessToken;
   let accessToken = sessionStorage.accessToken;
   const token = localStorage.accessToken;
@@ -104,20 +106,20 @@ function PostingBox(e) {
       <Link to={`/post/${postId}`}>
         <FlexBox style={{ display: "flex" }}>
           <Category>
-            {e.param.category === "Study" ? (
+            {e.param?.category === "Study" ? (
               <img src={studyLogo} />
             ) : (
               <img src={projectLogo} />
             )}
           </Category>
-          <State>{e.param.state === "Active" ? "모집중" : "모집종료"}</State>
+          <State>{e.param?.state === "Active" ? "모집중" : "모집종료"}</State>
         </FlexBox>
 
-        <Title>{e.param.title}</Title>
+        <Title>{e.param?.title}</Title>
         <Text></Text>
         <div style={{ marginTop: "100px" }}>
           <div style={{ display: "flex" }}>
-            {e.param.techs.map((e) => {
+            {e.param?.techs.map((e) => {
               return <Tech>{e}</Tech>;
             })}
           </div>
@@ -133,8 +135,8 @@ function PostingBox(e) {
           justifyContent: "space-around",
         }}
       >
-        <WritingDate>작성일 | {e.param.createdDate}</WritingDate>
-        <ReadCount>조회수: {e.param.readCount}</ReadCount>
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+        <ReadCount>조회수: {e.param?.readCount}</ReadCount>
         <div onClick={onHeartClick}>
           {heart ? (
             <AiFillHeart style={{ color: "red", fontSize: "30px" }} />
@@ -148,6 +150,12 @@ function PostingBox(e) {
 }
 
 export default PostingBox;
+
+const NickName = styled.div`
+  font-size: 20px;
+  top: 0;
+  color: "#FFD339";
+`;
 const FlexBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -186,6 +194,7 @@ export const WritingDate = styled.div`
   font-weight: 400;
 `;
 const Tech = styled.div`
+  margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
 

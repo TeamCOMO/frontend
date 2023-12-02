@@ -5,50 +5,61 @@ import styled from '@emotion/styled';
 import { Buffer } from 'buffer';
 import github from '../components/img/gihubImg.svg';
 import velog from '../components/img/velogImg.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getMypageInfo } from '../Apis/postApi';
+import { useEffect, useState } from 'react';
 
-function mypage() {
-  // const token = sessionStorage.getItem('accessToken');
-  // const base64Payload = token.split('.')[1]; //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE
-  // const payload = Buffer.from(base64Payload, 'base64');
-  // const info = JSON.parse(payload.toString());
+function Mypage() {
+  const [info, setInfo] = useState({});
 
+  useEffect(() => {
+    getMypageInfo()
+      .then((res) => {
+        setInfo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  console.log(info);
   return (
     <div>
       <Nav />
-
       <div className={styles.background_image} style={{ paddingTop: '100px' }}>
         <Box>
           <div style={{ marginTop: '40px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
               <div>
                 <div style={{ fontWeight: '700', fontSize: '30px' }}>
-                  주영잉
+                  {info.nickname}
                 </div>
-                <Info>dnjstj88@naver.com</Info>
+                <Info>{info.email}</Info>
               </div>
               <div>
-                <img src={github}></img>
+                {info.github_url == '' ? (
+                  ''
+                ) : (
+                  <Link to={info.github_url}>
+                    <img src={github}></img>
+                  </Link>
+                )}
 
-                <img style={{ marginLeft: '20px' }} src={velog}></img>
+                {info.blog_url == '' ? (
+                  ''
+                ) : (
+                  <img style={{ marginLeft: '20px' }} src={velog}></img>
+                )}
               </div>
-              <UserPatchBtn />
+              <UserPatchBtn info={info} />
             </div>
 
-            <MiniBox>
-              <div>아이디 </div>
-              {/* <Info>{info.sub}</Info> */}
-            </MiniBox>
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 글</MiniBox>
             </Link>
             <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 댓글 </MiniBox>
             </Link>
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
-              <MiniBox>내 모집글 신청 현황</MiniBox>
-            </Link>
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
           </div>
@@ -57,13 +68,13 @@ function mypage() {
     </div>
   );
 }
-export default mypage;
+export default Mypage;
 
 const Box = styled.div`
   display: flex;
   justify-content: space-around;
   width: 600px;
-  height: 500px;
+  height: 400px;
   background-color: #fff;
   border-radius: 20px;
   margin: 0 auto;

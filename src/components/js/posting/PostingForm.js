@@ -51,6 +51,7 @@ function PostingForm(param) {
     });
     setTech(filteredTech);
   };
+
   const handleTech = (e) => {
     setTechs(e.target.value);
   };
@@ -72,6 +73,7 @@ function PostingForm(param) {
       writePostApi(postInfo, tech)
         .then((res) => {
           console.log(res);
+
           alert("글 추가됨");
           navigate("/post");
         })
@@ -122,6 +124,7 @@ function PostingForm(param) {
           </Input>
           <hr></hr>
           <div>스택 </div>
+
           <div style={{ display: "flex" }}>
             <Input onChange={handleTech} id="techs" placeholder="기술스택">
               <option value={"React"}>React</option>
@@ -157,7 +160,6 @@ function PostingForm(param) {
               );
             })}
           </div>
-
           <div style={{ marginTop: "60px", marginLeft: "100px" }}>
             {param.postType == "editPost" ? (
               <button onClick={handleEditPosting}>수정하기</button>

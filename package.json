@@ -21,6 +21,7 @@
     "react-scripts": "^5.0.1",
     "recoil": "^0.7.7",
     "sass": "^1.69.5",
+
     "swiper": "^6.8.4",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"

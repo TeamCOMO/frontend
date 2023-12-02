@@ -1,7 +1,21 @@
 import axios from 'axios';
 
 const API = process.env.REACT_APP_API_KEY;
-const token = sessionStorage.accessToken;
+let token = sessionStorage.accessToken;
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  function (error) {
+    if (error.response.status == 403) {
+      alert('토큰이 만료되어 재로그인이 필요합니다.');
+      window.location.href = '/signin';
+    }
+
+    return Promise.reject(error);
+  }
+);
 export const viewPostApi = (page) => {
   return axios.get(`${API}/api/v1/post`, {
     params: { page },
@@ -28,14 +42,15 @@ export const writePostApi = (postInfo, tech) => {
 
   return axios.post(`${API}/api/v1/post`, data, {
     headers: {
-      'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
       Authorization: token,
+      'Content-Type': 'multipart/form-data', // 또는 'multipart/form-data'
     },
   });
 };
 
 export const getPostApi = (postId) => {
-  console.log(token);
+  token = sessionStorage.accessToken;
+
   return axios.get(`${API}/api/v1/post/${postId}`, {
     headers: {
       Authorization: token,
@@ -114,6 +129,30 @@ export const editUserInfoApi = (editInfo) => {
 
 export const getWriteApi = (page) => {
   return axios.get(`${API}/api/v1/post/myself?${page}`, {
+    headers: { Authorization: token },
+  });
+};
+
+export const getMypageInfo = () => {
+  token = sessionStorage.accessToken;
+
+  return axios.get(`${API}/user/my-page`, {
+    headers: { Authorization: token },
+  });
+};
+
+export const getMypageAppliedPost = (page) => {
+  return axios.get(
+    `${API}/api/v1/post/applied`,
+    {
+      headers: { Authorization: token },
+    },
+    { params: { page } }
+  );
+};
+
+export const getApplyStatus = (postId) => {
+  return axios.get(`${API}/user/applied/${postId}`, {
     headers: { Authorization: token },
   });
 };

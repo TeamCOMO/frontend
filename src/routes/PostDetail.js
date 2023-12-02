@@ -27,6 +27,20 @@ function PostDetail() {
 
   console.log(comments);
 
+  const navigate = useNavigate();
+  const handleDeletePost = () => {
+    deletePostApi(postingId)
+      .then((res) => {
+        navigate(-1);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  console.log(postInfo);
+  console.log("실시간 입력 댓글 : " + comment);
+  //console.log("댓글 닉네임 : " + comment.nickname);
+
   useEffect(() => {
     if (token) {
       try {
@@ -56,15 +70,6 @@ function PostDetail() {
   }, [postingId, token]);
   console.log("token : " + token);
 
-  const navigate = useNavigate();
-  const handleDeletePost = () => {
-    deletePostApi(postingId)
-      .then((res) => {
-        navigate("/post");
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
   console.log(postInfo);
   console.log("실시간 입력 댓글 : " + comment);
   //console.log("댓글 닉네임 : " + comment.nickname);
