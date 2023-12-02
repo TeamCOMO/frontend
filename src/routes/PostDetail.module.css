@@ -1,4 +1,3 @@
-/* PostDetail.module.css */
 .commentContainer {
   border-bottom: 1px solid #e3e3e3;
   padding: 10px;
@@ -36,3 +35,50 @@
   button:hover {
     background-color: #0056b3;
   } */
+
+.ActionButton {
+  padding: 4px 10px;
+  margin-right: 8px;
+  font-size: 18px;
+  color: white;
+  background-color: #b0c9cd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.commentEditButton:hover,
+.commentActionButton:hover {
+  background-color: #b0c9cd;
+}
+
+.commentActionButton:last-child {
+  margin-right: 0;
+}
+
+.commentBody {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.inputs {
+  margin: 12px auto;
+  display: flex;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #cccccc;
+  box-shadow: 0px 10px 40px rgba(174, 174, 174, 0.2);
+  text-indent: 20px;
+  font-size: 14px;
+  padding-left: 300px;
+  text-indent: 0;
+}
+.inputs::placeholder {
+  font-size: 14px;
+}
+input:focus {
+  outline: none;
+}
