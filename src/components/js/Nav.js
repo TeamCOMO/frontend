@@ -31,9 +31,6 @@ function Nav() {
         <Link to="/post" style={{ textDecoration: "none" }}>
           <flex className={NavStyle.menu}>Post</flex>
         </Link>
-        <Link to="/heart_p" style={{ textDecoration: "none" }}>
-          <flex className={NavStyle.menu}>Heart_p</flex>
-        </Link>
       </div>
 
       {accessToken === undefined || accessToken === "" ? (

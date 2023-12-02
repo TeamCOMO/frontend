@@ -1,53 +1,151 @@
-import { useState } from 'react';
-import boxStyle from './boxStyle.module.css';
-import { Link } from 'react-router-dom';
-import styled from '@emotion/styled';
-import studyLogo from '../../../components/img/studyLogo.svg';
-import projectLogo from '../../../components/img/projectLogo.svg';
-function PostingBox(e) {
-  if (e.param == undefined) return 0;
-  console.log(e);
-  const postId = e.param.id;
-  const token = sessionStorage.accessToken;
+import { useEffect, useState, useParams } from "react";
+import boxStyle from "./boxStyle.module.css";
+import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
+import studyLogo from "../../../components/img/studyLogo.svg";
+import projectLogo from "../../../components/img/projectLogo.svg";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
+import axios from "axios";
 
+function PostingBox(e) {
+  console.log(e);
+  const postId = e.param?.id;
+
+  //const postId = useParams().postId;
+  // const postId = e.param.id;
+  //const token = localStorage.accessToken;
+  let accessToken = sessionStorage.accessToken;
+  const token = localStorage.accessToken;
+  const [heart, setHeart] = useState(false); //heart 값 초기값 false 설정
+  const API = process.env.REACT_APP_API_KEY;
+  const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
+
+  console.log("여기!!!: " + accessToken);
+
+  const handleHeartClick = () => {
+    console.log("handleHeartClick 함수 안에 도착함");
+    axios
+      .post(
+        `${API}/api/v1/post/${postId}/heart`,
+        {
+          postId: postId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("accessToken", res.data);
+        setHeartCount(heartCount + 1);
+        console.log("하트증가성공:", res.data);
+        <AiFillHeart style={{ color: "red", fontSize: "30px" }} />;
+      })
+      .catch((error) => {
+        console.error("하트 클릭에 실패했습니다:", error);
+      });
+  };
+
+  const handleHeartDeleteClick = () => {
+    console.log("하트취소 함수 안에 도착함");
+    axios
+      .delete(`${API}/api/v1/post/${postId}/heart`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("accessToken", res.data);
+        setHeartCount(heartCount - 1);
+        console.log("하트'취소'에 성공 : ", res.data);
+        <AiOutlineHeart style={{ color: "gray", fontSize: "30px" }} />;
+      })
+      .catch((error) => {
+        console.error("하트'취소' 실패", error);
+      });
+  };
+  const onHeartClick = () => {
+    if (!heart) {
+      handleHeartClick();
+      setHeart(true); // 상태를 true로 변경
+    } else {
+      handleHeartDeleteClick();
+      setHeart(false); // 상태를 false로 변경
+    }
+  };
+  {
+    /*}
+  const handleHeart = (heart) => {
+    console.log("handleHeart 함수 안에 들어옴");
+    //console.log("setHeart(!heart);실행");
+    if (!heart) {
+      //하트가 안 눌러져 있을 때 등록
+      handleHeartClick(); // axios 통신 실행
+      console.log("handleHeartClick(); 실행 성공");
+      setHeart(heart);
+    } else if (heart) {
+      //하트 눌러져 있을때 취소
+      handleHeartDeleteClick(); // axios 통신 실행
+      console.log("handleHeartDeleteClick(); 실행 성공");
+      setHeart(!heart);
+    } else {
+      console.log("handleHeart 정상작동 실패");
+    }
+  };*/
+  }
+
+  console.log(e.param, "postingBox");
   return (
-    <Link to={`/post/${postId}`} style={{ color: '#C59900' }}>
-      <Box>
-        <NickName>{e.param.nickname}</NickName>
-        {e.status == true ? (
-          <Link to={`/mypage/status/${postId}`}>
-            <div>신청 현황 보기</div>
-          </Link>
-        ) : (
-          ''
-        )}
-        <FlexBox style={{ display: 'flex' }}>
+    <Box>
+      <Link to={`/post/${postId}`}>
+        <FlexBox style={{ display: "flex" }}>
           <Category>
-            {e.param.category === 'Study' ? (
+            {e.param?.category === "Study" ? (
               <img src={studyLogo} />
             ) : (
               <img src={projectLogo} />
             )}
           </Category>
-          <State>{e.param.state === 'Active' ? '모집중' : '모집종료'}</State>
+          <State>{e.param?.state === "Active" ? "모집중" : "모집종료"}</State>
         </FlexBox>
 
-        <Title>{e.param.title}</Title>
+        <Title>{e.param?.title}</Title>
         <Text></Text>
-        <div style={{ marginTop: '100px' }}>
-          <div style={{ display: 'flex' }}>
-            {e.param.techs.map((e) => {
+        <div style={{ marginTop: "100px" }}>
+          <div style={{ display: "flex" }}>
+            {e.param?.techs.map((e) => {
               return <Tech>{e}</Tech>;
             })}
           </div>
+
           <Line />
-          <FlexBox style={{ marginTop: '20px' }}>
-            <WritingDate>작성일 | {e.param.createdDate}</WritingDate>
-            <ReadCount>조회수: {e.param.readCount}</ReadCount>
-          </FlexBox>
+          <FlexBox style={{ marginTop: "20px" }}></FlexBox>
         </div>
-      </Box>
-    </Link>
+      </Link>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+        <ReadCount>조회수: {e.param?.readCount}</ReadCount>
+        <div onClick={onHeartClick}>
+          {heart ? (
+            <AiFillHeart style={{ color: "red", fontSize: "30px" }} />
+          ) : (
+            <AiOutlineHeart style={{ color: "gray", fontSize: "30px" }} />
+          )}
+        </div>
+      </div>
+    </Box>
   );
 }
 
@@ -56,7 +154,7 @@ export default PostingBox;
 const NickName = styled.div`
   font-size: 20px;
   top: 0;
-  color: '#FFD339';
+  color: "#FFD339";
 `;
 const FlexBox = styled.div`
   display: flex;
@@ -134,7 +232,7 @@ const State = styled.div`
 const ReadCount = styled.div`
   color: #787878;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 `;
 const Line = styled.div`
@@ -142,3 +240,4 @@ const Line = styled.div`
   height: 1px;
   background: #e7e5e5;
 `;
+//const Heart = styled.div`

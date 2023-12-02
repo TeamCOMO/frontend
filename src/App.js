@@ -1,18 +1,15 @@
-import React from 'react';
+import React from "react";
 //import { RecoilRoot } from "recoil";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './routes/Main';
-import SignUp from './routes/signUp';
-import SignIn from './routes/signIn';
-import Mypage from './routes/mypage';
-import Post from './routes/Post';
-import Posting from './routes/Posting';
-import PostDetail from './routes/PostDetail';
-import EditPost from './routes/EditPost';
-import MypageWrite from './routes/MypageWrite';
-import Heart_p from './routes/heart_p';
-import MypageApplied from './routes/MypageApplied';
-import MypageApplyStatus from './routes/MypageApplyStatus';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "./routes/Main";
+import SignUp from "./routes/signUp";
+import SignIn from "./routes/signIn";
+import Mypage from "./routes/mypage";
+import Post from "./routes/Post";
+import Posting from "./routes/Posting";
+import PostDetail from "./routes/PostDetail";
+import EditPost from "./routes/EditPost";
+import MypageWrite from "./routes/MypageWrite";
 
 function App() {
   return (
@@ -25,15 +22,8 @@ function App() {
         <Route path="/post" element={<Post />} />
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/posting" element={<Posting />} />
-        <Route path="/heart_p" element={<Heart_p />} />
-
         <Route path="/editpost/:postId" element={<EditPost />} />
         <Route path="/mypage/write" element={<MypageWrite />}></Route>
-        <Route path="/mypage/applied" element={<MypageApplied />}></Route>
-        <Route
-          path="/mypage/status/:postId"
-          element={<MypageApplyStatus />}
-        ></Route>
       </Routes>
     </Router>
   );
