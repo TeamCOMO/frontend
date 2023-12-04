@@ -1,12 +1,12 @@
-import { useEffect, useState, useParams } from "react";
-import boxStyle from "./boxStyle.module.css";
-import { Link } from "react-router-dom";
-import styled from "@emotion/styled";
-import studyLogo from "../../../components/img/studyLogo.svg";
-import projectLogo from "../../../components/img/projectLogo.svg";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiFillHeart } from "react-icons/ai";
-import axios from "axios";
+import { useEffect, useState, useParams } from 'react';
+import boxStyle from './boxStyle.module.css';
+import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
+import studyLogo from '../../../components/img/studyLogo.svg';
+import projectLogo from '../../../components/img/projectLogo.svg';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
+import axios from 'axios';
 
 function PostingBox(e) {
   console.log(e);
@@ -21,10 +21,10 @@ function PostingBox(e) {
   const API = process.env.REACT_APP_API_KEY;
   const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
 
-  console.log("여기!!!: " + accessToken);
+  console.log('여기!!!: ' + accessToken);
 
   const handleHeartClick = () => {
-    console.log("handleHeartClick 함수 안에 도착함");
+    console.log('handleHeartClick 함수 안에 도착함');
     axios
       .post(
         `${API}/api/v1/post/${postId}/heart`,
@@ -33,38 +33,38 @@ function PostingBox(e) {
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: accessToken,
           },
         }
       )
       .then((res) => {
         console.log(res);
-        localStorage.setItem("accessToken", res.data);
+        localStorage.setItem('accessToken', res.data);
         setHeartCount(heartCount + 1);
-        console.log("하트증가성공:", res.data);
-        <AiFillHeart style={{ color: "red", fontSize: "30px" }} />;
+        console.log('하트증가성공:', res.data);
+        <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />;
       })
       .catch((error) => {
-        console.error("하트 클릭에 실패했습니다:", error);
+        console.error('하트 클릭에 실패했습니다:', error);
       });
   };
 
   const handleHeartDeleteClick = () => {
-    console.log("하트취소 함수 안에 도착함");
+    console.log('하트취소 함수 안에 도착함');
     axios
       .delete(`${API}/api/v1/post/${postId}/heart`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: accessToken,
         },
       })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("accessToken", res.data);
+        localStorage.setItem('accessToken', res.data);
         setHeartCount(heartCount - 1);
         console.log("하트'취소'에 성공 : ", res.data);
-        <AiOutlineHeart style={{ color: "gray", fontSize: "30px" }} />;
+        <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />;
       })
       .catch((error) => {
         console.error("하트'취소' 실패", error);
@@ -100,48 +100,48 @@ function PostingBox(e) {
   };*/
   }
 
-  console.log(e.param, "postingBox");
+  console.log(e.param, 'postingBox');
   return (
     <Box>
       <Link to={`/post/${postId}`}>
-        <FlexBox style={{ display: "flex" }}>
+        <FlexBox style={{ display: 'flex' }}>
           <Category>
-            {e.param?.category === "Study" ? (
+            {e.param?.category === 'Study' ? (
               <img src={studyLogo} />
             ) : (
               <img src={projectLogo} />
             )}
           </Category>
-          <State>{e.param?.state === "Active" ? "모집중" : "모집종료"}</State>
+          <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
         </FlexBox>
 
         <Title>{e.param?.title}</Title>
         <Text></Text>
-        <div style={{ marginTop: "100px" }}>
-          <div style={{ display: "flex" }}>
+        <div style={{ marginTop: '100px' }}>
+          <div style={{ display: 'flex' }}>
             {e.param?.techs.map((e) => {
               return <Tech>{e}</Tech>;
             })}
           </div>
 
           <Line />
-          <FlexBox style={{ marginTop: "20px" }}></FlexBox>
+          <FlexBox style={{ marginTop: '20px' }}></FlexBox>
         </div>
       </Link>
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-around',
         }}
       >
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
         <div onClick={onHeartClick}>
           {heart ? (
-            <AiFillHeart style={{ color: "red", fontSize: "30px" }} />
+            <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
           ) : (
-            <AiOutlineHeart style={{ color: "gray", fontSize: "30px" }} />
+            <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
         </div>
       </div>
@@ -154,7 +154,7 @@ export default PostingBox;
 const NickName = styled.div`
   font-size: 20px;
   top: 0;
-  color: "#FFD339";
+  color: '#FFD339';
 `;
 const FlexBox = styled.div`
   display: flex;
