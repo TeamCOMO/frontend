@@ -211,6 +211,10 @@ function PostDetail() {
                 <WritingDate style={{ marginLeft: '40px' }}>
                   작성일 {postInfo.createdDate}
                 </WritingDate>
+                <div style={{ marginLeft: '80px' }}>
+                  <h1 style={{ fontSize: '25px' }}>♥ {postInfo.heartCount}</h1>
+                </div>
+
                 <div style={{ marginLeft: 'auto' }}>
                   {postInfo.writer === nicknameFromToken ? (
                     <>
@@ -377,3 +381,4 @@ const Body = styled.div`
   font-size: 20px;
   font-weight: 700;
 `;
+const Heart = styled.div``;
