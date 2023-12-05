@@ -23,6 +23,7 @@ function PostDetail() {
 
   let accessToken = sessionStorage.accessToken;
   const postingId = useParams().postId;
+
   const token = sessionStorage.getItem('accessToken');
 
   console.log(comments);
@@ -37,7 +38,6 @@ function PostDetail() {
       .catch((err) => console.log(err));
   };
 
-  console.log(postInfo);
   console.log('실시간 입력 댓글 : ' + comment);
   //console.log("댓글 닉네임 : " + comment.nickname);
 
@@ -194,158 +194,185 @@ function PostDetail() {
         });
     }
   };
-
+  console.log(postInfo);
   return (
     <div>
       <Nav />
-      <Background className={postStyle.background}>
-        <div className={postStyle.totalPostingBox}>
-          <PostContatiner>
-            <PostDetailContainer>
-              <div>
-                <img style={{ width: '100px' }} src={postInfo.images}></img>
-              </div>
-              <Title>{postInfo.title}</Title>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div>{postInfo.writer}</div>
-                <WritingDate style={{ marginLeft: '40px' }}>
-                  작성일 {postInfo.createdDate}
-                </WritingDate>
-                <div style={{ marginLeft: '80px' }}>
-                  <h1 style={{ fontSize: '25px' }}>♥ {postInfo.heartCount}</h1>
-                </div>
 
-                <div style={{ marginLeft: 'auto' }}>
-                  {postInfo.writer === nicknameFromToken ? (
-                    <>
-                      <Link to={`/editpost/${postingId}`}>
-                        <button className={style.ActionButton}>수정하기</button>
-                      </Link>
+      <Background className={postStyle.background} style={{ height: '100vh' }}>
+        <Background className={postStyle.background}>
+          <div className={postStyle.totalPostingBox}>
+            <PostContatiner>
+              <PostDetailContainer>
+                <div>
+                  <img style={{ width: '100px' }} src={postInfo.images}></img>
+                </div>
+                <Title>{postInfo.title}</Title>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div>{postInfo.writer}</div>
+                  <WritingDate style={{ marginLeft: '40px' }}>
+                    작성일 {postInfo.createdDate}
+                  </WritingDate>
+                  <div style={{ marginLeft: '80px' }}>
+                    <h1 style={{ fontSize: '25px' }}>
+                      ♥ {postInfo.heartCount}
+                    </h1>
+                  </div>
+                  <div style={{ marginLeft: 'auto', display: 'flex' }}>
+                    {postInfo.writer === nicknameFromToken ? (
+                      <div style={{ display: 'flex' }}>
+                        <Link
+                          to={`/editpost/${postingId}`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Button>수정하기</Button>
+                        </Link>
+                        <Button onClick={handleDeletePost}>삭제하기</Button>
+                        <Link
+                          to={`/mypage/status/${postingId}`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Button>지원현황</Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', justifyContent: 'end' }}>
+                        <ApplyBtn postId={postingId}></ApplyBtn>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <Line />
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    marginTop: '20px',
+                  }}
+                >
+                  <div style={{ display: 'flex' }}>
+                    <SubTitle>카테고리 </SubTitle>
+                    <SubInfo>
+                      {postInfo.category == 'Study' ? '스터디' : '프로젝트'}
+                    </SubInfo>
+                  </div>
+                  <div style={{ display: 'flex' }}>
+                    <SubTitle>사용스택 </SubTitle>
+                    <SubInfo>
+                      {postInfo.techs == 'React' ? '리액트' : '스프링'}
+                    </SubInfo>
+                  </div>
+                </div>
+                <Body>{postInfo.body}</Body>
+
+                <div>
+                  {token ? (
+                    <div>
+                      <input
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="댓글을 입력하세요..."
+                        className={style.inputs}
+                      />
                       <button
-                        onClick={handleDeletePost}
+                        onClick={handleComment}
                         className={style.ActionButton}
                       >
-                        삭제하기
+                        입력 완료
                       </button>
-                      <button className={style.ActionButton}>지원현황</button>
-                    </>
+                    </div>
                   ) : (
-                    <ApplyBtn postId={postingId}></ApplyBtn>
+                    <p>
+                      <Link to="/signin">로그인</Link>을 해야합니다.
+                    </p>
                   )}
                 </div>
-              </div>
-              <Line />
-              <Body>{postInfo.body}</Body>
-              <div>
-                <span>카테고리 : </span>
-                <span>{postInfo.category}</span>
-              </div>
-              <div>
-                <span>기술스택 : </span>
-                <span>{postInfo.techs}</span>
-              </div>
-              <div>
-                {token ? (
-                  <div>
-                    <input
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                      placeholder='댓글을 입력하세요...'
-                      className={style.inputs}
-                    />
-                    <button
-                      onClick={handleComment}
-                      className={style.ActionButton}
-                    >
-                      입력 완료
-                    </button>
-                  </div>
-                ) : (
-                  <p>
-                    <Link to='/signin'>로그인</Link>을 해야합니다.
-                  </p>
-                )}
-              </div>
-              <div>
                 <div>
-                  <h3>댓글:</h3>
-                  {comments.map((singleComment, index) => (
-                    <div key={index} className={style.commentContainer}>
-                      {commentId === singleComment.id ? (
-                        <div>
-                          <input
-                            type='text'
-                            value={editingComment}
-                            onChange={(e) => setEditingComment(e.target.value)}
-                            placeholder='댓글 수정...'
-                            className={style.commentEditInput} // Added class for styling
-                          />
-                          <button
-                            onClick={() => handleCommentUpdate(singleComment)}
-                            className={style.ActionButton} // Added class for styling
-                          >
-                            수정 완료
-                          </button>
-                        </div>
-                      ) : (
-                        <>
-                          <p className={style.commentBody}>
-                            {singleComment.body}
-                          </p>
-                          <p className={style.commentNickname}>
-                            {singleComment.nickname}
-                          </p>
-                          <p className={style.commentTime}>
-                            {singleComment.createdTime}
-                          </p>
-                          {singleComment.nickname === nicknameFromToken && (
-                            <>
-                              <button
-                                onClick={() => handleEditComment(singleComment)}
-                                className={style.ActionButton} // Added class for styling
-                              >
-                                수정
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleDeleteComment(singleComment.id)
-                                }
-                                className={style.ActionButton} // Added class for styling
-                              >
-                                삭제
-                              </button>
-                            </>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  ))}
+                  <div>
+                    <h3>댓글:</h3>
+                    {comments.map((singleComment, index) => (
+                      <div key={index} className={style.commentContainer}>
+                        {commentId === singleComment.id ? (
+                          <div>
+                            <input
+                              type="text"
+                              value={editingComment}
+                              onChange={(e) =>
+                                setEditingComment(e.target.value)
+                              }
+                              placeholder="댓글 수정..."
+                              className={style.commentEditInput} // Added class for styling
+                            />
+                            <button
+                              onClick={() => handleCommentUpdate(singleComment)}
+                              className={style.ActionButton} // Added class for styling
+                            >
+                              수정 완료
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <p className={style.commentBody}>
+                              {singleComment.body}
+                            </p>
+                            <p className={style.commentNickname}>
+                              {singleComment.nickname}
+                            </p>
+                            <p className={style.commentTime}>
+                              {singleComment.createdTime}
+                            </p>
+                            {singleComment.nickname === nicknameFromToken && (
+                              <>
+                                <button
+                                  onClick={() =>
+                                    handleEditComment(singleComment)
+                                  }
+                                  className={style.ActionButton} // Added class for styling
+                                >
+                                  수정
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleDeleteComment(singleComment.id)
+                                  }
+                                  className={style.ActionButton} // Added class for styling
+                                >
+                                  삭제
+                                </button>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Line />
-            </PostDetailContainer>
-          </PostContatiner>
-        </div>
+
+                <Line />
+              </PostDetailContainer>
+            </PostContatiner>
+          </div>
+        </Background>
       </Background>
     </div>
   );
 }
 export default PostDetail;
+
 const PostContatiner = styled.div`
   width: 1000px;
-  height: 100vh;
+
+  height: auto;
   margin: 0 auto;
   background-color: #fff;
 `;
 const PostDetailContainer = styled.div`
   width: 850px;
-  height: 100vh;
+
   margin: 0 auto;
 `;
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
-
   position: flex;
   position: relative;
 `;
@@ -370,15 +397,38 @@ const Line = styled.div`
   background: #e3e3e3;
 `;
 const Body = styled.div`
+  white-space: pre-line;
   display: flex;
   margin-top: 40px;
   width: 850px;
-  height: 400px;
 
   flex-shrink: 0;
   color: #000;
   font-family: Roboto;
   font-size: 20px;
+  font-weight: 400;
+`;
+
+const Button = styled.button`
+  background-color: #c59900b5;
+  border: 0px;
+  color: #fff;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const SubTitle = styled(WritingDate)`
+  font-size: 20px;
+  font-weight: 700;
+`;
+const SubInfo = styled.div`
+  font-size: 20px;
+  margin-left: 50px;
   font-weight: 700;
 `;
 const Heart = styled.div``;

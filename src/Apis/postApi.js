@@ -9,7 +9,7 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status == 403) {
-      alert('토큰이 만료되어 재로그인이 필요합니다.');
+      alert('로그인이 필요합니다.');
       window.location.href = '/signin';
     }
 

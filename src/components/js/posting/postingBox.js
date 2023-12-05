@@ -12,16 +12,11 @@ function PostingBox(e) {
   console.log(e);
   const postId = e.param?.id;
 
-  //const postId = useParams().postId;
-  // const postId = e.param.id;
-  //const token = localStorage.accessToken;
   let accessToken = sessionStorage.accessToken;
   const token = localStorage.accessToken;
   const [heart, setHeart] = useState(false); //heart 값 초기값 false 설정
   const API = process.env.REACT_APP_API_KEY;
   const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
-
-  console.log('여기!!!: ' + accessToken);
 
   const handleHeartClick = () => {
     console.log('handleHeartClick 함수 안에 도착함');
@@ -103,7 +98,7 @@ function PostingBox(e) {
   console.log(e.param, 'postingBox');
   return (
     <Box>
-      <Link to={`/post/${postId}`}>
+      <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param?.category === 'Study' ? (
@@ -116,17 +111,14 @@ function PostingBox(e) {
         </FlexBox>
 
         <Title>{e.param?.title}</Title>
-        <Text></Text>
-        <div style={{ marginTop: '100px' }}>
-          <div style={{ display: 'flex' }}>
-            {e.param?.techs.map((e) => {
-              return <Tech>{e}</Tech>;
-            })}
-          </div>
 
-          <Line />
-          <FlexBox style={{ marginTop: '20px' }}></FlexBox>
+        <div style={{ display: 'flex' }}>
+          {e.param?.techs.map((e) => {
+            return <Tech>{e}</Tech>;
+          })}
         </div>
+
+        <Line />
       </Link>
       <div
         style={{
@@ -194,6 +186,7 @@ export const WritingDate = styled.div`
   font-weight: 400;
 `;
 const Tech = styled.div`
+  margin-top: 30px;
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
@@ -201,13 +194,16 @@ const Tech = styled.div`
   font-size: 16px;
 `;
 const Title = styled.div`
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
   margin-top: 20px;
+  width: 250px;
+  height: 110px;
   color: #000;
-  font-family: Big Shoulders Display;
+
   font-size: 16px;
-  font-style: normal;
   font-weight: 900;
-  line-height: normal;
 `;
 
 const Text = styled.div`
