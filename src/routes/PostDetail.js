@@ -182,128 +182,132 @@ function PostDetail() {
   return (
     <div>
       <Nav />
-      <Background className={postStyle.background}>
-        <div className={postStyle.totalPostingBox}>
-          <PostContatiner>
-            <PostDetailContainer>
-              <div>
-                <img style={{ width: '100px' }} src={postInfo.images}></img>
-              </div>
-              <Title>{postInfo.title}</Title>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div>글 작성한 사람</div>
-                <WritingDate style={{ marginLeft: '40px' }}>
-                  작성일 {postInfo.createdDate}
-                </WritingDate>
-                <div style={{ marginLeft: 'auto' }}>
-                  <Link to={`/editpost/${postingId}`}>
-                    <button>수정하기</button>
-                  </Link>
-                  <button onClick={handleDeletePost}>삭제하기</button>
-                  <button>지원현황</button>
-                  <ApplyBtn postId={postingId}></ApplyBtn>
-                </div>
-              </div>
-              <Line />
-              <Body>{postInfo.body}</Body>
-              <div>
-                <span>카테고리 : </span>
-                <span>{postInfo.category}</span>
-              </div>
-              <div>
-                <span>기술스택 : </span>
-                <span>{postInfo.techs}</span>
-              </div>
-              <div>
-                {token ? (
-                  <div>
-                    <input
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                      placeholder="댓글을 입력하세요..."
-                    />
-                    <button onClick={handleComment}>입력 완료</button>
-                  </div>
-                ) : (
-                  <p>
-                    <Link to="/signin">로그인</Link>을 해야합니다.
-                  </p>
-                )}
-              </div>
-              <div>
+      <Background className={postStyle.background} style={{ height: '100vh' }}>
+        <Background className={postStyle.background}>
+          <div className={postStyle.totalPostingBox}>
+            <PostContatiner>
+              <PostDetailContainer>
                 <div>
-                  <h3>댓글:</h3>
-                  {comments.map((singleComment, index) => (
-                    <div key={index} className={style.commentContainer}>
-                      {commentId === singleComment.id ? (
-                        // 편집 모드 활성화시 표시되는 부분
-                        <div>
-                          <input
-                            type="text"
-                            value={editingComment}
-                            onChange={(e) => setEditingComment(e.target.value)}
-                            placeholder="댓글 수정..."
-                          />
-                          <button
-                            onClick={() => handleCommentUpdate(singleComment)}
-                          >
-                            수정 완료
-                          </button>
-                        </div>
-                      ) : (
-                        // 일반 댓글 표시 부분
-                        <>
-                          <p className={style.commentBody}>
-                            {singleComment.body}
-                          </p>
-                          <p className={style.commentNickname}>
-                            {singleComment.nickname}
-                          </p>
-                          <p className={style.commentTime}>
-                            {singleComment.createdTime}
-                          </p>
-                          <button
-                            onClick={() => handleEditComment(singleComment)}
-                          >
-                            댓수정하기
-                          </button>
-                          <button
-                            onClick={() =>
-                              handleDeleteComment(singleComment.id)
-                            }
-                          >
-                            댓삭제하기
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  ))}
+                  <img style={{ width: '100px' }} src={postInfo.images}></img>
                 </div>
-              </div>
-              <Line />
-            </PostDetailContainer>
-          </PostContatiner>
-        </div>
+                <Title>{postInfo.title}</Title>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div>글 작성한 사람</div>
+                  <WritingDate style={{ marginLeft: '40px' }}>
+                    작성일 {postInfo.createdDate}
+                  </WritingDate>
+                  <div style={{ marginLeft: 'auto' }}>
+                    <Link to={`/editpost/${postingId}`}>
+                      <button>수정하기</button>
+                    </Link>
+                    <button onClick={handleDeletePost}>삭제하기</button>
+                    <button>지원현황</button>
+                    <ApplyBtn postId={postingId}></ApplyBtn>
+                  </div>
+                </div>
+                <Line />
+                <Body>{postInfo.body}</Body>
+                <div>
+                  <span>카테고리 : </span>
+                  <span>{postInfo.category}</span>
+                </div>
+                <div>
+                  <span>기술스택 : </span>
+                  <span>{postInfo.techs}</span>
+                </div>
+                <div>
+                  {token ? (
+                    <div>
+                      <input
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="댓글을 입력하세요..."
+                      />
+                      <button onClick={handleComment}>입력 완료</button>
+                    </div>
+                  ) : (
+                    <p>
+                      <Link to="/signin">로그인</Link>을 해야합니다.
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <div>
+                    <h3>댓글:</h3>
+                    {comments.map((singleComment, index) => (
+                      <div key={index} className={style.commentContainer}>
+                        {commentId === singleComment.id ? (
+                          // 편집 모드 활성화시 표시되는 부분
+                          <div>
+                            <input
+                              type="text"
+                              value={editingComment}
+                              onChange={(e) =>
+                                setEditingComment(e.target.value)
+                              }
+                              placeholder="댓글 수정..."
+                            />
+                            <button
+                              onClick={() => handleCommentUpdate(singleComment)}
+                            >
+                              수정 완료
+                            </button>
+                          </div>
+                        ) : (
+                          // 일반 댓글 표시 부분
+                          <>
+                            <p className={style.commentBody}>
+                              {singleComment.body}
+                            </p>
+                            <p className={style.commentNickname}>
+                              {singleComment.nickname}
+                            </p>
+                            <p className={style.commentTime}>
+                              {singleComment.createdTime}
+                            </p>
+                            <button
+                              onClick={() => handleEditComment(singleComment)}
+                            >
+                              댓수정하기
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteComment(singleComment.id)
+                              }
+                            >
+                              댓삭제하기
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Line />
+              </PostDetailContainer>
+            </PostContatiner>
+          </div>
+        </Background>
       </Background>
     </div>
   );
 }
 export default PostDetail;
+
 const PostContatiner = styled.div`
   width: 1000px;
-  height: 100vh;
+
+  height: auto;
   margin: 0 auto;
   background-color: #fff;
 `;
 const PostDetailContainer = styled.div`
   width: 850px;
-  height: 100vh;
+
   margin: 0 auto;
 `;
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
-
   position: flex;
   position: relative;
 `;
@@ -328,10 +332,10 @@ const Line = styled.div`
   background: #e3e3e3;
 `;
 const Body = styled.div`
+  white-space: pre-line;
   display: flex;
   margin-top: 40px;
   width: 850px;
-  height: 400px;
 
   flex-shrink: 0;
   color: #000;

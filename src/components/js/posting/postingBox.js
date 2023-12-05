@@ -96,6 +96,7 @@ export const WritingDate = styled.div`
   font-weight: 400;
 `;
 const Tech = styled.div`
+  margin-top: 30px;
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
@@ -103,13 +104,16 @@ const Tech = styled.div`
   font-size: 16px;
 `;
 const Title = styled.div`
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
   margin-top: 20px;
+  width: 250px;
+  height: 100px;
   color: #000;
-  font-family: Big Shoulders Display;
+  position: absolute;
   font-size: 16px;
-  font-style: normal;
   font-weight: 900;
-  line-height: normal;
 `;
 
 const Text = styled.div`
