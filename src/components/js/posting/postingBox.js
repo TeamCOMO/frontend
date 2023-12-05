@@ -109,9 +109,9 @@ const Title = styled.div`
   text-overflow: ellipsis;
   margin-top: 20px;
   width: 250px;
-  height: 100px;
+
   color: #000;
-  position: absolute;
+  position: relative;
   font-size: 16px;
   font-weight: 900;
 `;

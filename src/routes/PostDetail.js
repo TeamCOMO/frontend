@@ -23,10 +23,6 @@ function PostDetail() {
   let accessToken = sessionStorage.accessToken;
 
   const postingId = useParams().postId;
-  //const commentId = comment.id;
-  console.log(accessToken);
-
-  console.log(comments);
 
   const navigate = useNavigate();
   const handleDeletePost = () => {
@@ -37,7 +33,7 @@ function PostDetail() {
       })
       .catch((err) => console.log(err));
   };
-  console.log(postInfo);
+
   console.log('실시간 입력 댓글 : ' + comment);
   //console.log("댓글 닉네임 : " + comment.nickname);
 
@@ -178,7 +174,7 @@ function PostDetail() {
         });
     }
   };
-
+  console.log(postInfo);
   return (
     <div>
       <Nav />
@@ -196,24 +192,46 @@ function PostDetail() {
                   <WritingDate style={{ marginLeft: '40px' }}>
                     작성일 {postInfo.createdDate}
                   </WritingDate>
-                  <div style={{ marginLeft: 'auto' }}>
-                    <Link to={`/editpost/${postingId}`}>
-                      <button>수정하기</button>
+                  <div style={{ marginLeft: 'auto', display: 'flex' }}>
+                    <Link
+                      to={`/editpost/${postingId}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button>수정하기</Button>
                     </Link>
-                    <button onClick={handleDeletePost}>삭제하기</button>
-                    <button>지원현황</button>
-                    <ApplyBtn postId={postingId}></ApplyBtn>
+                    <Button onClick={handleDeletePost}>삭제하기</Button>
+                    <Link
+                      to={`/mypage/status/${postingId}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button>지원현황</Button>
+                    </Link>
                   </div>
                 </div>
                 <Line />
-                <Body>{postInfo.body}</Body>
-                <div>
-                  <span>카테고리 : </span>
-                  <span>{postInfo.category}</span>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    marginTop: '20px',
+                  }}
+                >
+                  <div style={{ display: 'flex' }}>
+                    <SubTitle>카테고리 </SubTitle>
+                    <SubInfo>
+                      {postInfo.category == 'Study' ? '스터디' : '프로젝트'}
+                    </SubInfo>
+                  </div>
+                  <div style={{ display: 'flex' }}>
+                    <SubTitle>사용스택 </SubTitle>
+                    <SubInfo>
+                      {postInfo.techs == 'React' ? '리액트' : '스프링'}
+                    </SubInfo>
+                  </div>
                 </div>
-                <div>
-                  <span>기술스택 : </span>
-                  <span>{postInfo.techs}</span>
+                <Body>{postInfo.body}</Body>
+                <div style={{ display: 'flex', justifyContent: 'end' }}>
+                  <ApplyBtn postId={postingId}></ApplyBtn>
                 </div>
                 <div>
                   {token ? (
@@ -341,5 +359,28 @@ const Body = styled.div`
   color: #000;
   font-family: Roboto;
   font-size: 20px;
+  font-weight: 400;
+`;
+
+const Button = styled.button`
+  background-color: #c59900b5;
+  border: 0px;
+  color: #fff;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const SubTitle = styled(WritingDate)`
+  font-size: 20px;
+  font-weight: 700;
+`;
+const SubInfo = styled.div`
+  font-size: 20px;
+  margin-left: 50px;
   font-weight: 700;
 `;
