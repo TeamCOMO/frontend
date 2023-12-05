@@ -10,30 +10,22 @@ import Posting from './routes/Posting';
 import PostDetail from './routes/PostDetail';
 import EditPost from './routes/EditPost';
 import MypageWrite from './routes/MypageWrite';
-import Heart_p from './routes/heart_p';
-import MypageApplied from './routes/MypageApplied';
-import MypageApplyStatus from './routes/MypageApplyStatus';
+import MypageComment from './routes/MypageComment';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/post/:postId" element={<PostDetail />} />
-        <Route path="/posting" element={<Posting />} />
-        <Route path="/heart_p" element={<Heart_p />} />
-
-        <Route path="/editpost/:postId" element={<EditPost />} />
-        <Route path="/mypage/write" element={<MypageWrite />}></Route>
-        <Route path="/mypage/applied" element={<MypageApplied />}></Route>
-        <Route
-          path="/mypage/status/:postId"
-          element={<MypageApplyStatus />}
-        ></Route>
+        <Route path='/' element={<Main />} />
+        <Route path='/signin' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/mypage' element={<Mypage />} />
+        <Route path='/post' element={<Post />} />
+        <Route path='/post/:postId' element={<PostDetail />} />
+        <Route path='/posting' element={<Posting />} />
+        <Route path='/editpost/:postId' element={<EditPost />} />
+        <Route path='/mypage/write' element={<MypageWrite />}></Route>
+        <Route path='/mypage/comment' element={<MypageComment />}></Route>
       </Routes>
     </Router>
   );

@@ -53,13 +53,13 @@ function Mypage() {
               <UserPatchBtn info={info} />
             </div>
 
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
+            <Link to='/mypage/write' style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 글</MiniBox>
             </Link>
-            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
-              <MiniBox>내가 쓴 댓글 </MiniBox>
+            <Link to='/mypage/comment' style={{ textDecoration: 'none' }}>
+              <MiniBox>댓글 단 게시물</MiniBox>
             </Link>
-            <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
+            <Link to='/mypage/applied' style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
           </div>

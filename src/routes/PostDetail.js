@@ -8,21 +8,25 @@ import styled from '@emotion/styled';
 import { WritingDate } from '../components/js/posting/postingBox';
 import axios from 'axios';
 import style from '../routes/PostDetail.module.css';
+import { jwtDecode } from 'jwt-decode';
 
 function PostDetail() {
   const [postInfo, setPostInfo] = useState({});
   const [comment, setComment] = useState(''); // 댓글을 저장하는 상태 변수
   const [comments, setComments] = useState([]); // 댓글 리스트를 저장하는 상태 변수
   const API = process.env.REACT_APP_API_KEY;
-  const token = sessionStorage.accessToken;
   const [body, setBody] = useState(''); // 내용을 저장하는 상태 변수
   const [commentId, setEditingCommentId] = useState(null);
   const [editingComment, setEditingComment] = useState('');
   const [editing, setEditing] = useState(false);
-  //const [nickname, setickname] = useState("");
-  let accessToken = sessionStorage.accessToken;
+  const [nicknameFromToken, setNicknameFromToken] = useState('');
 
+  let accessToken = sessionStorage.accessToken;
   const postingId = useParams().postId;
+
+  const token = sessionStorage.getItem('accessToken');
+
+  console.log(comments);
 
   const navigate = useNavigate();
   const handleDeletePost = () => {
@@ -38,6 +42,17 @@ function PostDetail() {
   //console.log("댓글 닉네임 : " + comment.nickname);
 
   useEffect(() => {
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log('Decoded Token: ', decodedToken);
+        const nicknameFromToken = decodedToken.nickname;
+        console.log('Nickname from Token: ', nicknameFromToken);
+        setNicknameFromToken(decodedToken.nickname); // 토큰에서 nickname 설정
+      } catch (error) {
+        console.error('Error decoding token: ', error);
+      }
+    }
     getPostApi(postingId)
       .then((res) => {
         setPostInfo(res.data);
@@ -53,6 +68,11 @@ function PostDetail() {
       });
     handleComments();
   }, [postingId, token]);
+  console.log('token : ' + token);
+
+  console.log(postInfo);
+  console.log('실시간 입력 댓글 : ' + comment);
+  //console.log("댓글 닉네임 : " + comment.nickname);
 
   // 댓글 기능 : 댓글 입력 완료 후 사용자의 닉네임과 함께 보이도록 설정
   const handleComment = () => {
@@ -112,7 +132,7 @@ function PostDetail() {
 
   // 댓글 수정 기능
   const handleCommentUpdate = () => {
-    console.log('111111111');
+    // console.log("댓글 수정 함수 실행");
     if (window.confirm('댓글을 수정하시겠습니까?')) {
       axios
         .patch(
@@ -178,6 +198,7 @@ function PostDetail() {
   return (
     <div>
       <Nav />
+
       <Background className={postStyle.background} style={{ height: '100vh' }}>
         <Background className={postStyle.background}>
           <div className={postStyle.totalPostingBox}>
@@ -188,24 +209,37 @@ function PostDetail() {
                 </div>
                 <Title>{postInfo.title}</Title>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div>글 작성한 사람</div>
+                  <div>{postInfo.writer}</div>
                   <WritingDate style={{ marginLeft: '40px' }}>
                     작성일 {postInfo.createdDate}
                   </WritingDate>
+                  <div style={{ marginLeft: '80px' }}>
+                    <h1 style={{ fontSize: '25px' }}>
+                      ♥ {postInfo.heartCount}
+                    </h1>
+                  </div>
                   <div style={{ marginLeft: 'auto', display: 'flex' }}>
-                    <Link
-                      to={`/editpost/${postingId}`}
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <Button>수정하기</Button>
-                    </Link>
-                    <Button onClick={handleDeletePost}>삭제하기</Button>
-                    <Link
-                      to={`/mypage/status/${postingId}`}
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <Button>지원현황</Button>
-                    </Link>
+                    {postInfo.writer === nicknameFromToken ? (
+                      <div style={{ display: 'flex' }}>
+                        <Link
+                          to={`/editpost/${postingId}`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Button>수정하기</Button>
+                        </Link>
+                        <Button onClick={handleDeletePost}>삭제하기</Button>
+                        <Link
+                          to={`/mypage/status/${postingId}`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Button>지원현황</Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', justifyContent: 'end' }}>
+                        <ApplyBtn postId={postingId}></ApplyBtn>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <Line />
@@ -230,9 +264,7 @@ function PostDetail() {
                   </div>
                 </div>
                 <Body>{postInfo.body}</Body>
-                <div style={{ display: 'flex', justifyContent: 'end' }}>
-                  <ApplyBtn postId={postingId}></ApplyBtn>
-                </div>
+
                 <div>
                   {token ? (
                     <div>
@@ -240,8 +272,14 @@ function PostDetail() {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="댓글을 입력하세요..."
+                        className={style.inputs}
                       />
-                      <button onClick={handleComment}>입력 완료</button>
+                      <button
+                        onClick={handleComment}
+                        className={style.ActionButton}
+                      >
+                        입력 완료
+                      </button>
                     </div>
                   ) : (
                     <p>
@@ -255,7 +293,6 @@ function PostDetail() {
                     {comments.map((singleComment, index) => (
                       <div key={index} className={style.commentContainer}>
                         {commentId === singleComment.id ? (
-                          // 편집 모드 활성화시 표시되는 부분
                           <div>
                             <input
                               type="text"
@@ -264,15 +301,16 @@ function PostDetail() {
                                 setEditingComment(e.target.value)
                               }
                               placeholder="댓글 수정..."
+                              className={style.commentEditInput} // Added class for styling
                             />
                             <button
                               onClick={() => handleCommentUpdate(singleComment)}
+                              className={style.ActionButton} // Added class for styling
                             >
                               수정 완료
                             </button>
                           </div>
                         ) : (
-                          // 일반 댓글 표시 부분
                           <>
                             <p className={style.commentBody}>
                               {singleComment.body}
@@ -283,24 +321,33 @@ function PostDetail() {
                             <p className={style.commentTime}>
                               {singleComment.createdTime}
                             </p>
-                            <button
-                              onClick={() => handleEditComment(singleComment)}
-                            >
-                              댓수정하기
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleDeleteComment(singleComment.id)
-                              }
-                            >
-                              댓삭제하기
-                            </button>
+                            {singleComment.nickname === nicknameFromToken && (
+                              <>
+                                <button
+                                  onClick={() =>
+                                    handleEditComment(singleComment)
+                                  }
+                                  className={style.ActionButton} // Added class for styling
+                                >
+                                  수정
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleDeleteComment(singleComment.id)
+                                  }
+                                  className={style.ActionButton} // Added class for styling
+                                >
+                                  삭제
+                                </button>
+                              </>
+                            )}
                           </>
                         )}
                       </div>
                     ))}
                   </div>
                 </div>
+
                 <Line />
               </PostDetailContainer>
             </PostContatiner>
@@ -384,3 +431,4 @@ const SubInfo = styled.div`
   margin-left: 50px;
   font-weight: 700;
 `;
+const Heart = styled.div``;

@@ -12,14 +12,15 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
     "react-js-pagination": "^3.0.3",
     "react-router-dom": "^6.14.1",
     "react-scripts": "^5.0.1",
     "recoil": "^0.7.7",
     "sass": "^1.69.5",
-
     "swiper": "^6.8.4",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"

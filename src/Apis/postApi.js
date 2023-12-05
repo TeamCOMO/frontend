@@ -133,6 +133,13 @@ export const getWriteApi = (page) => {
   });
 };
 
+export const getCommentApi = (page) => {
+  return axios.get(`${API}/api/v1/post/comment?${page}`, {
+    headers: { Authorization: token },
+    'Content-Type': 'application/json',
+  });
+};
+
 export const getMypageInfo = () => {
   token = sessionStorage.accessToken;
 
