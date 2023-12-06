@@ -168,6 +168,13 @@ function PostingBox(e) {
             )}
           </Category>
           <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
+          <div onClick={onHeartClick}>
+            {heart ? (
+              <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
+            ) : (
+              <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
+            )}
+          </div>
         </FlexBox>
 
         <Title>{e.param?.title}</Title>
@@ -176,7 +183,7 @@ function PostingBox(e) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '10px',
+            marginBottom: '20px',
           }}
         >
           {e.param?.techs.map((e) => {
@@ -265,14 +272,6 @@ const Category = styled.div`
   background: #d9d9d9;
 `;
 export const WritingDate = styled.div`
-  color: #9a9a9a;
-  font-family: Big Shoulders Display;
-  font-size: 14px;
-  font-weight: 400;
-  margin-left: 7vw;
-  margin-top: -2vh;
-`;
-export const Nickname = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
   font-size: 14px;
