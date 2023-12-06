@@ -7,6 +7,8 @@ import projectLogo from '../../../components/img/projectLogo.svg';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
+import reactLogo from '../../img/React-icon.svg';
+import springLogo from '../../img/springLogo.svg';
 
 function PostingBox(e) {
   console.log(e);
@@ -98,15 +100,23 @@ function PostingBox(e) {
   console.log(e.param, 'postingBox');
   return (
     <Box>
-      <NickName>{e.param?.nickname}</NickName>
-      <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <NickName>{e.param?.nickname}</NickName>
         {e.status == true ? (
           <Link to={`/mypage/status/${postId}`}>
-            <div>신청 현황 보기</div>
+            <Status>지원 현황 보기</Status>
           </Link>
         ) : (
           ''
         )}
+      </div>
+      <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param?.category === 'Study' ? (
@@ -122,7 +132,15 @@ function PostingBox(e) {
 
         <div style={{ display: 'flex' }}>
           {e.param?.techs.map((e) => {
-            return <Tech>{e}</Tech>;
+            return (
+              <Tech>
+                {e == 'React' ? (
+                  <Logo src={reactLogo} />
+                ) : (
+                  <Logo src={springLogo} />
+                )}
+              </Tech>
+            );
           })}
         </div>
 
@@ -207,7 +225,7 @@ const Title = styled.div`
   text-overflow: ellipsis;
   margin-top: 20px;
   width: 250px;
-  height: 90px;
+  height: 76px;
   color: #000;
 
   font-size: 16px;
@@ -244,4 +262,11 @@ const Line = styled.div`
   height: 1px;
   background: #e7e5e5;
 `;
-//const Heart = styled.div`
+const Status = styled.button`
+  color: #fff;
+  background-color: black;
+  height: 30px;
+`;
+const Logo = styled.img`
+  width: 30px;
+`;

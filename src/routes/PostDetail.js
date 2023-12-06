@@ -167,7 +167,7 @@ function PostDetail() {
         });
     }
   };
-
+  console.log(postInfo);
   //수정 상태를 활성화하는 함수
   const handleEditComment = (singleComment) => {
     console.log('수정 상태를 활성화 handleEditComment 함수 실행');
@@ -259,10 +259,24 @@ function PostDetail() {
                   <div style={{ display: 'flex' }}>
                     <SubTitle>사용스택 </SubTitle>
                     <SubInfo>
-                      {postInfo.techs == 'React' ? '리액트' : '스프링'}
+                      {postInfo.techs?.map((e) => {
+                        return e == 'React' ? (
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            리액트
+                          </div>
+                        ) : (
+                          '스프링'
+                        );
+                      })}
                     </SubInfo>
                   </div>
                 </div>
+                <Line style={{ marginTop: '20px' }} />
 
                 <Body>
                   <img style={{ width: '100px' }} src={postInfo.images}></img>
@@ -428,7 +442,7 @@ const Button = styled.button`
   border: 0px;
   color: #fff;
   width: 100px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -441,8 +455,14 @@ const SubTitle = styled(WritingDate)`
   font-weight: 700;
 `;
 const SubInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
   font-size: 20px;
   margin-left: 50px;
   font-weight: 700;
 `;
 const Heart = styled.div``;
+const Logo = styled.img`
+  height: 20px;
+`;
