@@ -62,6 +62,7 @@ function UserPatchBtn(props) {
         onClick={() => {
           setPopup(!popup);
         }}
+        style={{ background: 'black', color: '#fff', fontSize: '14px' }}
       >
         정보 수정
       </button>
