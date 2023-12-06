@@ -21,7 +21,9 @@ function Mypage() {
         console.log(err);
       });
   }, []);
+
   console.log(info);
+
   return (
     <div>
       <Nav />
@@ -61,6 +63,9 @@ function Mypage() {
             </Link>
             <Link to='/mypage/applied' style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
+            </Link>
+            <Link to='/mypage/scraped' style={{ textDecoration: 'none' }}>
+              <MiniBox>스크랩한 글</MiniBox>
             </Link>
           </div>
         </Box>

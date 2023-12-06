@@ -6,6 +6,7 @@ import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
+import { BsBookmarkPlusFill } from 'react-icons/bs';
 import axios from 'axios';
 import reactLogo from '../../img/React-icon.svg';
 import springLogo from '../../img/springLogo.svg';
@@ -17,8 +18,84 @@ function PostingBox(e) {
   let accessToken = sessionStorage.accessToken;
   const token = localStorage.accessToken;
   const [heart, setHeart] = useState(false); //heart 값 초기값 false 설정
+  const [scrap, setScrap] = useState(false);
   const API = process.env.REACT_APP_API_KEY;
   const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
+  const [interestId, setInterestId] = useState(null);
+
+  console.log('여기!!!: ' + accessToken);
+
+  const onScrapClick = () => {
+    if (!scrap) {
+      handleScrapClick();
+      setScrap(true); // 상태를 true로 변경
+    } else {
+      handleScrapDeleteClick();
+      setScrap(false); // 상태를 false로 변경
+    }
+  };
+
+  const handleScrapClick = () => {
+    setScrap(true);
+    console.log('스크랩 함수 안에 도착함');
+    const confirmScrap = window.confirm('스크랩 하겠습니까?');
+    if (confirmScrap) {
+      axios
+        .post(
+          `${API}/api/v1/interest`,
+          {
+            postId: postId,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: accessToken,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('accessToken', res.data);
+          console.log('스크랩 성공:', res.data);
+          setScrap(true);
+          setInterestId(res.data.interestId); // Assuming res.data.interestId is the correct path to the interestId
+        })
+        .catch((error) => {
+          console.error('스크랩에 실패했습니다:', error);
+        });
+    } else {
+      console.log('스크랩 취소');
+    }
+  };
+
+  const handleScrapDeleteClick = () => {
+    //event.stopPropagation();
+    const confirmScrap = window.confirm(
+      '이미 스크랩 된 글입니다.\n스크랩을 취소 하겠습니까?'
+    );
+    if (confirmScrap) {
+      console.log('스크랩 취소 함수 안에 도착함');
+      axios
+        .delete(`${API}/api/v1/interest/${interestId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('accessToken', res.data);
+          setScrap(false);
+          console.log("스크랩'취소'에 성공 : ", res.data);
+          setScrap(false);
+          setInterestId(null); // Reset interestId after successful delete
+        })
+        .catch((error) => {
+          console.error("스크랩'취소' 실패", error);
+        });
+    } else {
+    }
+  };
 
   const handleHeartClick = () => {
     console.log('handleHeartClick 함수 안에 도착함');
@@ -49,6 +126,7 @@ function PostingBox(e) {
 
   const handleHeartDeleteClick = () => {
     console.log('하트취소 함수 안에 도착함');
+    //event.stopPropagation();
     axios
       .delete(`${API}/api/v1/post/${postId}/heart`, {
         headers: {
@@ -76,26 +154,6 @@ function PostingBox(e) {
       setHeart(false); // 상태를 false로 변경
     }
   };
-  {
-    /*}
-  const handleHeart = (heart) => {
-    console.log("handleHeart 함수 안에 들어옴");
-    //console.log("setHeart(!heart);실행");
-    if (!heart) {
-      //하트가 안 눌러져 있을 때 등록
-      handleHeartClick(); // axios 통신 실행
-      console.log("handleHeartClick(); 실행 성공");
-      setHeart(heart);
-    } else if (heart) {
-      //하트 눌러져 있을때 취소
-      handleHeartDeleteClick(); // axios 통신 실행
-      console.log("handleHeartDeleteClick(); 실행 성공");
-      setHeart(!heart);
-    } else {
-      console.log("handleHeart 정상작동 실패");
-    }
-  };*/
-  }
 
   console.log(e.param, 'postingBox');
   return (
@@ -150,6 +208,10 @@ function PostingBox(e) {
 
         <Line />
       </Link>
+
+      <Line />
+      <FlexBox style={{ marginTop: '20px' }}></FlexBox>
+
       <div
         style={{
           display: 'flex',
@@ -161,6 +223,18 @@ function PostingBox(e) {
         <WritingDate>{e.param?.nickname}</WritingDate>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
+        <div onClick={onHeartClick}>
+          {heart ? (
+            <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
+          ) : (
+            <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
+          )}
+        </div>
+        <div onClick={onScrapClick}>
+          <BsBookmarkPlusFill
+            style={{ fontSize: '30px', marginleft: '50px', color: 'gray' }}
+          />
+        </div>
       </div>
     </Box>
   );

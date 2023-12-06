@@ -59,7 +59,7 @@ function CategoryBtn() {
             </div>
           );
         })}
-        <PostingBtn param="post" />
+        <PostingBtn param='post' />
       </div>
     </div>
   );
