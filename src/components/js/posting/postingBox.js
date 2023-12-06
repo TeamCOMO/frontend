@@ -190,7 +190,7 @@ const Category = styled.div`
 export const WritingDate = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
 `;
 const Tech = styled.div`
@@ -236,7 +236,7 @@ const State = styled.div`
 const ReadCount = styled.div`
   color: #787878;
   font-family: Roboto;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 `;
 const Line = styled.div`

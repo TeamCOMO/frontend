@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import style from "./boxStyle.module.css";
+import { useEffect, useState } from 'react';
+import style from './boxStyle.module.css';
 
-import { useNavigate } from "react-router-dom";
-import { editPostApi, writePostApi } from "../../../Apis/postApi";
-import styled from "@emotion/styled";
+import { useNavigate } from 'react-router-dom';
+import { editPostApi, writePostApi } from '../../../Apis/postApi';
+import styled from '@emotion/styled';
 function PostingForm(param) {
   const navigate = useNavigate();
   let formData = new FormData();
 
   const [postInfo, setPostInfo] = useState({
-    postId: "",
-    title: "",
-    body: "",
-    category: "Study",
-    image: "",
+    postId: '',
+    title: '',
+    body: '',
+    category: 'Study',
+    image: '',
   });
-  const [techs, setTechs] = useState("React");
+  const [techs, setTechs] = useState('React');
   const [tech, setTech] = useState([]);
 
   useEffect(() => {
-    param.postType == "editPost"
+    param.postType == 'editPost'
       ? setPostInfo(param.editPostInfo)
-      : console.log("Not Edit");
+      : console.log('Not Edit');
   }, [param]);
   const handlePostInfo = (e) => {
-    if (e.target.id === "image") {
+    if (e.target.id === 'image') {
       setPostInfo({
         ...postInfo,
         image: e.target.files[0], // 파일 객체를 저장
@@ -39,11 +39,11 @@ function PostingForm(param) {
   postInfo.postId = Number(postInfo.postId);
   const onClickTehcs = () => {
     if (tech.includes(techs)) {
-      alert("이미 존재하는 스택입니다!");
+      alert('이미 존재하는 스택입니다!');
       return;
     }
     setTech(tech.concat(techs));
-    alert("추가됐습니다.");
+    alert('추가됐습니다.');
   };
   const handleDelete = (delTech) => {
     const filteredTech = tech.filter((e) => {
@@ -59,23 +59,23 @@ function PostingForm(param) {
     editPostApi(postInfo, tech)
       .then((res) => {
         console.log(res);
-        navigate("/post");
+        navigate('/post');
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const handlePosting = () => {
-    if (tech == "") alert("스택을 추가해주세요");
-    else if (postInfo.title == "") alert("제목을 입력해주세요");
-    else if (postInfo.body == "") alert("본문을 입력해주세요.");
+    if (tech == '') alert('스택을 추가해주세요');
+    else if (postInfo.title == '') alert('제목을 입력해주세요');
+    else if (postInfo.body == '') alert('본문을 입력해주세요.');
     else
       writePostApi(postInfo, tech)
         .then((res) => {
           console.log(res);
 
-          alert("글 추가됨");
-          navigate("/post");
+          alert('글 추가됨');
+          navigate('/post');
         })
         .catch((error) => {
           console.log(error);
@@ -84,7 +84,7 @@ function PostingForm(param) {
 
   return (
     <div>
-      <div style={{ justifyContent: "space-between", display: "flex" }}>
+      <div style={{ justifyContent: 'space-between', display: 'flex' }}>
         <Title
           value={postInfo.title}
           onChange={handlePostInfo}
@@ -98,20 +98,20 @@ function PostingForm(param) {
           accept="image/*"
           onChange={handlePostInfo}
           id="image"
-          style={{ marginTop: "30px" }}
+          style={{ marginTop: '30px' }}
         ></input>
         <hr></hr>
       </div>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: 'flex' }}>
         <textarea
           value={postInfo.body}
           onChange={handlePostInfo}
           id="body"
           placeholder="본문"
           className={style.textarea}
-          style={{ width: "1000px", height: "400px" }}
+          style={{ width: '1000px', height: '400px', borderRadius: '5px' }}
         ></textarea>
-        <div style={{ marginTop: "50px", marginLeft: "100px" }}>
+        <div style={{ marginTop: '100px', marginLeft: '100px' }}>
           <div>카테고리</div>
           <Input
             value={postInfo.category}
@@ -119,40 +119,40 @@ function PostingForm(param) {
             id="category"
             placeholder="카테고리"
           >
-            <option value={"Study"}>스터디</option>
-            <option value={"Project"}>프로젝트</option>
+            <option value={'Study'}>스터디</option>
+            <option value={'Project'}>프로젝트</option>
           </Input>
           <hr></hr>
           <div>스택 </div>
 
-          <div style={{ display: "flex" }}>
+          <div style={{ display: 'flex' }}>
             <Input onChange={handleTech} id="techs" placeholder="기술스택">
-              <option value={"React"}>React</option>
-              <option value={"Spring"}>Spring</option>
+              <option value={'React'}>React</option>
+              <option value={'Spring'}>Spring</option>
             </Input>
-            <button
-              style={{ marginLeft: "20px", border: "0" }}
+            <Add
+              style={{ marginLeft: '20px', border: '0' }}
               onClick={onClickTehcs}
             >
               추가
-            </button>
+            </Add>
           </div>
           <div
             style={{
-              display: "flex",
-              background: "#fff",
-              marginTop: "20px",
-              alignItems: "center",
-              flexWrap: "wrap",
+              display: 'flex',
+              background: '#fff',
+              marginTop: '20px',
+              alignItems: 'center',
+              flexWrap: 'wrap',
             }}
           >
             {tech.map((e) => {
               return (
                 <TechBox>
-                  {e}{" "}
+                  {e}{' '}
                   <Delete
                     onClick={() => handleDelete(e)}
-                    style={{ marginLeft: "40px" }}
+                    style={{ marginLeft: '40px' }}
                   >
                     x
                   </Delete>
@@ -160,11 +160,17 @@ function PostingForm(param) {
               );
             })}
           </div>
-          <div style={{ marginTop: "60px", marginLeft: "100px" }}>
-            {param.postType == "editPost" ? (
-              <button onClick={handleEditPosting}>수정하기</button>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'end',
+              marginTop: '90px',
+            }}
+          >
+            {param.postType == 'editPost' ? (
+              <PostingBtn onClick={handleEditPosting}>수정하기</PostingBtn>
             ) : (
-              <button onClick={handlePosting}> 글쓰기 </button>
+              <PostingBtn onClick={handlePosting}> 글쓰기 </PostingBtn>
             )}
           </div>
         </div>
@@ -174,17 +180,28 @@ function PostingForm(param) {
 }
 
 export default PostingForm;
+const PostingBtn = styled.button`
+  background-color: black;
+  color: white;
+`;
+const Add = styled.button`
+  background-color: black;
+  color: white;
+  margin-top: 5px;
+`;
 const Title = styled.input`
   width: 1000px;
   height: 40px;
   font-size: 30px;
   font-weight: 600;
   border: 0;
+  border-radius: 5px;
   margin-top: 20px;
 `;
 const Input = styled.select`
   width: 200px;
   height: 50px;
+  border-radius: 5px;
 `;
 
 const TechBox = styled.div`

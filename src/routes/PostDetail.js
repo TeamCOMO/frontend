@@ -199,14 +199,14 @@ function PostDetail() {
     <div>
       <Nav />
 
-      <Background className={postStyle.background} style={{ height: '100vh' }}>
+      <Background
+        className={postStyle.background}
+        style={{ height: '100vh', paddingTop: '60px' }}
+      >
         <Background className={postStyle.background}>
           <div className={postStyle.totalPostingBox}>
             <PostContatiner>
               <PostDetailContainer>
-                <div>
-                  <img style={{ width: '100px' }} src={postInfo.images}></img>
-                </div>
                 <Title>{postInfo.title}</Title>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div>{postInfo.writer}</div>
@@ -263,7 +263,20 @@ function PostDetail() {
                     </SubInfo>
                   </div>
                 </div>
-                <Body>{postInfo.body}</Body>
+
+                <Body>
+                  <img style={{ width: '100px' }} src={postInfo.images}></img>
+
+                  {postInfo.body?.split('\n').map((e) => {
+                    console.log(e);
+                    return (
+                      <div>
+                        {e}
+                        <br></br>
+                      </div>
+                    );
+                  })}
+                </Body>
 
                 <div>
                   {token ? (
@@ -361,6 +374,7 @@ export default PostDetail;
 
 const PostContatiner = styled.div`
   width: 1000px;
+  border-radius: 4px;
 
   height: auto;
   margin: 0 auto;
@@ -377,9 +391,10 @@ const Background = styled.div`
   position: relative;
 `;
 const Title = styled.div`
+  overflow-wrap: break-word;
   display: flex;
   width: 815px;
-  height: 65.859px;
+  padding-top: 50px;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -397,9 +412,7 @@ const Line = styled.div`
   background: #e3e3e3;
 `;
 const Body = styled.div`
-  white-space: pre-line;
-  display: flex;
-  margin-top: 40px;
+  margin-top: 20px;
   width: 850px;
 
   flex-shrink: 0;
@@ -407,10 +420,11 @@ const Body = styled.div`
   font-family: Roboto;
   font-size: 20px;
   font-weight: 400;
+  overflow-wrap: break-word;
 `;
 
 const Button = styled.button`
-  background-color: #c59900b5;
+  background-color: black;
   border: 0px;
   color: #fff;
   width: 100px;

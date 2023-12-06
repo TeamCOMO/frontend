@@ -29,7 +29,7 @@ function ApplyBtn(props) {
 export default ApplyBtn;
 
 const Button = styled.button`
-  background-color: #c59900b5;
+  background-color: black;
   border: 0px;
   color: #fff;
   width: 100px;
