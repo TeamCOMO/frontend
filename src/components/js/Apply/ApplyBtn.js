@@ -33,7 +33,7 @@ const Button = styled.button`
   border: 0px;
   color: #fff;
   width: 100px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   justify-content: center;

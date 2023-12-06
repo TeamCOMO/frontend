@@ -100,22 +100,6 @@ function PostingBox(e) {
   console.log(e.param, 'postingBox');
   return (
     <Box>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <NickName>{e.param?.nickname}</NickName>
-        {e.status == true ? (
-          <Link to={`/mypage/status/${postId}`}>
-            <Status>지원 현황 보기</Status>
-          </Link>
-        ) : (
-          ''
-        )}
-      </div>
       <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
         <FlexBox style={{ display: 'flex' }}>
           <Category>
@@ -126,11 +110,24 @@ function PostingBox(e) {
             )}
           </Category>
           <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
+          <div onClick={onHeartClick}>
+            {heart ? (
+              <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
+            ) : (
+              <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
+            )}
+          </div>
         </FlexBox>
 
         <Title>{e.param?.title}</Title>
 
-        <div style={{ display: 'flex' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '20px',
+          }}
+        >
           {e.param?.techs.map((e) => {
             return (
               <Tech>
@@ -142,6 +139,13 @@ function PostingBox(e) {
               </Tech>
             );
           })}
+          {e.status == true ? (
+            <Link to={`/mypage/status/${postId}`}>
+              <Status>지원 현황 보기</Status>
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
 
         <Line />
@@ -151,17 +155,12 @@ function PostingBox(e) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
+          marginTop: '10px',
         }}
       >
+        <WritingDate>{e.param?.nickname}</WritingDate>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
-        <div onClick={onHeartClick}>
-          {heart ? (
-            <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
-          ) : (
-            <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
-          )}
-        </div>
       </div>
     </Box>
   );
@@ -193,8 +192,6 @@ const Box = styled.div`
   margin-top: 40px;
 `;
 const Category = styled.div`
-  margin-top: 10px;
-
   width: 96px;
   height: 33px;
   display: flex;
@@ -208,11 +205,10 @@ const Category = styled.div`
 export const WritingDate = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
 `;
 const Tech = styled.div`
-  margin-top: 30px;
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
@@ -220,12 +216,11 @@ const Tech = styled.div`
   font-size: 16px;
 `;
 const Title = styled.div`
-  overflow: hidden;
-  white-space: wrap;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  margin-left: 10px;
   margin-top: 20px;
-  width: 250px;
-  height: 76px;
+  width: 230px;
+  height: 116px;
   color: #000;
 
   font-size: 16px;
@@ -248,7 +243,6 @@ const State = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-right: 20px;
 `;
 
 const ReadCount = styled.div`
@@ -266,6 +260,10 @@ const Status = styled.button`
   color: #fff;
   background-color: black;
   height: 30px;
+  &:hover {
+    box-shadow: 3px 3px 3px rgb(172, 172, 172), 3px 3px 3px rgb(237, 237, 237);
+    transition: 0.1s;
+  }
 `;
 const Logo = styled.img`
   width: 30px;

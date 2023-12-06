@@ -415,7 +415,7 @@ const Title = styled.div`
 
   color: #000;
   font-family: Big Shoulders Display;
-  font-size: 40px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
