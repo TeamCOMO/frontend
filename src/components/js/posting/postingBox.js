@@ -98,7 +98,15 @@ function PostingBox(e) {
   console.log(e.param, 'postingBox');
   return (
     <Box>
+      <NickName>{e.param?.nickname}</NickName>
       <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
+        {e.status == true ? (
+          <Link to={`/mypage/status/${postId}`}>
+            <div>신청 현황 보기</div>
+          </Link>
+        ) : (
+          ''
+        )}
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param?.category === 'Study' ? (
@@ -146,7 +154,7 @@ export default PostingBox;
 const NickName = styled.div`
   font-size: 20px;
   top: 0;
-  color: '#FFD339';
+  color: #ffd339;
 `;
 const FlexBox = styled.div`
   display: flex;
@@ -199,7 +207,7 @@ const Title = styled.div`
   text-overflow: ellipsis;
   margin-top: 20px;
   width: 250px;
-  height: 110px;
+  height: 90px;
   color: #000;
 
   font-size: 16px;

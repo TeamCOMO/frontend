@@ -1,24 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import style from "./Cateogory.module.css";
-import { categoryClickApi, viewPostApi } from "../../../Apis/postApi";
-import PostingBox from "./postingBox";
-import { postState } from "../../../recoils/Recoil";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from 'react';
+import { categoryClickApi, viewPostApi } from '../../../Apis/postApi';
+import { postState } from '../../../recoils/Recoil';
+import { useRecoilState } from 'recoil';
+import styled from '@emotion/styled';
 function CategoryBtn() {
-  const [clicked, setClicked] = useState("");
-  const category = ["전체", "Project", "Study"];
+  const [clicked, setClicked] = useState('');
+  const category = ['전체', 'Project', 'Study'];
   const [posts, setPosts] = useRecoilState(postState);
   useEffect(() => {
-    console.log(clicked);
-  }, [clicked]);
+    setClicked('전체');
+  }, []);
   useEffect(() => {
     console.log(posts);
   }, [posts]);
   const handleCategory = (e) => {
     setClicked(e.target.id);
     {
-      e.target.id == "전체"
+      e.target.id == '전체'
         ? viewPostApi(1)
             .then((res) => {
               console.log(res.data.posts);
@@ -37,22 +35,18 @@ function CategoryBtn() {
   };
   return (
     <div>
-      <div style={{ display: "flex", marginTop: "20px" }}>
+      <div style={{ display: 'flex', marginTop: '20px' }}>
         {category.map((e) => {
+          console.log(e, 'zz');
           return (
             <div>
-              <button
+              <Category
                 id={e}
                 onClick={handleCategory}
-                className={style.Btn}
-                style={
-                  e === clicked
-                    ? { background: "yellowgreen" }
-                    : { background: "#fff" }
-                }
+                style={e === clicked ? { color: 'black' } : { color: 'gray' }}
               >
-                {e}
-              </button>
+                {e == 'Project' ? '프로젝트' : e == 'Study' ? '스터디' : '전체'}
+              </Category>
             </div>
           );
         })}
@@ -61,3 +55,16 @@ function CategoryBtn() {
   );
 }
 export default CategoryBtn;
+
+const Category = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+  font-size: 30px;
+  font-weight: 700;
+  width: 120px;
+  height: 50px;
+`;

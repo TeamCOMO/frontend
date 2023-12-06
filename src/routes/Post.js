@@ -21,7 +21,7 @@ function Post() {
   const handlePageChange = (page) => {
     setPage(page);
   };
-  console.log(API);
+
   console.log(useRecoilValue(postState));
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function Post() {
           style={{ paddingTop: '30px' }}
         >
           <PostingBtn param="post" />
-          <h3 style={{ margin: '0 0 0 60px' }}>POSTING</h3>
+
           <div className={postStyle.postingBoxWrap}>
             <CategoryBtn />
             {useRecoilValue(postState).map((e) => {
