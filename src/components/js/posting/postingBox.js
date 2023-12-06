@@ -265,7 +265,7 @@ export const WritingDate = styled.div`
   font-family: Big Shoulders Display;
   font-size: 14px;
   font-weight: 400;
-  margin-left: 8vw;
+  margin-left: 7vw;
   margin-top: -2vh;
 `;
 export const Nickname = styled.div`

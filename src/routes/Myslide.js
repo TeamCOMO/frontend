@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // Swiper React 컴포넌트 임포트
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
@@ -15,7 +15,10 @@ const MySwiperComponent = () => {
   const API = process.env.REACT_APP_API_KEY;
   const token = sessionStorage.getItem('accessToken');
   const [post, setPost] = useState([]);
+  const swiperRef = useRef(null);
+
   console.log(API);
+
   useEffect(() => {
     axios
       .get(`${API}/api/v1/post`, {
@@ -36,35 +39,33 @@ const MySwiperComponent = () => {
 
   console.log(post[0]);
   return (
-    <Swiper
-      modules={[Pagination, Navigation]}
-      slidesPerView={3}
-      Navigation
-      pagination={{ clickable: true }}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>
-        <div style={{ marginLeft: '8vw' }}>
-          <PostingBox param={post[0]} />
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div style={{ marginLeft: '8vw' }}>
-          <PostingBox param={post[1]} />
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div style={{ marginLeft: '8vw' }}>
-          <PostingBox param={post[2]} />
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div style={{ marginLeft: '8vw' }}>
-          <PostingBox param={post[3]} />
-        </div>
-      </SwiperSlide>
-    </Swiper>
+    <>
+      <Swiper
+        modules={[Pagination, Navigation]}
+        slidesPerView={3}
+        navigation={true}
+        pagination={{
+          clickable: true,
+          el: '.swiper-pagination',
+          bulletClass: 'swiper-pagination-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active',
+        }}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+      >
+        {post.map(
+          (
+            item,
+            index // post 배열을 매핑하여 SwiperSlide 생성
+          ) => (
+            <SwiperSlide key={index} className='my-swiper-slide'>
+              <div style={{ marginLeft: `${3 - 10 * index}vw` }}>
+                <PostingBox param={item} />
+              </div>
+            </SwiperSlide>
+          )
+        )}
+      </Swiper>
+    </>
   );
 };
 
