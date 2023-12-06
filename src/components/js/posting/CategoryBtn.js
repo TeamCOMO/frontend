@@ -63,14 +63,7 @@ function CategoryBtn(props) {
 }
 export default CategoryBtn;
 
-const Category = styled.div`
-  @font-face {
-    font-family: 'Cafe24Dangdanghae';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff')
-      format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+export const Category = styled.div`
   font-family: 'Cafe24Dangdanghae';
   display: flex;
   justify-content: center;

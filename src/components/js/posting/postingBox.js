@@ -183,7 +183,7 @@ function PostingBox(e) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '20px',
+            marginBottom: '10px',
           }}
         >
           {e.param?.techs.map((e) => {

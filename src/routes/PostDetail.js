@@ -390,3 +390,11 @@ const Body = styled.div`
   font-size: 20px;
   font-weight: 700;
 `;
+const SubInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  font-size: 20px;
+  margin-left: 50px;
+  font-weight: 700;
+`;
