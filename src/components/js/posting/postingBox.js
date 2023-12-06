@@ -125,7 +125,7 @@ function PostingBox(e) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '20px',
+            marginBottom: '10px',
           }}
         >
           {e.param?.techs.map((e) => {
@@ -267,4 +267,5 @@ const Status = styled.button`
 `;
 const Logo = styled.img`
   width: 30px;
+  margin-top: 10px;
 `;

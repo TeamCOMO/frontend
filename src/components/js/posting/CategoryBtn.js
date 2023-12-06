@@ -3,6 +3,8 @@ import { categoryClickApi, viewPostApi } from '../../../Apis/postApi';
 import { postState } from '../../../recoils/Recoil';
 import { useRecoilState } from 'recoil';
 import styled from '@emotion/styled';
+import PostingBtn from './PostingBtn';
+
 function CategoryBtn() {
   const [clicked, setClicked] = useState('');
   const category = ['전체', 'Project', 'Study'];
@@ -35,7 +37,14 @@ function CategoryBtn() {
   };
   return (
     <div>
-      <div style={{ display: 'flex', marginTop: '20px' }}>
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '20px',
+          alignItems: 'center',
+          width: '1250px',
+        }}
+      >
         {category.map((e) => {
           console.log(e, 'zz');
           return (
@@ -50,20 +59,14 @@ function CategoryBtn() {
             </div>
           );
         })}
+        <PostingBtn param="post" />
       </div>
     </div>
   );
 }
 export default CategoryBtn;
 
-const Category = styled.div`
-  @font-face {
-    font-family: 'Cafe24Dangdanghae';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff')
-      format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+export const Category = styled.div`
   font-family: 'Cafe24Dangdanghae';
   display: flex;
   justify-content: center;

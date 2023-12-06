@@ -462,7 +462,3 @@ const SubInfo = styled.div`
   margin-left: 50px;
   font-weight: 700;
 `;
-const Heart = styled.div``;
-const Logo = styled.img`
-  height: 20px;
-`;

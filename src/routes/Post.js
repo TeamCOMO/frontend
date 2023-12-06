@@ -52,14 +52,14 @@ function Post() {
           className={postStyle.totalPostingBox}
           style={{ paddingTop: '30px', width: '1500px' }}
         >
-          <PostingBtn param="post" />
-
           <div className={postStyle.postingBoxWrap}>
             <CategoryBtn />
+
             {useRecoilValue(postState).map((e) => {
               return <PostingBox param={e} />;
             })}
           </div>
+
           <div className={postStyle.pagination}>
             <Pagination
               activePage={page}
