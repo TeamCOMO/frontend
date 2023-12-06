@@ -48,7 +48,7 @@ function Post() {
     <div style={{ overflowX: 'hidden' }}>
       <Nav />
 
-      <div className={postStyle.background} style={{ height: '130vh' }}>
+      <div className={postStyle.background} style={{ height: '150vh' }}>
         <div
           className={postStyle.totalPostingBox}
           style={{ paddingTop: '30px', width: '1500px' }}
