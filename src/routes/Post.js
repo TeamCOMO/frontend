@@ -10,6 +10,7 @@ import { viewPostApi } from '../Apis/postApi';
 import CategoryBtn from '../components/js/posting/CategoryBtn';
 import { postState } from '../recoils/Recoil';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 function Post() {
   const API = process.env.REACT_APP_API_KEY;
   const token = sessionStorage.accessToken;

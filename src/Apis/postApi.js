@@ -140,6 +140,13 @@ export const getCommentApi = (page) => {
   });
 };
 
+export const getScrapApi = (page) => {
+  return axios.get(`${API}/api/v1/interest?${page}`, {
+    headers: { Authorization: token },
+    'Content-Type': 'application/json',
+  });
+};
+
 export const getMypageInfo = () => {
   token = sessionStorage.accessToken;
 
