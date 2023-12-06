@@ -205,23 +205,21 @@ function PostingBox(e) {
             ''
           )}
         </div>
-
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
       </Link>
-
       <Line />
-      <FlexBox style={{ marginTop: '20px' }}></FlexBox>
+      <FlexBox style={{ marginTop: '5px' }}></FlexBox>
 
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
-          marginTop: '10px',
+          //marginTop: '10px',
         }}
       >
-        <WritingDate>{e.param?.nickname}</WritingDate>
-        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+        <Nickname>{e.param?.nickname}</Nickname>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
         <div onClick={onHeartClick}>
           {heart ? (
@@ -242,11 +240,6 @@ function PostingBox(e) {
 
 export default PostingBox;
 
-const NickName = styled.div`
-  font-size: 20px;
-  top: 0;
-  color: #ffd339;
-`;
 const FlexBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -271,12 +264,19 @@ const Category = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 90px;
   background: #d9d9d9;
 `;
 
 export const WritingDate = styled.div`
+  color: #9a9a9a;
+  font-family: Big Shoulders Display;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 8vw;
+  margin-top: -2vh;
+`;
+export const Nickname = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
   font-size: 14px;
