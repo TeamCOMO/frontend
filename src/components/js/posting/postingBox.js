@@ -114,6 +114,7 @@ function PostingBox(e) {
         console.log('하트증가성공:', res.data);
         <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />;
       })
+
       .catch((error) => {
         console.error('하트 클릭에 실패했습니다:', error);
       });
@@ -216,24 +217,34 @@ function PostingBox(e) {
       >
         <Nickname>{e.param?.nickname}</Nickname>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
-        <div onClick={onHeartClick}>
+        <HeartDiv onClick={onHeartClick}>
           {heart ? (
             <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
           ) : (
             <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
-        </div>
-        <div onClick={onScrapClick}>
+        </HeartDiv>
+        <ScrapDiv onClick={onScrapClick}>
           <BsBookmarkPlusFill
             style={{ fontSize: '30px', marginleft: '50px', color: 'gray' }}
           />
-        </div>
+        </ScrapDiv>
       </div>
     </Box>
   );
 }
 
 export default PostingBox;
+const HeartDiv = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const ScrapDiv = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const Click = styled.div`
   &:hover {
     cursor: pointer;
