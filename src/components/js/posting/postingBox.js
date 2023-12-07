@@ -168,13 +168,6 @@ function PostingBox(e) {
             )}
           </Category>
           <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
-          <div onClick={onHeartClick}>
-            {heart ? (
-              <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
-            ) : (
-              <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
-            )}
-          </div>
         </FlexBox>
 
         <Title>{e.param?.title}</Title>
@@ -288,14 +281,18 @@ const Title = styled.div`
   overflow-wrap: break-word;
   margin-left: 10px;
   margin-top: 20px;
-  width: 230px;
-  height: 116px;
+  width: 250px;
+  height: 76px;
   color: #000;
 
   font-size: 16px;
   font-weight: 900;
 `;
-
+const Nickname = styled.div`
+  font-size: 20px;
+  top: 0;
+  color: #ffd339;
+`;
 const Text = styled.div`
   margin-top: 10px;
   color: #000;
