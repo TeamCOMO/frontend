@@ -21,7 +21,12 @@ function Mypage() {
         console.log(err);
       });
   }, []);
-
+  const handleLink = () => {
+    window.location.href = `https:${info.github_url}`;
+  };
+  const handleLinkVelog = () => {
+    window.location.href = `https:${info.blog_url}`;
+  };
   console.log(info);
 
   return (
@@ -37,34 +42,36 @@ function Mypage() {
                 </div>
                 <Info>{info.email}</Info>
               </div>
-              <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 {info.github_url == '' ? (
                   ''
                 ) : (
-                  <Link to={info.github_url}>
+                  <Logo onClick={handleLink}>
                     <img src={github}></img>
-                  </Link>
+                  </Logo>
                 )}
 
                 {info.blog_url == '' ? (
                   ''
                 ) : (
-                  <img style={{ marginLeft: '20px' }} src={velog}></img>
+                  <Logo onClick={handleLinkVelog}>
+                    <img style={{ marginLeft: '20px' }} src={velog}></img>
+                  </Logo>
                 )}
               </div>
               <UserPatchBtn info={info} />
             </div>
 
-            <Link to='/mypage/write' style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/write" style={{ textDecoration: 'none' }}>
               <MiniBox>내가 쓴 글</MiniBox>
             </Link>
-            <Link to='/mypage/comment' style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/comment" style={{ textDecoration: 'none' }}>
               <MiniBox>댓글 단 게시물</MiniBox>
             </Link>
-            <Link to='/mypage/applied' style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
-            <Link to='/mypage/scraped' style={{ textDecoration: 'none' }}>
+            <Link to="/mypage/scraped" style={{ textDecoration: 'none' }}>
               <MiniBox>스크랩한 글</MiniBox>
             </Link>
           </div>
@@ -84,7 +91,9 @@ const Box = styled.div`
   border-radius: 20px;
   margin: 0 auto;
 `;
-
+const Logo = styled.div`
+  cursor: pointer;
+`;
 const MiniBox = styled.div`
   display: flex;
   width: 350px;
