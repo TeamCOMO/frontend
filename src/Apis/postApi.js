@@ -3,19 +3,19 @@ import axios from 'axios';
 const API = process.env.REACT_APP_API_KEY;
 let token = sessionStorage.accessToken;
 
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  function (error) {
-    if (error.response.status == 403) {
-      alert('로그인이 필요합니다.');
-      window.location.href = '/signin';
-    }
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   function (error) {
+//     if (error.response.status == 403) {
+//       alert('로그인이 필요합니다.');
+//       window.location.href = '/signin';
+//     }
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 export const viewPostApi = (page) => {
   return axios.get(`${API}/api/v1/post`, {
     params: { page },
@@ -135,6 +135,13 @@ export const getWriteApi = (page) => {
 
 export const getCommentApi = (page) => {
   return axios.get(`${API}/api/v1/post/comment?${page}`, {
+    headers: { Authorization: token },
+    'Content-Type': 'application/json',
+  });
+};
+
+export const getScrapApi = (page) => {
+  return axios.get(`${API}/api/v1/interest?${page}`, {
     headers: { Authorization: token },
     'Content-Type': 'application/json',
   });

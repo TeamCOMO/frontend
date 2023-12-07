@@ -1,24 +1,96 @@
 import { useEffect, useState, useParams } from 'react';
 import boxStyle from './boxStyle.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
+import { BsBookmarkPlusFill } from 'react-icons/bs';
 import axios from 'axios';
 import reactLogo from '../../img/React-icon.svg';
 import springLogo from '../../img/springLogo.svg';
 
 function PostingBox(e) {
-  console.log(e);
   const postId = e.param?.id;
-
+  const navigate = useNavigate();
   let accessToken = sessionStorage.accessToken;
-  const token = localStorage.accessToken;
   const [heart, setHeart] = useState(false); //heart 값 초기값 false 설정
+  const [scrap, setScrap] = useState(false);
   const API = process.env.REACT_APP_API_KEY;
   const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
+  const [interestId, setInterestId] = useState(null);
+
+  const onScrapClick = () => {
+    if (!scrap) {
+      handleScrapClick();
+      setScrap(true); // 상태를 true로 변경
+    } else {
+      handleScrapDeleteClick();
+      setScrap(false); // 상태를 false로 변경
+    }
+  };
+
+  const handleScrapClick = () => {
+    setScrap(true);
+    console.log('스크랩 함수 안에 도착함');
+    const confirmScrap = window.confirm('스크랩 하겠습니까?');
+    if (confirmScrap) {
+      axios
+        .post(
+          `${API}/api/v1/interest`,
+          {
+            postId: postId,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: accessToken,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('accessToken', res.data);
+          console.log('스크랩 성공:', res.data);
+          setScrap(true);
+          setInterestId(res.data.interestId); // Assuming res.data.interestId is the correct path to the interestId
+        })
+        .catch((error) => {
+          console.error('스크랩에 실패했습니다:', error);
+        });
+    } else {
+      console.log('스크랩 취소');
+    }
+  };
+
+  const handleScrapDeleteClick = () => {
+    //event.stopPropagation();
+    const confirmScrap = window.confirm(
+      '이미 스크랩 된 글입니다.\n스크랩을 취소 하겠습니까?'
+    );
+    if (confirmScrap) {
+      console.log('스크랩 취소 함수 안에 도착함');
+      axios
+        .delete(`${API}/api/v1/interest/${interestId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          localStorage.setItem('accessToken', res.data);
+          setScrap(false);
+          console.log("스크랩'취소'에 성공 : ", res.data);
+          setScrap(false);
+          setInterestId(null); // Reset interestId after successful delete
+        })
+        .catch((error) => {
+          console.error("스크랩'취소' 실패", error);
+        });
+    } else {
+    }
+  };
 
   const handleHeartClick = () => {
     console.log('handleHeartClick 함수 안에 도착함');
@@ -49,6 +121,7 @@ function PostingBox(e) {
 
   const handleHeartDeleteClick = () => {
     console.log('하트취소 함수 안에 도착함');
+    //event.stopPropagation();
     axios
       .delete(`${API}/api/v1/post/${postId}/heart`, {
         headers: {
@@ -76,47 +149,16 @@ function PostingBox(e) {
       setHeart(false); // 상태를 false로 변경
     }
   };
-  {
-    /*}
-  const handleHeart = (heart) => {
-    console.log("handleHeart 함수 안에 들어옴");
-    //console.log("setHeart(!heart);실행");
-    if (!heart) {
-      //하트가 안 눌러져 있을 때 등록
-      handleHeartClick(); // axios 통신 실행
-      console.log("handleHeartClick(); 실행 성공");
-      setHeart(heart);
-    } else if (heart) {
-      //하트 눌러져 있을때 취소
-      handleHeartDeleteClick(); // axios 통신 실행
-      console.log("handleHeartDeleteClick(); 실행 성공");
-      setHeart(!heart);
-    } else {
-      console.log("handleHeart 정상작동 실패");
-    }
-  };*/
-  }
 
-  console.log(e.param, 'postingBox');
+  const handleLink = () => {
+    if (accessToken == '') {
+      alert('로그인이 필요한 서비스입니다.');
+      navigate('/signin');
+    } else navigate(`/post/${postId}`);
+  };
   return (
     <Box>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <NickName>{e.param?.nickname}</NickName>
-        {e.status == true ? (
-          <Link to={`/mypage/status/${postId}`}>
-            <Status>지원 현황 보기</Status>
-          </Link>
-        ) : (
-          ''
-        )}
-      </div>
-      <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
+      <Click onClick={handleLink}>
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param?.category === 'Study' ? (
@@ -130,7 +172,13 @@ function PostingBox(e) {
 
         <Title>{e.param?.title}</Title>
 
-        <div style={{ display: 'flex' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '10px',
+          }}
+        >
           {e.param?.techs.map((e) => {
             return (
               <Tech>
@@ -142,18 +190,29 @@ function PostingBox(e) {
               </Tech>
             );
           })}
+          {e.status == true ? (
+            <Link to={`/mypage/status/${postId}`}>
+              <Status>지원 현황 보기</Status>
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
-
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
-      </Link>
+      </Click>
+      <Line />
+      <FlexBox style={{ marginTop: '5px' }}></FlexBox>
+
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
+          marginTop: '5px',
         }}
       >
-        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+        <Nickname>{e.param?.nickname}</Nickname>
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
         <div onClick={onHeartClick}>
           {heart ? (
@@ -162,17 +221,21 @@ function PostingBox(e) {
             <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
         </div>
+        <div onClick={onScrapClick}>
+          <BsBookmarkPlusFill
+            style={{ fontSize: '30px', marginleft: '50px', color: 'gray' }}
+          />
+        </div>
       </div>
     </Box>
   );
 }
 
 export default PostingBox;
-
-const NickName = styled.div`
-  font-size: 20px;
-  top: 0;
-  color: #ffd339;
+const Click = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const FlexBox = styled.div`
   display: flex;
@@ -193,26 +256,29 @@ const Box = styled.div`
   margin-top: 40px;
 `;
 const Category = styled.div`
-  margin-top: 10px;
-
   width: 96px;
   height: 33px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 90px;
   background: #d9d9d9;
 `;
-
 export const WritingDate = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 7vw;
+  margin-top: -2vh;
+`;
+export const Nickname = styled.div`
+  color: #9a9a9a;
+  font-family: Big Shoulders Display;
+  font-size: 14px;
   font-weight: 400;
 `;
 const Tech = styled.div`
-  margin-top: 30px;
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
@@ -220,12 +286,11 @@ const Tech = styled.div`
   font-size: 16px;
 `;
 const Title = styled.div`
-  overflow: hidden;
-  white-space: wrap;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  margin-left: 10px;
   margin-top: 20px;
-  width: 250px;
-  height: 76px;
+  width: 230px;
+  height: 116px;
   color: #000;
 
   font-size: 16px;
@@ -248,7 +313,6 @@ const State = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-right: 20px;
 `;
 
 const ReadCount = styled.div`
@@ -266,7 +330,12 @@ const Status = styled.button`
   color: #fff;
   background-color: black;
   height: 30px;
+  &:hover {
+    box-shadow: 3px 3px 3px rgb(172, 172, 172), 3px 3px 3px rgb(237, 237, 237);
+    transition: 0.1s;
+  }
 `;
 const Logo = styled.img`
   width: 30px;
+  margin-top: 10px;
 `;

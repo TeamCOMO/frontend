@@ -1,6 +1,6 @@
-import Nav from "../components/js/Nav";
-import styles from "../components/css/Maincss.module.css";
-import Myslide from "./Myslide";
+import Nav from '../components/js/Nav';
+import styles from '../components/css/Maincss.module.css';
+import Myslide from './Myslide';
 
 function Main() {
   return (
@@ -22,13 +22,16 @@ function Main() {
       <Nav />
 
       <div className={styles.background_image}>
-        <h1 class="animate__animated animate__fadeInLeftBig">
+        <div class="animate__animated animate__fadeInLeftBig">
           <div className={styles.explain}>
             <h1>welcome to COMO</h1>
-            <span>This is some text.</span>
+            <span>
+              환영합니다! 함께 성장하고 협력하는 개발자들을 위한 공간에 오신
+              것을 환영합니다
+            </span>
           </div>
           <Myslide></Myslide>
-        </h1>
+        </div>
       </div>
     </div>
   );
