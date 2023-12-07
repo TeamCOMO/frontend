@@ -283,7 +283,7 @@ const Title = styled.div`
   overflow-wrap: break-word;
   margin-left: 10px;
   margin-top: 20px;
-  width: 250px;
+  width: 230px;
   height: 76px;
   color: #000;
   overflow-y: hidden;
