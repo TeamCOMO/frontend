@@ -293,18 +293,27 @@ function PostDetail() {
                 <div>
                   {token ? (
                     <div>
-                      <input
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="댓글을 입력하세요..."
-                        className={style.inputs}
+                      <Line
+                        style={{ marginTop: '50px', marginBottom: '40px' }}
                       />
-                      <button
-                        onClick={handleComment}
-                        className={style.ActionButton}
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          marginBottom: '40px',
+                        }}
                       >
-                        입력 완료
-                      </button>
+                        <input
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          placeholder="댓글을 입력하세요..."
+                          className={style.inputs}
+                        />
+                        <Button style={{ margin: 0 }} onClick={handleComment}>
+                          입력 완료
+                        </Button>
+                      </div>
                     </div>
                   ) : (
                     <p>
@@ -313,8 +322,8 @@ function PostDetail() {
                   )}
                 </div>
                 <div>
-                  <div>
-                    <h3>댓글:</h3>
+                  <div style={{ paddingBottom: '50px' }}>
+                    <h3 style={{ margin: 0 }}>댓글</h3>
                     {comments.map((singleComment, index) => (
                       <div key={index} className={style.commentContainer}>
                         {commentId === singleComment.id ? (
@@ -372,7 +381,6 @@ function PostDetail() {
                     ))}
                   </div>
                 </div>
-                <Line />
               </PostDetailContainer>
             </PostContatiner>
           </div>
