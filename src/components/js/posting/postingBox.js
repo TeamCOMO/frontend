@@ -286,14 +286,15 @@ const Title = styled.div`
   width: 250px;
   height: 76px;
   color: #000;
-
+  overflow-y: hidden;
+  text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 900;
 `;
 const Nickname = styled.div`
   font-size: 20px;
   top: 0;
-  color: #ffd339;
+  color: black;
 `;
 const Text = styled.div`
   margin-top: 10px;

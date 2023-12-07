@@ -289,14 +289,7 @@ function PostDetail() {
                     );
                   })}
                 </Body>
-                <div>
-                  <span>카테고리 : </span>
-                  <span>{postInfo.category}</span>
-                </div>
-                <div>
-                  <span>기술스택 : </span>
-                  <span>{postInfo.techs}</span>
-                </div>
+
                 <div>
                   {token ? (
                     <div>
