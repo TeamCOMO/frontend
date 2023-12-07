@@ -158,18 +158,25 @@ function PostingBox(e) {
   };
   return (
     <Box>
-      <Click onClick={handleLink}>
-        <FlexBox style={{ display: 'flex' }}>
-          <Category>
-            {e.param?.category === 'Study' ? (
-              <img src={studyLogo} />
-            ) : (
-              <img src={projectLogo} />
-            )}
-          </Category>
-          <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
-        </FlexBox>
+      <FlexBox style={{ display: 'flex' }}>
+        <Category>
+          {e.param?.category === 'Study' ? (
+            <img src={studyLogo} />
+          ) : (
+            <img src={projectLogo} />
+          )}
+        </Category>
+        {e.status == true ? (
+          <Link to={`/mypage/status/${postId}`}>
+            <Status>지원 현황 보기</Status>
+          </Link>
+        ) : (
+          ''
+        )}
+        <State>{e.param?.state === 'Active' ? '모집중' : '모집종료'}</State>
+      </FlexBox>
 
+      <Click onClick={handleLink}>
         <Title>{e.param?.title}</Title>
 
         <div
@@ -190,18 +197,13 @@ function PostingBox(e) {
               </Tech>
             );
           })}
-          {e.status == true ? (
-            <Link to={`/mypage/status/${postId}`}>
-              <Status>지원 현황 보기</Status>
-            </Link>
-          ) : (
-            ''
-          )}
         </div>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
       </Click>
+
       <Line />
+
       <FlexBox style={{ marginTop: '5px' }}></FlexBox>
 
       <div
