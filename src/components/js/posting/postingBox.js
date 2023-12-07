@@ -1,6 +1,6 @@
 import { useEffect, useState, useParams } from 'react';
 import boxStyle from './boxStyle.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import studyLogo from '../../../components/img/studyLogo.svg';
 import projectLogo from '../../../components/img/projectLogo.svg';
@@ -12,18 +12,14 @@ import reactLogo from '../../img/React-icon.svg';
 import springLogo from '../../img/springLogo.svg';
 
 function PostingBox(e) {
-  console.log(e);
   const postId = e.param?.id;
-
+  const navigate = useNavigate();
   let accessToken = sessionStorage.accessToken;
-  const token = localStorage.accessToken;
   const [heart, setHeart] = useState(false); //heart 값 초기값 false 설정
   const [scrap, setScrap] = useState(false);
   const API = process.env.REACT_APP_API_KEY;
   const [heartCount, setHeartCount] = useState(0); // 하트 수 저장하는 상태
   const [interestId, setInterestId] = useState(null);
-
-  console.log('여기!!!: ' + accessToken);
 
   const onScrapClick = () => {
     if (!scrap) {
@@ -83,7 +79,6 @@ function PostingBox(e) {
           },
         })
         .then((res) => {
-          console.log(res);
           localStorage.setItem('accessToken', res.data);
           setScrap(false);
           console.log("스크랩'취소'에 성공 : ", res.data);
@@ -155,10 +150,15 @@ function PostingBox(e) {
     }
   };
 
-  console.log(e.param, 'postingBox');
+  const handleLink = () => {
+    if (accessToken == '') {
+      alert('로그인이 필요한 서비스입니다.');
+      navigate('/signin');
+    } else navigate(`/post/${postId}`);
+  };
   return (
     <Box>
-      <Link to={`/post/${postId}`} style={{ textDecoration: 'none' }}>
+      <Click onClick={handleLink}>
         <FlexBox style={{ display: 'flex' }}>
           <Category>
             {e.param?.category === 'Study' ? (
@@ -200,7 +200,7 @@ function PostingBox(e) {
         </div>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
-      </Link>
+      </Click>
       <Line />
       <FlexBox style={{ marginTop: '5px' }}></FlexBox>
 
@@ -232,7 +232,11 @@ function PostingBox(e) {
 }
 
 export default PostingBox;
-
+const Click = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const FlexBox = styled.div`
   display: flex;
   justify-content: space-between;

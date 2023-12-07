@@ -235,7 +235,17 @@ function PostDetail() {
                 </div>
               </div>
               <Line />
-              <Body>{postInfo.body}</Body>
+              <Body>
+                {postInfo.body?.split('\n').map((e) => {
+                  console.log(e);
+                  return (
+                    <div>
+                      {e}
+                      <br></br>
+                    </div>
+                  );
+                })}
+              </Body>
               <div>
                 <span>카테고리 : </span>
                 <span>{postInfo.category}</span>
@@ -250,7 +260,7 @@ function PostDetail() {
                     <input
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
-                      placeholder='댓글을 입력하세요...'
+                      placeholder="댓글을 입력하세요..."
                       className={style.inputs}
                     />
                     <button
@@ -262,7 +272,7 @@ function PostDetail() {
                   </div>
                 ) : (
                   <p>
-                    <Link to='/signin'>로그인</Link>을 해야합니다.
+                    <Link to="/signin">로그인</Link>을 해야합니다.
                   </p>
                 )}
               </div>
@@ -274,10 +284,10 @@ function PostDetail() {
                       {commentId === singleComment.id ? (
                         <div>
                           <input
-                            type='text'
+                            type="text"
                             value={editingComment}
                             onChange={(e) => setEditingComment(e.target.value)}
-                            placeholder='댓글 수정...'
+                            placeholder="댓글 수정..."
                             className={style.commentEditInput} // Added class for styling
                           />
                           <button
