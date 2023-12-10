@@ -79,6 +79,7 @@ function PostingBox(e) {
           },
         })
         .then((res) => {
+
           localStorage.setItem('accessToken', res.data);
           setScrap(false);
           console.log("스크랩'취소'에 성공 : ", res.data);
@@ -159,6 +160,7 @@ function PostingBox(e) {
   };
   return (
     <Box>
+
       <FlexBox style={{ display: 'flex' }}>
         <Category>
           {e.param?.category === 'Study' ? (
@@ -198,9 +200,17 @@ function PostingBox(e) {
               </Tech>
             );
           })}
+          {e.status == true ? (
+            <Link to={`/mypage/status/${postId}`}>
+              <Status>지원 현황 보기</Status>
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
+
       </Click>
 
       <Line />
@@ -223,18 +233,21 @@ function PostingBox(e) {
           ) : (
             <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
+
         </HeartDiv>
         <ScrapDiv onClick={onScrapClick}>
           <BsBookmarkPlusFill
             style={{ fontSize: '30px', marginleft: '50px', color: 'gray' }}
           />
         </ScrapDiv>
+ 
       </div>
     </Box>
   );
 }
 
 export default PostingBox;
+
 const HeartDiv = styled.div`
   &:hover {
     cursor: pointer;
@@ -295,6 +308,7 @@ const Title = styled.div`
   margin-left: 10px;
   margin-top: 20px;
   width: 230px;
+
   height: 76px;
   color: #000;
   overflow-y: hidden;

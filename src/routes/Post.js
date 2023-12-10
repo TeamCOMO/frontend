@@ -10,6 +10,7 @@ import { viewPostApi } from '../Apis/postApi';
 import CategoryBtn from '../components/js/posting/CategoryBtn';
 import { postState } from '../recoils/Recoil';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { useNavigationType } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
@@ -67,7 +68,9 @@ function Post() {
           style={{ paddingTop: '30px', width: '1500px' }}
         >
           <div className={postStyle.postingBoxWrap}>
+
             <CategoryBtn setPage={setPage} />
+
 
             {useRecoilValue(postState).map((e) => {
               return <PostingBox param={e} />;

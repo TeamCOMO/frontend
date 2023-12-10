@@ -21,6 +21,7 @@ function Mypage() {
         console.log(err);
       });
   }, []);
+
   const handleLink = () => {
     window.location.href = `https:${info.github_url}`;
   };
@@ -71,6 +72,7 @@ function Mypage() {
             <Link to="/mypage/applied" style={{ textDecoration: 'none' }}>
               <MiniBox>지원한 글</MiniBox>
             </Link>
+
             <Link to="/mypage/scraped" style={{ textDecoration: 'none' }}>
               <MiniBox>스크랩한 글</MiniBox>
             </Link>

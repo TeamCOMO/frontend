@@ -199,6 +199,7 @@ function PostDetail() {
     <div>
       <Nav />
 
+
       <Background
         className={postStyle.background}
         style={{ paddingTop: '60px', paddingBottom: '60px' }}
@@ -316,11 +317,10 @@ function PostDetail() {
                       </div>
                     </div>
                   ) : (
-                    <p>
-                      <Link to="/signin">로그인</Link>을 해야합니다.
-                    </p>
+                    <ApplyBtn postId={postingId}></ApplyBtn>
                   )}
                 </div>
+
                 <div>
                   <div style={{ paddingBottom: '50px' }}>
                     <h3 style={{ margin: 0 }}>댓글</h3>
@@ -380,7 +380,68 @@ function PostDetail() {
                       </div>
                     ))}
                   </div>
+                ) : (
+                  <p>
+                    <Link to='/signin'>로그인</Link>을 해야합니다.
+                  </p>
+                )}
+              </div>
+              <div>
+                <div>
+                  <h3>댓글:</h3>
+                  {comments.map((singleComment, index) => (
+                    <div key={index} className={style.commentContainer}>
+                      {commentId === singleComment.id ? (
+                        <div>
+                          <input
+                            type='text'
+                            value={editingComment}
+                            onChange={(e) => setEditingComment(e.target.value)}
+                            placeholder='댓글 수정...'
+                            className={style.commentEditInput} // Added class for styling
+                          />
+                          <button
+                            onClick={() => handleCommentUpdate(singleComment)}
+                            className={style.ActionButton} // Added class for styling
+                          >
+                            수정 완료
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <p className={style.commentBody}>
+                            {singleComment.body}
+                          </p>
+                          <p className={style.commentNickname}>
+                            {singleComment.nickname}
+                          </p>
+                          <p className={style.commentTime}>
+                            {singleComment.createdTime}
+                          </p>
+                          {singleComment.nickname === nicknameFromToken && (
+                            <>
+                              <button
+                                onClick={() => handleEditComment(singleComment)}
+                                className={style.ActionButton} // Added class for styling
+                              >
+                                수정
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleDeleteComment(singleComment.id)
+                                }
+                                className={style.ActionButton} // Added class for styling
+                              >
+                                삭제
+                              </button>
+                            </>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </div>
+
               </PostDetailContainer>
             </PostContatiner>
           </div>
@@ -393,6 +454,7 @@ export default PostDetail;
 
 const PostContatiner = styled.div`
   width: 1000px;
+
 
   margin: 0 auto;
   background-color: #fff;
@@ -428,6 +490,7 @@ const Line = styled.div`
   background: #e3e3e3;
 `;
 const Body = styled.div`
+
   margin-top: 40px;
   width: 850px;
 
@@ -435,36 +498,5 @@ const Body = styled.div`
   color: #000;
   font-family: Roboto;
   font-size: 20px;
-  font-weight: 400;
-  overflow-wrap: break-word;
-`;
-
-const Button = styled.button`
-  background-color: black;
-  border: 0px;
-  color: #fff;
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const SubTitle = styled(WritingDate)`
-  font-size: 20px;
   font-weight: 700;
-`;
-const SubInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 120px;
-  font-size: 20px;
-  margin-left: 50px;
-  font-weight: 700;
-`;
-const Heart = styled.div``;
-const Logo = styled.img`
-  height: 20px;
 `;

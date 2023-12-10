@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import styled from '@emotion/styled';
 import PostingBtn from './PostingBtn';
 
+
 function CategoryBtn(props) {
   const [clicked, setClicked] = useState('');
   const category = ['전체', 'Project', 'Study'];
@@ -56,6 +57,7 @@ function CategoryBtn(props) {
             </div>
           );
         })}
+
         <PostingBtn param="post" />
       </div>
     </div>
