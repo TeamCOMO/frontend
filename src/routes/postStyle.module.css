@@ -52,7 +52,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: cadetblue;
 }
 .pagination li.active {
   background-color: gray;
