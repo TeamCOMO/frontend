@@ -183,11 +183,13 @@ export default PostingForm;
 const PostingBtn = styled.button`
   background-color: black;
   color: white;
+  font-size: 14px;
 `;
 const Add = styled.button`
   background-color: black;
   color: white;
   margin-top: 5px;
+  font-size: 14px;
 `;
 const Title = styled.input`
   width: 1000px;
@@ -213,7 +215,8 @@ const TechBox = styled.div`
   align-items: center;
   width: 132px;
   height: 30px;
-  background-color: aliceblue;
+  background-color: black;
+  color: white;
 `;
 const Delete = styled.div`
   &:hover {

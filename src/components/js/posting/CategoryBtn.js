@@ -5,18 +5,17 @@ import { useRecoilState } from 'recoil';
 import styled from '@emotion/styled';
 import PostingBtn from './PostingBtn';
 
-function CategoryBtn() {
+function CategoryBtn(props) {
   const [clicked, setClicked] = useState('');
   const category = ['전체', 'Project', 'Study'];
   const [posts, setPosts] = useRecoilState(postState);
   useEffect(() => {
     setClicked('전체');
   }, []);
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+
   const handleCategory = (e) => {
     setClicked(e.target.id);
+    props.setPage(1);
     {
       e.target.id == '전체'
         ? viewPostApi(1)
@@ -29,7 +28,6 @@ function CategoryBtn() {
             })
         : categoryClickApi(e.target.id, 1)
             .then((res) => {
-              console.log(res.data.posts);
               setPosts(res.data.posts);
             })
             .catch((err) => console.log(err));
@@ -46,7 +44,6 @@ function CategoryBtn() {
         }}
       >
         {category.map((e) => {
-          console.log(e, 'zz');
           return (
             <div>
               <Category
@@ -59,6 +56,7 @@ function CategoryBtn() {
             </div>
           );
         })}
+
         <PostingBtn param='post' />
       </div>
     </div>

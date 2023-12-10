@@ -27,8 +27,7 @@ function ApplyBtn(props) {
 }
 
 export default ApplyBtn;
-
-const Button = styled.button`
+export const Button = styled.button`
   background-color: black;
   border: 0px;
   color: #fff;
