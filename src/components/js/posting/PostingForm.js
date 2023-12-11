@@ -88,16 +88,16 @@ function PostingForm(param) {
         <Title
           value={postInfo.title}
           onChange={handlePostInfo}
-          id="title"
-          placeholder="제목"
+          id='title'
+          placeholder='제목'
         ></Title>
       </div>
       <div>
         <input
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           onChange={handlePostInfo}
-          id="image"
+          id='image'
           style={{ marginTop: '30px' }}
         ></input>
         <hr></hr>
@@ -106,8 +106,8 @@ function PostingForm(param) {
         <textarea
           value={postInfo.body}
           onChange={handlePostInfo}
-          id="body"
-          placeholder="본문"
+          id='body'
+          placeholder='본문'
           className={style.textarea}
           style={{ width: '1000px', height: '400px', borderRadius: '5px' }}
         ></textarea>
@@ -116,8 +116,8 @@ function PostingForm(param) {
           <Input
             value={postInfo.category}
             onChange={handlePostInfo}
-            id="category"
-            placeholder="카테고리"
+            id='category'
+            placeholder='카테고리'
           >
             <option value={'Study'}>스터디</option>
             <option value={'Project'}>프로젝트</option>
@@ -126,7 +126,7 @@ function PostingForm(param) {
           <div>스택 </div>
 
           <div style={{ display: 'flex' }}>
-            <Input onChange={handleTech} id="techs" placeholder="기술스택">
+            <Input onChange={handleTech} id='techs' placeholder='기술스택'>
               <option value={'React'}>React</option>
               <option value={'Spring'}>Spring</option>
             </Input>

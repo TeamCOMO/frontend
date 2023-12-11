@@ -79,7 +79,6 @@ function PostingBox(e) {
           },
         })
         .then((res) => {
-
           localStorage.setItem('accessToken', res.data);
           setScrap(false);
           console.log("스크랩'취소'에 성공 : ", res.data);
@@ -160,7 +159,6 @@ function PostingBox(e) {
   };
   return (
     <Box>
-
       <FlexBox style={{ display: 'flex' }}>
         <Category>
           {e.param?.category === 'Study' ? (
@@ -210,7 +208,6 @@ function PostingBox(e) {
         </div>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
-
       </Click>
 
       <Line />
@@ -233,14 +230,12 @@ function PostingBox(e) {
           ) : (
             <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
-
         </HeartDiv>
         <ScrapDiv onClick={onScrapClick}>
           <BsBookmarkPlusFill
             style={{ fontSize: '30px', marginleft: '50px', color: 'gray' }}
           />
         </ScrapDiv>
- 
       </div>
     </Box>
   );
@@ -295,6 +290,15 @@ export const WritingDate = styled.div`
   font-family: Big Shoulders Display;
   font-size: 14px;
   font-weight: 400;
+  margin-left: 7vw;
+  margin-top: -2vh;
+`;
+export const Nickname = styled.div`
+  color: #9a9a9a;
+  font-family: Big Shoulders Display;
+  font-size: 14px;
+
+  font-weight: 400;
 `;
 const Tech = styled.div`
   margin-left: 10px;
@@ -316,11 +320,7 @@ const Title = styled.div`
   font-size: 16px;
   font-weight: 900;
 `;
-const Nickname = styled.div`
-  font-size: 20px;
-  top: 0;
-  color: black;
-`;
+
 const Text = styled.div`
   margin-top: 10px;
   color: #000;

@@ -6,12 +6,11 @@ function PostingBtn(param) {
   return (
     <div style={{ marginLeft: 'auto' }}>
       {param.param === 'post' ? (
-
-        <Link to="/posting" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to='/posting' style={{ textDecoration: 'none', color: 'black' }}>
           <Category>글쓰기</Category>
         </Link>
       ) : (
-        <Link to="/post" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to='/post' style={{ textDecoration: 'none', color: 'black' }}>
           <Category>뒤로가기</Category>
         </Link>
       )}

@@ -1,9 +1,7 @@
 .swiper-container {
-  /* 기존 스타일 유지하면서 padding-bottom을 추가하여 점들을 아래로 내립니다. */
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 }
-
-.swiper-pagination-bullet {
+s .swiper-pagination-bullet {
   width: 10px; /* Pagination 점의 너비 */
   height: 10px; /* Pagination 점의 높이 */
   background-color: #fff; /* Pagination 점의 색상 */
@@ -12,4 +10,8 @@
 
 .swiper-pagination-bullet-active {
   background-color: #000; /* 활성 Pagination 점의 색상 */
+}
+
+.swpier-wrapper {
+  transition-timing-function: linear;
 }
