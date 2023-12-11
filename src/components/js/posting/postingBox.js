@@ -94,52 +94,61 @@ function PostingBox(e) {
 
   const handleHeartClick = () => {
     console.log('handleHeartClick 함수 안에 도착함');
-    axios
-      .post(
-        `${API}/api/v1/post/${postId}/heart`,
-        {
-          postId: postId,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: accessToken,
+    const confirmScrap = window.confirm('하트를 누르시겠습니까?');
+    if (confirmScrap) {
+      axios
+        .post(
+          `${API}/api/v1/post/${postId}/heart`,
+          {
+            postId: postId,
           },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('accessToken', res.data);
-        setHeartCount(heartCount + 1);
-        console.log('하트증가성공:', res.data);
-        <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />;
-      })
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: accessToken,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('accessToken', res.data);
+          setHeartCount(heartCount + 1);
+          console.log('하트증가성공:', res.data);
+          //<AiFillHeart style={{ color: 'red', fontSize: '30px' }} />;
+        })
 
-      .catch((error) => {
-        console.error('하트 클릭에 실패했습니다:', error);
-      });
+        .catch((error) => {
+          console.error('하트 클릭에 실패했습니다:', error);
+        });
+    } else {
+    }
   };
 
   const handleHeartDeleteClick = () => {
     console.log('하트취소 함수 안에 도착함');
-    //event.stopPropagation();
-    axios
-      .delete(`${API}/api/v1/post/${postId}/heart`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: accessToken,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('accessToken', res.data);
-        setHeartCount(heartCount - 1);
-        console.log("하트'취소'에 성공 : ", res.data);
-        <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />;
-      })
-      .catch((error) => {
-        console.error("하트'취소' 실패", error);
-      });
+    const confirmScrap = window.confirm(
+      '이미 하트를 누른 글입니다.\n하트를 취소 하겠습니까?'
+    );
+    if (confirmScrap) {
+      axios
+        .delete(`${API}/api/v1/post/${postId}/heart`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('accessToken', res.data);
+          setHeartCount(heartCount - 1);
+          console.log("하트'취소'에 성공 : ", res.data);
+          <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />;
+        })
+        .catch((error) => {
+          console.error("하트'취소' 실패", error);
+        });
+    } else {
+    }
   };
   const onHeartClick = () => {
     if (!heart) {
@@ -187,30 +196,30 @@ function PostingBox(e) {
             marginBottom: '10px',
           }}
         >
-          {e.param?.techs.map((e) => {
-            return (
-              <Tech>
-                {e == 'React' ? (
-                  <Logo src={reactLogo} />
-                ) : (
-                  <Logo src={springLogo} />
-                )}
-              </Tech>
-            );
-          })}
-          {e.status == true ? (
-            <Link to={`/mypage/status/${postId}`}>
-              <Status>지원 현황 보기</Status>
-            </Link>
-          ) : (
-            ''
-          )}
+          <div style={{ display: 'flex' }}>
+            {e.param?.techs.map((e) => {
+              return (
+                <Tech>
+                  {e == 'React' ? (
+                    <Logo src={reactLogo} />
+                  ) : (
+                    <Logo src={springLogo} />
+                  )}
+                </Tech>
+              );
+            })}
+            {e.status === true ? (
+              <Link to={`/mypage/status/${postId}`}>
+                <Status>지원 현황 보기</Status>
+              </Link>
+            ) : (
+              ''
+            )}
+          </div>
+          <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         </div>
-        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         <Line />
       </Click>
-
-      <Line />
 
       <FlexBox style={{ marginTop: '5px' }}></FlexBox>
 
@@ -226,7 +235,7 @@ function PostingBox(e) {
         <ReadCount>조회수: {e.param?.readCount}</ReadCount>
         <HeartDiv onClick={onHeartClick}>
           {heart ? (
-            <AiFillHeart style={{ color: 'red', fontSize: '30px' }} />
+            <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           ) : (
             <AiOutlineHeart style={{ color: 'gray', fontSize: '30px' }} />
           )}
@@ -290,22 +299,22 @@ export const WritingDate = styled.div`
   font-family: Big Shoulders Display;
   font-size: 14px;
   font-weight: 400;
-  margin-left: 7vw;
-  margin-top: -2vh;
+  margin-left: 4vw;
+  margin-top: 5vh;
 `;
 export const Nickname = styled.div`
   color: #9a9a9a;
   font-family: Big Shoulders Display;
   font-size: 14px;
-
   font-weight: 400;
 `;
 const Tech = styled.div`
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
-
   font-size: 16px;
+  margin-top: 4vh;
+  display: flex;
 `;
 const Title = styled.div`
   overflow-wrap: break-word;
@@ -347,8 +356,9 @@ const ReadCount = styled.div`
 `;
 const Line = styled.div`
   width: 250px;
-  height: 1px;
+  height: 2px;
   background: #e7e5e5;
+  margin-top: 12px;
 `;
 const Status = styled.button`
   color: #fff;
@@ -362,4 +372,5 @@ const Status = styled.button`
 const Logo = styled.img`
   width: 30px;
   margin-top: 10px;
+  display: flex;
 `;
