@@ -321,6 +321,7 @@ function PostDetail() {
                     </p>
                   )}
                 </div>
+
                 <div>
                   <div style={{ paddingBottom: '50px' }}>
                     <h3 style={{ margin: 0 }}>댓글</h3>
