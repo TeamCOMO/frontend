@@ -194,6 +194,7 @@ function PostingBox(e) {
             display: 'flex',
             alignItems: 'center',
             marginBottom: '10px',
+            marginTop: '20px',
           }}
         >
           <div style={{ display: 'flex' }}>
@@ -216,8 +217,9 @@ function PostingBox(e) {
               ''
             )}
           </div>
-          <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         </div>
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+
         <Line />
       </Click>
 
@@ -299,7 +301,7 @@ export const WritingDate = styled.div`
   font-family: Big Shoulders Display;
   font-size: 14px;
   font-weight: 400;
-  margin-left: 4vw;
+  margin-left: 10px;
 `;
 export const Nickname = styled.div`
   color: #9a9a9a;
@@ -312,7 +314,7 @@ const Tech = styled.div`
   width: 40px;
   color: #9a9a9a;
   font-size: 16px;
-  margin-top: 4vh;
+  height: 30px;
   display: flex;
 `;
 const Title = styled.div`
@@ -370,6 +372,6 @@ const Status = styled.button`
 `;
 const Logo = styled.img`
   width: 30px;
-  margin-top: 10px;
+
   display: flex;
 `;
