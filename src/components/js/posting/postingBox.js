@@ -194,6 +194,7 @@ function PostingBox(e) {
             display: 'flex',
             alignItems: 'center',
             marginBottom: '10px',
+            marginTop: '20px',
           }}
         >
           <div style={{ display: 'flex' }}>
@@ -208,16 +209,10 @@ function PostingBox(e) {
                 </Tech>
               );
             })}
-            {e.status === true ? (
-              <Link to={`/mypage/status/${postId}`}>
-                <Status>지원 현황 보기</Status>
-              </Link>
-            ) : (
-              ''
-            )}
           </div>
-          <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         </div>
+        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
+
         <Line />
       </Click>
 
@@ -299,21 +294,20 @@ export const WritingDate = styled.div`
   font-family: Big Shoulders Display;
   font-size: 14px;
   font-weight: 400;
-  margin-left: 4vw;
-  margin-top: 5vh;
+  margin-left: 10px;
 `;
 export const Nickname = styled.div`
-  color: #9a9a9a;
+  color: black;
   font-family: Big Shoulders Display;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 600;
 `;
 const Tech = styled.div`
   margin-left: 10px;
   width: 40px;
   color: #9a9a9a;
   font-size: 16px;
-  margin-top: 4vh;
+  height: 30px;
   display: flex;
 `;
 const Title = styled.div`
@@ -346,6 +340,8 @@ const State = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  margin-right: 10px;
+  width: 50px;
 `;
 
 const ReadCount = styled.div`
@@ -361,6 +357,7 @@ const Line = styled.div`
   margin-top: 12px;
 `;
 const Status = styled.button`
+  margin-left: 4px;
   color: #fff;
   background-color: black;
   height: 30px;
@@ -371,6 +368,6 @@ const Status = styled.button`
 `;
 const Logo = styled.img`
   width: 30px;
-  margin-top: 10px;
+
   display: flex;
 `;

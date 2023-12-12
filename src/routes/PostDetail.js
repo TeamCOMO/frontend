@@ -307,7 +307,7 @@ function PostDetail() {
                         <input
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
-                          placeholder='댓글을 입력하세요...'
+                          placeholder="댓글을 입력하세요..."
                           className={style.inputs}
                         />
                         <Button style={{ margin: 0 }} onClick={handleComment}>
@@ -317,7 +317,7 @@ function PostDetail() {
                     </div>
                   ) : (
                     <p>
-                      <Link to='/signin'>로그인</Link>을 해야합니다.
+                      <Link to="/signin">로그인</Link>을 해야합니다.
                     </p>
                   )}
                 </div>
@@ -330,12 +330,12 @@ function PostDetail() {
                         {commentId === singleComment.id ? (
                           <div>
                             <input
-                              type='text'
+                              type="text"
                               value={editingComment}
                               onChange={(e) =>
                                 setEditingComment(e.target.value)
                               }
-                              placeholder='댓글 수정...'
+                              placeholder="댓글 수정..."
                               className={style.commentEditInput} // Added class for styling
                             />
                             <button
@@ -455,6 +455,7 @@ const Button = styled.button`
 
 const SubTitle = styled(WritingDate)`
   font-size: 20px;
+  margin: 0;
   font-weight: 700;
 `;
 const SubInfo = styled.div`
