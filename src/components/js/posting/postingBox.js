@@ -209,13 +209,6 @@ function PostingBox(e) {
                 </Tech>
               );
             })}
-            {e.status === true ? (
-              <Link to={`/mypage/status/${postId}`}>
-                <Status>지원 현황 보기</Status>
-              </Link>
-            ) : (
-              ''
-            )}
           </div>
         </div>
         <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
@@ -348,6 +341,7 @@ const State = styled.div`
   font-weight: 700;
   line-height: normal;
   margin-right: 10px;
+  width: 50px;
 `;
 
 const ReadCount = styled.div`
@@ -363,6 +357,7 @@ const Line = styled.div`
   margin-top: 12px;
 `;
 const Status = styled.button`
+  margin-left: 4px;
   color: #fff;
   background-color: black;
   height: 30px;
