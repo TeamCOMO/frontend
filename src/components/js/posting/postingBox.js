@@ -300,7 +300,6 @@ export const WritingDate = styled.div`
   font-size: 14px;
   font-weight: 400;
   margin-left: 4vw;
-  margin-top: 5vh;
 `;
 export const Nickname = styled.div`
   color: #9a9a9a;
