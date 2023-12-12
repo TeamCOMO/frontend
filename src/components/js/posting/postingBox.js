@@ -304,10 +304,10 @@ export const WritingDate = styled.div`
   margin-left: 10px;
 `;
 export const Nickname = styled.div`
-  color: #9a9a9a;
+  color: black;
   font-family: Big Shoulders Display;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 600;
 `;
 const Tech = styled.div`
   margin-left: 10px;
@@ -347,6 +347,7 @@ const State = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  margin-right: 10px;
 `;
 
 const ReadCount = styled.div`
