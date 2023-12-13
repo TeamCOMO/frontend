@@ -34,7 +34,7 @@ function MypageScrap() {
           <Title>내가 스크랩 한 글</Title>
           {post != undefined
             ? post.map((e) => {
-                return <PostingBox param={e} status={true} />;
+                return <PostingBox param={e} status={false} />;
               })
             : ''}
           {post == '' ? <No>스크랩한 글이 존재하지 않습니다.</No> : ''}

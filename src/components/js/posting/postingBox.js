@@ -210,9 +210,8 @@ function PostingBox(e) {
               );
             })}
           </div>
+          <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
         </div>
-        <WritingDate>작성일 | {e.param?.createdDate}</WritingDate>
-
         <Line />
       </Click>
 
