@@ -34,7 +34,7 @@ function MypageComment() {
           <Title>내가 댓글 단 글</Title>
           {post != undefined
             ? post.map((e) => {
-                return <PostingBox param={e} status={true} />;
+                return <PostingBox param={e} status={false} />;
               })
             : ''}
           {post == '' ? <No>댓글 단 글이 존재하지 않습니다.</No> : ''}
